@@ -10,10 +10,12 @@ import {
   ArrowRight, 
   CheckCircle2, 
   XCircle, 
-  Flame,
-  Award,
-  Zap
+  Flame, 
+  Award, 
+  Zap,
+  ArrowUpRight
 } from 'lucide-react';
+import KineticReelPlayer from '../components/KineticReelPlayer';
 import { 
   PERFORMANCE_METRICS, 
   WHAT_IS_WORKING, 
@@ -24,317 +26,293 @@ import {
 export default function PerformanceView({ onNavigate, onOpenCreateWithTopic }) {
   const [timeframe, setTimeframe] = useState('week'); // 'week' | 'month'
 
-  const rankings = [
+  const topReels = [
     {
-      rank: '#1',
+      id: 'top-1',
+      rank: '01',
       title: 'Why Meetings Destroy Productivity',
+      hook: 'A 30-minute meeting does not cost 30 minutes. It costs 2 hours of cognitive recovery.',
+      duration: '23s',
       views: '82.4k',
       shares: '1.8k',
       saves: '2.1k',
-      tag: 'Viral Winner',
-      theme: 'amber'
+      theme: 'pink',
+      badge: 'TOP VIRAL WINNER'
     },
     {
-      rank: '#2',
+      id: 'top-2',
+      rank: '02',
       title: 'Stop Doing 24/7 Reels Manually',
+      hook: 'POV: You spent 6 hours recording reels today instead of building your actual product.',
+      duration: '21s',
       views: '64.1k',
       shares: '920',
       saves: '1.4k',
-      tag: 'Top Converter',
-      theme: 'yellow'
+      theme: 'amber',
+      badge: 'HIGH CONVERSION'
     },
     {
-      rank: '#3',
-      title: 'The 30-Second Attention Span Myth',
+      id: 'top-3',
+      rank: '03',
+      title: 'The Hidden Cost of Tool Overload',
+      hook: 'You think you are paying $30/mo for software. You are actually losing $3,400 in context switching.',
+      duration: '27s',
       views: '49.2k',
       shares: '750',
       saves: '1.1k',
-      tag: 'Consistent Performer',
-      theme: 'cyan'
+      theme: 'yellow',
+      badge: 'SOLID RESIDUALS'
     }
   ];
 
   return (
-    <div className="space-y-8 pb-16 max-w-6xl mx-auto">
+    <div className="space-y-12 pb-24 max-w-7xl mx-auto">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER WITH "IS THIS WORKING?" CLARITY
+          1. EDITORIAL HEADER & HIGH-VELOCITY MOMENTUM STATEMENT
       ────────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FEF08A] p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop">
+      <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-[#0D0C11] pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-brand-dark text-xs font-bold uppercase tracking-wider mb-2 text-brand-dark">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Plain-English Intelligence
+          <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#6B6875] mb-2">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+            <span>EXECUTIVE INTELLIGENCE • IS THIS SHIT WORKING?</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black uppercase font-obviously tracking-tight leading-none mb-1">
-            IS THIS SHIT WORKING?
+          <h1 className="text-4xl sm:text-6xl font-black uppercase font-obviously tracking-tight leading-[0.92] text-[#0D0C11]">
+            YES. ALGORITHMIC <br />
+            <span className="text-[#10B981] underline decoration-4 decoration-[#FAED8F]">MOMENTUM IS +31%.</span>
           </h1>
-          <p className="font-handwritten text-xl sm:text-2xl text-brand-orange font-bold">
-            Yes. Your organic reach is beating last month by +31%.
-          </p>
         </div>
 
-        {/* Timeframe Toggle */}
-        <div className="flex items-center bg-white p-1 rounded-full border-2 border-brand-dark shadow-pop-sm">
+        {/* Timeframe Pill Switcher */}
+        <div className="flex items-center bg-white p-1 rounded-full border-2 border-[#0D0C11] shadow-editorial-sm self-start lg:self-auto">
           <button
+            type="button"
             onClick={() => setTimeframe('week')}
-            className={`px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider transition-colors ${
-              timeframe === 'week' ? 'bg-brand-dark text-white' : 'text-gray-700 hover:text-black'
+            className={`px-5 py-2 rounded-full font-mono text-xs font-black uppercase tracking-wider transition-all ${
+              timeframe === 'week' ? 'bg-[#0D0C11] text-white' : 'text-[#2A2930] hover:text-black'
             }`}
           >
-            This Week
+            Past 7 Days
           </button>
           <button
+            type="button"
             onClick={() => setTimeframe('month')}
-            className={`px-4 py-1.5 rounded-full font-black text-xs uppercase tracking-wider transition-colors ${
-              timeframe === 'month' ? 'bg-brand-dark text-white' : 'text-gray-700 hover:text-black'
+            className={`px-5 py-2 rounded-full font-mono text-xs font-black uppercase tracking-wider transition-all ${
+              timeframe === 'month' ? 'bg-[#0D0C11] text-white' : 'text-[#2A2930] hover:text-black'
             }`}
           >
-            This Month
+            Past 30 Days
           </button>
         </div>
-      </div>
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. TOP LEVEL METRICS GRID (VIEWS, REACH, ENGAGEMENT, ETC.)
+          2. CORE METRICS STRIP (HIGH PRESENCE NUMBERS)
       ────────────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        
-        {/* Views */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Views</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            {timeframe === 'week' ? '248.5K' : '892.4K'}
+      <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        {[
+          { label: 'TOTAL VIEWS', val: timeframe === 'week' ? '248.5K' : '892.4K', change: '+28%', up: true },
+          { label: 'UNIQUE REACH', val: timeframe === 'week' ? '180.2K' : '640.1K', change: '+31%', up: true },
+          { label: 'AVG ENGAGEMENT', val: '8.4%', change: '+1.2%', up: true },
+          { label: 'NEW AUDIENCE', val: timeframe === 'week' ? '+1,420' : '+4,890', change: '+15%', up: true },
+          { label: 'TOTAL SHARES', val: '4,820', change: '+42%', up: true },
+          { label: 'BOOKMARK SAVES', val: '2,940', change: '+19%', up: true }
+        ].map((stat, idx) => (
+          <div 
+            key={idx}
+            className="p-5 rounded-4xl bg-white border-2 border-[#0D0C11] shadow-editorial flex flex-col justify-between"
+          >
+            <div className="text-[10px] font-mono font-bold uppercase text-[#6B6875] tracking-wider">
+              {stat.label}
+            </div>
+            <div className="text-2xl sm:text-3xl font-black font-obviously text-[#0D0C11] mt-2 mb-1">
+              {stat.val}
+            </div>
+            <div className="flex items-center gap-1 text-[11px] font-mono font-black text-[#10B981]">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>{stat.change} VELOCITY</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+28%</span>
-          </div>
-        </div>
-
-        {/* Reach */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Reach</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            {timeframe === 'week' ? '180.2K' : '640.1K'}
-          </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+31%</span>
-          </div>
-        </div>
-
-        {/* Engagement */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Engagement</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            8.4%
-          </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+1.2%</span>
-          </div>
-        </div>
-
-        {/* Followers Gained */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Followers</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            {timeframe === 'week' ? '+1,420' : '+4,890'}
-          </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+15%</span>
-          </div>
-        </div>
-
-        {/* Shares */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Shares</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            4,820
-          </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+42%</span>
-          </div>
-        </div>
-
-        {/* Saves */}
-        <div className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop">
-          <div className="text-[11px] font-bold text-gray-500 uppercase">Saves</div>
-          <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark mt-1">
-            2,940
-          </div>
-          <div className="flex items-center gap-1 text-[11px] font-black text-emerald-600 mt-1">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <span>+19%</span>
-          </div>
-        </div>
-
-      </div>
+        ))}
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. BEST-PERFORMING CONTENT (SIMPLE RANKINGS)
+          3. BEST PERFORMING CONTENT (SHOWN AS ACTUAL MEDIA SLABS!)
       ────────────────────────────────────────────────────────────── */}
-      <div className="bg-white p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Award className="w-6 h-6 text-brand-amber" />
-            <h2 className="text-xl sm:text-2xl font-black uppercase font-obviously tracking-tight">
-              TOP PERFORMING REELS
+      <section className="space-y-6">
+        <div className="flex items-center justify-between border-b-2 border-[#0D0C11] pb-4">
+          <div>
+            <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#6B6875]">
+              VERIFIED RESIDUAL CHAMPIONS
+            </div>
+            <h2 className="font-obviously text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#0D0C11]">
+              THE WINNERS PODIUM
             </h2>
           </div>
-          <span className="text-xs font-bold text-gray-500">Sorted by algorithm velocity</span>
+          <span className="text-xs font-mono font-bold text-[#FF5500]">REAL MEDIA PREVIEWS</span>
         </div>
 
-        <div className="space-y-3">
-          {rankings.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {topReels.map((reel) => (
             <div
-              key={item.rank}
-              className="p-4 sm:p-5 rounded-3xl border-2 border-brand-dark bg-[#FFFDF7] flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#FFF8D6] transition-colors"
+              key={reel.id}
+              className="p-6 rounded-5xl bg-white border-3 border-[#0D0C11] shadow-editorial-lg flex flex-col justify-between"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-brand-dark text-[#FAED8F] font-obviously font-black text-lg flex items-center justify-center flex-shrink-0">
-                  {item.rank}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-brand-yellow-butter rounded-full border border-brand-dark">
-                      {item.tag}
-                    </span>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-8 h-8 rounded-full bg-[#0D0C11] text-[#FAED8F] font-obviously font-black flex items-center justify-center text-xs">
+                    {reel.rank}
                   </div>
-                  <h3 className="font-obviously text-base sm:text-lg font-black uppercase text-brand-dark">
-                    {item.title}
-                  </h3>
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#FAED8F] text-[#0D0C11] text-[9px] font-mono font-black uppercase border border-[#0D0C11]">
+                    {reel.badge}
+                  </span>
+                </div>
+
+                {/* 9:16 Video preview */}
+                <div className="w-full h-48 rounded-3xl border-2 border-[#0D0C11] overflow-hidden mb-4 shadow-editorial-sm">
+                  <KineticReelPlayer
+                    reel={{
+                      title: reel.title,
+                      hook: reel.hook,
+                      duration: reel.duration,
+                      videoTheme: reel.theme,
+                      stats: { views: reel.views }
+                    }}
+                    compact={true}
+                    interactive={false}
+                  />
+                </div>
+
+                <h3 className="font-obviously text-lg font-black uppercase leading-tight mb-2 text-[#0D0C11]">
+                  {reel.title}
+                </h3>
+
+                <div className="p-3 bg-[#FAF7F2] rounded-2xl border border-[#0D0C11]/10 text-xs font-mono font-bold text-[#0D0C11] flex justify-between mb-4">
+                  <span>🔥 {reel.views}</span>
+                  <span>↗ {reel.shares}</span>
+                  <span>★ {reel.saves}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 self-end sm:self-center">
-                <div className="text-right">
-                  <div className="text-base sm:text-lg font-black text-brand-orange font-obviously">{item.views}</div>
-                  <div className="text-[11px] text-gray-500 font-bold">{item.shares} shares • {item.saves} saves</div>
-                </div>
-                <button
-                  onClick={() => onOpenCreateWithTopic(`Followup breakdown on ${item.title}`)}
-                  className="px-4 py-2 bg-brand-dark text-white rounded-full font-black text-xs uppercase btn-pop-sm flex items-center gap-1"
-                >
-                  <span>Replicate</span>
-                  <ArrowRight className="w-3 h-3 text-yellow-300" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => onOpenCreateWithTopic(`Followup breakdown on ${reel.title}`)}
+                className="w-full py-2.5 bg-[#0D0C11] text-white rounded-full font-black text-xs uppercase btn-editorial-sm flex items-center justify-center gap-2"
+              >
+                <span>Synthesize Followup</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#FAED8F]" />
+              </button>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          4. WHAT IS WORKING & WHAT IS NOT WORKING (PLAIN ENGLISH INTELLIGENCE)
+          4. WHAT IS WORKING VS WHAT IS NOT WORKING (PLAIN ENGLISH)
       ────────────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* WHAT IS WORKING */}
-        <div className="bg-[#CFFAFE] p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop flex flex-col justify-between">
+        <div className="p-8 rounded-5xl bg-[#FAED8F] border-3 border-[#0D0C11] shadow-editorial flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <CheckCircle2 className="w-6 h-6 text-cyan-800" />
-              <h3 className="font-obviously text-2xl uppercase font-black text-brand-dark">
-                WHAT IS WORKING
+              <CheckCircle2 className="w-6 h-6 text-[#0D0C11]" />
+              <h3 className="font-obviously text-2xl uppercase font-black text-[#0D0C11]">
+                WHAT IS PROPAGATING
               </h3>
             </div>
-            <p className="text-xs font-semibold text-cyan-950 mb-6">
-              Insights that actually drive views, not useless chart noise:
+            <p className="text-xs font-mono font-bold text-[#0D0C11]/70 mb-6">
+              Mechanics actively amplified by the short-form recommendation feed:
             </p>
 
             <ul className="space-y-3.5">
               {WHAT_IS_WORKING.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-white/80 p-3.5 rounded-2xl border border-brand-dark/20 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  <span className="text-emerald-600 font-black flex-shrink-0">✓</span>
+                <li key={idx} className="p-4 rounded-2xl bg-white border-2 border-[#0D0C11] text-xs font-bold text-[#0D0C11] leading-snug flex items-start gap-3 shadow-editorial-sm">
+                  <span className="text-[#10B981] font-black text-sm">✓</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-brand-dark/20 text-[11px] font-bold text-cyan-900">
-            ✦ Intelligence applied automatically to upcoming generation cues.
+          <div className="mt-6 pt-4 border-t-2 border-[#0D0C11]/20 text-[11px] font-mono font-bold text-[#0D0C11]">
+            ✦ Autonomous generators pre-calibrate to these parameters.
           </div>
         </div>
 
         {/* WHAT IS NOT WORKING */}
-        <div className="bg-[#FCE7F3] p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop flex flex-col justify-between">
+        <div className="p-8 rounded-5xl bg-[#FFFDF7] border-3 border-[#0D0C11] shadow-editorial flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <XCircle className="w-6 h-6 text-pink-700" />
-              <h3 className="font-obviously text-2xl uppercase font-black text-brand-dark">
-                WHAT ISN'T WORKING
+              <XCircle className="w-6 h-6 text-[#FF5500]" />
+              <h3 className="font-obviously text-2xl uppercase font-black text-[#0D0C11]">
+                WHAT DIES EARLY
               </h3>
             </div>
-            <p className="text-xs font-semibold text-pink-950 mb-6">
-              Patterns we actively eliminate before scripts hit your review:
+            <p className="text-xs font-mono font-bold text-[#6B6875] mb-6">
+              Anti-patterns eliminated before scripts hit client review:
             </p>
 
             <ul className="space-y-3.5">
               {WHAT_IS_NOT_WORKING.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-white/80 p-3.5 rounded-2xl border border-brand-dark/20 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  <span className="text-red-500 font-black flex-shrink-0">✕</span>
+                <li key={idx} className="p-4 rounded-2xl bg-[#FAF7F2] border-2 border-[#0D0C11] text-xs font-bold text-[#0D0C11] leading-snug flex items-start gap-3 shadow-editorial-sm">
+                  <span className="text-[#FF5500] font-black text-sm">✕</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-brand-dark/20 text-[11px] font-bold text-pink-900">
-            ✦ Filters active. No low-retention intros will be created.
+          <div className="mt-6 pt-4 border-t-2 border-[#0D0C11]/20 text-[11px] font-mono font-bold text-[#6B6875]">
+            ✦ 100% of upcoming production cuts exclude these formats.
           </div>
         </div>
 
-      </div>
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. RECOMMENDED NEXT MOVES (WITH DIRECT CONNECT INTO CREATE)
+          5. ACTION DIRECTIVES (CONNECTING DIRECTLY INTO CREATE)
       ────────────────────────────────────────────────────────────── */}
-      <div className="bg-[#FFF8D6] p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-brand-orange fill-brand-orange" />
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-black uppercase font-obviously tracking-tight leading-none">
-                VIRALYST RECOMMENDS
-              </h2>
-              <p className="text-xs font-bold text-gray-700 mt-0.5">
-                Immediate next steps grounded in your live performance data:
-              </p>
-            </div>
+      <section className="p-8 sm:p-10 rounded-5xl bg-[#0D0C11] text-white border-3 border-[#0D0C11] shadow-editorial space-y-6">
+        <div>
+          <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#FAED8F]">
+            ACTION DIRECTIVES
           </div>
+          <h2 className="font-obviously text-2xl sm:text-4xl font-black uppercase tracking-tight text-white mt-1">
+            RECOMMENDED NEXT MOVES
+          </h2>
+          <p className="text-xs font-mono text-gray-400 mt-1">
+            Execute directly. Each directive links straight into the synthesis studio.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {RECOMMENDED_NEXT_MOVES.map((move) => (
             <div
               key={move.id}
-              className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop-sm flex flex-col justify-between"
+              className="p-6 rounded-4xl bg-white/5 border border-white/20 flex flex-col justify-between hover:bg-white/10 transition-colors"
             >
               <div>
-                <h4 className="font-obviously text-base font-black uppercase leading-tight mb-2 text-brand-dark">
+                <h4 className="font-obviously text-base font-black uppercase text-[#FAED8F] leading-snug mb-2">
                   {move.title}
                 </h4>
-                <p className="text-xs text-gray-600 font-semibold mb-4 leading-relaxed">
+                <p className="text-xs text-gray-300 font-semibold mb-6">
                   Reason: {move.reason}
                 </p>
               </div>
 
               <button
+                type="button"
                 onClick={() => onOpenCreateWithTopic(move.promptSeed)}
-                className="w-full py-2.5 bg-brand-dark text-white rounded-full font-black text-xs uppercase btn-pop-sm flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#FAED8F] text-[#0D0C11] rounded-full font-black text-xs uppercase tracking-wider btn-editorial flex items-center justify-center gap-2"
               >
-                <span>Create content from this</span>
-                <ArrowRight className="w-3.5 h-3.5 text-yellow-300" />
+                <span>Synthesize From This Insight</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#0D0C11]" />
               </button>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
     </div>
   );

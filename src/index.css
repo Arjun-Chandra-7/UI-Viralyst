@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --brand-butter: #FAED8F;
-    --brand-gold: #FACC15;
-    --brand-amber: #F59E0B;
-    --brand-orange: #EA580C;
-    --brand-dark: #12111A;
+    --ink: #0D0C11;
+    --ground: #FAF7F2;
+    --butter: #FAED8F;
+    --amber: #FF9E00;
+    --orange: #FF5500;
   }
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #FFFDF7;
-    color: #12111A;
+    background-color: #FAF7F2;
+    color: #0D0C11;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -23,94 +23,117 @@
   h1, h2, h3, .font-obviously {
     font-family: 'Obviously Extended Black', 'Obviously', 'Syne', 'Archivo Black', system-ui, sans-serif;
     font-weight: 800;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.04em;
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Tactile Editorial Button - Crafted, Not Template */
+.btn-editorial {
+  position: relative;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 4px 4px 0px 0px #0D0C11;
 }
-::-webkit-scrollbar-track {
-  background: #FEF9C3;
+.btn-editorial:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #0D0C11;
 }
-::-webkit-scrollbar-thumb {
-  background: #FACC15;
-  border-radius: 9999px;
-  border: 2px solid #FEF9C3;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #F59E0B;
+.btn-editorial:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #0D0C11;
 }
 
-/* Tactile Pop Buttons (Aardvark Book Club Inspired) */
-.btn-pop {
-  transition: all 0.2s cubic-bezier(0.34, 1.57, 0.64, 1);
-  box-shadow: 0 6px 0px 0px #12111A;
+.btn-editorial-sm {
+  position: relative;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 3px 3px 0px 0px #0D0C11;
 }
-.btn-pop:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 9px 0px 0px #12111A;
+.btn-editorial-sm:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px 0px #0D0C11;
 }
-.btn-pop:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0px 0px #12111A;
-}
-
-.btn-pop-sm {
-  transition: all 0.2s cubic-bezier(0.34, 1.57, 0.64, 1);
-  box-shadow: 0 4px 0px 0px #12111A;
-}
-.btn-pop-sm:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 0px 0px #12111A;
-}
-.btn-pop-sm:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0px 0px #12111A;
+.btn-editorial-sm:active {
+  transform: translate(1.5px, 1.5px);
+  box-shadow: 0px 0px 0px 0px #0D0C11;
 }
 
-/* Pill badges */
-.pill-badge {
+/* Kinetic Reel Slab */
+.reel-slab {
+  aspect-ratio: 9/16;
+  border-radius: 28px;
+  border: 2.5px solid #0D0C11;
+  box-shadow: 6px 6px 0px 0px #0D0C11;
+  transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: hidden;
+  position: relative;
+}
+.reel-slab:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 10px 10px 0px 0px #0D0C11;
+}
+
+/* Tactile Tag / Category Pill */
+.tag-editorial {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 1rem;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
   border-radius: 9999px;
-  border: 1.5px solid #12111A;
-  font-weight: 600;
-  font-size: 0.875rem;
+  border: 1.5px solid #0D0C11;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   background-color: #FFFFFF;
-  box-shadow: 0 2px 0px 0px #12111A;
-  transition: transform 0.15s ease;
-}
-.pill-badge:hover {
-  transform: translateY(-1px);
+  box-shadow: 2px 2px 0px 0px #0D0C11;
 }
 
-/* Circular curved text path animation */
-@keyframes rotateCurved {
-  from {
-    transform: rotate(0deg);
+/* Signal Pulse Dot */
+.signal-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+  position: relative;
+}
+.signal-beacon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #10B981;
+  opacity: 0.7;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Architectural Card */
+.arch-card {
+  background-color: #FFFFFF;
+  border: 2.5px solid #0D0C11;
+  border-radius: 36px;
+  box-shadow: 6px 6px 0px 0px #0D0C11;
+  transition: all 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Custom Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #0D0C11;
+  border-radius: 9999px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.animate-spin-path {
-  animation: rotateCurved 30s linear infinite;
-  transform-origin: center;
-}
-
-/* Wave layer curves */
-.wave-mask {
-  mask-image: radial-gradient(circle at 50% 100%, black 70%, transparent 100%);
-}
-
-/* Glass effect */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }

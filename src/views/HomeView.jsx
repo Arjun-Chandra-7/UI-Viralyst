@@ -7,13 +7,16 @@ import {
   AlertCircle, 
   Send, 
   Play, 
-  Flame, 
-  TrendingUp,
-  MessageSquare,
-  HelpCircle,
-  Eye,
-  Plus
+  TrendingUp, 
+  Bot, 
+  Eye, 
+  Plus, 
+  ArrowUpRight,
+  ShieldCheck,
+  Flame,
+  Radio
 } from 'lucide-react';
+import KineticReelPlayer from '../components/KineticReelPlayer';
 
 export default function HomeView({ 
   contentList, 
@@ -23,421 +26,355 @@ export default function HomeView({
   onRequestChanges, 
   onOpenCreateWithTopic 
 }) {
-  // Compute current status counts
-  const inProgressCount = contentList.filter(c => c.status === 'In Progress').length;
-  const waitingApprovalCount = contentList.filter(c => c.status === 'Ready for Review').length;
-  const scheduledCount = contentList.filter(c => c.status === 'Scheduled').length;
-  const publishedCount = contentList.filter(c => c.status === 'Published').length;
-
-  const waitingApprovalItem = contentList.find(c => c.status === 'Ready for Review');
-  const recentItems = contentList.slice(0, 3);
+  const waitingApprovalItem = contentList.find(c => c.status === 'Ready for Review') || contentList[0];
+  const inProgressItems = contentList.filter(c => c.status === 'In Progress');
+  const scheduledItems = contentList.filter(c => c.status === 'Scheduled');
+  const publishedItems = contentList.filter(c => c.status === 'Published');
 
   return (
-    <div className="space-y-8 pb-16 max-w-6xl mx-auto">
+    <div className="space-y-12 pb-24 max-w-7xl mx-auto">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER GREETING & RIDICULOUSLY SIMPLE COMMAND STATEMENT
+          1. DRAMATIC EDITORIAL MASTHEAD (BREAKING THE SAAS TEMPLATE RHYTHM)
       ────────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 bg-[#FFF8D6] p-6 sm:p-8 rounded-5xl border-3 border-brand-dark shadow-pop">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-brand-dark text-xs font-bold uppercase tracking-wider mb-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Active Social Autopilot
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black uppercase font-obviously tracking-tight leading-none mb-2">
-            WHAT MATTERS RIGHT NOW
-          </h1>
-          <p className="font-handwritten text-xl sm:text-2xl text-brand-orange font-bold">
-            All systems running. 1 piece waiting for your stamp of approval.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => onNavigate('manager')}
-            className="px-5 py-3 bg-white text-brand-dark rounded-full font-black text-xs uppercase tracking-wider border-2 border-brand-dark btn-pop-sm flex items-center gap-2"
-          >
-            <MessageSquare className="w-4 h-4 text-brand-amber" />
-            <span>Ask Manager</span>
-          </button>
-          <button
-            onClick={() => onNavigate('create')}
-            className="px-6 py-3 bg-brand-dark text-white rounded-full font-black text-xs uppercase tracking-wider border-2 border-brand-dark btn-pop flex items-center gap-2"
-          >
-            <Plus className="w-4 h-4" />
-            <span>New Reel</span>
-          </button>
-        </div>
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          2. CURRENT PIPELINE STATUS (4 SIMPLE BADGES)
-      ────────────────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        
-        {/* Waiting For Approval (Highlighted if > 0) */}
-        <div 
-          onClick={() => onNavigate('content', 'Ready for Review')}
-          className={`p-5 rounded-4xl border-2 border-brand-dark shadow-pop cursor-pointer transition-all hover:-translate-y-1 ${
-            waitingApprovalCount > 0 ? 'bg-[#FCE7F3] ring-2 ring-pink-500/50' : 'bg-white'
-          }`}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase text-gray-700">Needs Approval</span>
-            <AlertCircle className={`w-5 h-5 ${waitingApprovalCount > 0 ? 'text-pink-600 animate-bounce' : 'text-gray-400'}`} />
-          </div>
-          <div className="text-3xl sm:text-4xl font-black font-obviously text-brand-dark">
-            {waitingApprovalCount}
-          </div>
-          <div className="text-[11px] font-semibold text-gray-600 mt-1">
-            {waitingApprovalCount > 0 ? 'Action required today' : 'All approved!'}
-          </div>
-        </div>
-
-        {/* Content Being Worked On */}
-        <div 
-          onClick={() => onNavigate('content', 'In Progress')}
-          className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop cursor-pointer transition-all hover:-translate-y-1"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase text-gray-700">Being Created</span>
-            <Clock className="w-5 h-5 text-amber-500 animate-spin-slow" />
-          </div>
-          <div className="text-3xl sm:text-4xl font-black font-obviously text-brand-dark">
-            {inProgressCount}
-          </div>
-          <div className="text-[11px] font-semibold text-gray-600 mt-1">
-            Internal AI synthesis
-          </div>
-        </div>
-
-        {/* Scheduled Content */}
-        <div 
-          onClick={() => onNavigate('content', 'Scheduled')}
-          className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop cursor-pointer transition-all hover:-translate-y-1"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase text-gray-700">Scheduled</span>
-            <Send className="w-5 h-5 text-cyan-600" />
-          </div>
-          <div className="text-3xl sm:text-4xl font-black font-obviously text-brand-dark">
-            {scheduledCount}
-          </div>
-          <div className="text-[11px] font-semibold text-gray-600 mt-1">
-            Queued for publishing
-          </div>
-        </div>
-
-        {/* Published Content */}
-        <div 
-          onClick={() => onNavigate('content', 'Published')}
-          className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop cursor-pointer transition-all hover:-translate-y-1"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase text-gray-700">Published</span>
-            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-          </div>
-          <div className="text-3xl sm:text-4xl font-black font-obviously text-brand-dark">
-            {publishedCount}
-          </div>
-          <div className="text-[11px] font-semibold text-gray-600 mt-1">
-            Live on Instagram
-          </div>
-        </div>
-
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          3. THIS WEEK SNAPSHOT
-      ────────────────────────────────────────────────────────────── */}
-      <div className="bg-white p-6 sm:p-7 rounded-5xl border-3 border-brand-dark shadow-pop flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="w-full md:w-auto">
-          <div className="text-xs font-black uppercase text-gray-500 tracking-wider mb-1">
-            Performance Direction
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="text-2xl sm:text-3xl font-black font-obviously text-brand-dark">
-              THIS WEEK
+      <section className="relative pt-2 pb-6 border-b-2 border-[#0D0C11]">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#6B6875] mb-2">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+              <span>ORBITAL FLIGHT MONITOR • LIVE STATUS</span>
             </div>
-            <span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-black">
-              <TrendingUp className="w-3.5 h-3.5" />
-              +31% Reach Spike
+
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase font-obviously tracking-tight leading-[0.92] text-[#0D0C11]">
+              TELL ME WHAT <br />
+              <span className="text-[#FF5500] underline decoration-4 decoration-[#FAED8F]">MATTERS NOW.</span>
+            </h1>
+          </div>
+
+          {/* Contextual Intelligence Statement & Direct Triggers */}
+          <div className="lg:max-w-md space-y-4">
+            <div className="p-4 bg-white rounded-3xl border-2 border-[#0D0C11] shadow-editorial-sm">
+              <div className="text-[10px] font-mono font-bold uppercase text-[#6B6875] mb-1">
+                EXECUTIVE SUMMARY
+              </div>
+              <p className="text-sm font-semibold text-[#0D0C11] leading-relaxed">
+                The engine synthesized <span className="font-black text-[#FF5500]">6 reels</span> this week. <span className="font-black">1 cut requires your verdict</span> before Friday broadcast. Organic reach is up <span className="font-black text-[#10B981]">+31%</span>.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => onNavigate('create')}
+                className="flex-1 py-3 px-5 bg-[#0D0C11] text-white rounded-full font-black text-xs uppercase tracking-wider btn-editorial flex items-center justify-center gap-2"
+              >
+                <Plus className="w-4 h-4 text-[#FAED8F]" />
+                <span>Synthesize Reel</span>
+              </button>
+              <button
+                onClick={() => onNavigate('manager')}
+                className="py-3 px-5 bg-[#FAED8F] text-[#0D0C11] rounded-full font-black text-xs uppercase tracking-wider border-2 border-[#0D0C11] btn-editorial-sm flex items-center gap-1.5"
+              >
+                <Bot className="w-4 h-4" />
+                <span>Ask Manager</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          2. THE ACTIVE CONTENT CONSTELLATION (SPATIAL VERDICT HERO)
+             Oversized Interactive Reel Slab next to Velocity Analytics
+      ────────────────────────────────────────────────────────────── */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        {/* LEFT / CENTERPIECE: The Spotlight Verdict Cinema Slab */}
+        <div className="lg:col-span-7 bg-[#FFFDF7] p-6 sm:p-8 rounded-5xl border-3 border-[#0D0C11] shadow-editorial-lg relative overflow-hidden">
+          
+          {/* Subtle Background Badge */}
+          <div className="flex items-center justify-between pb-4 mb-6 border-b-2 border-[#0D0C11]/10">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5500] animate-ping" />
+              <span className="font-obviously text-sm font-black uppercase tracking-wider text-[#FF5500]">
+                Requires Client Verdict
+              </span>
+            </div>
+            <span className="text-[11px] font-mono font-bold text-[#6B6875]">
+              HOLD SCORE: 88/100
             </span>
           </div>
-          <p className="text-xs text-gray-600 font-semibold mt-1">
-            Educational reels beat your previous monthly average. Audience share rate is up 42%.
-          </p>
-        </div>
 
-        <div className="flex items-center justify-between w-full md:w-auto gap-6 sm:gap-10 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-8">
-          <div>
-            <div className="text-2xl font-black font-obviously text-brand-dark">6</div>
-            <div className="text-[11px] font-bold text-gray-500 uppercase">Created</div>
-          </div>
-          <div>
-            <div className="text-2xl font-black font-obviously text-brand-dark">4</div>
-            <div className="text-[11px] font-bold text-gray-500 uppercase">Approved</div>
-          </div>
-          <div>
-            <div className="text-2xl font-black font-obviously text-brand-dark">3</div>
-            <div className="text-[11px] font-bold text-gray-500 uppercase">Published</div>
-          </div>
-        </div>
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+            
+            {/* The Real-Time Playable Kinetic Reel */}
+            <div className="sm:col-span-6 flex justify-center">
+              <div className="w-[230px] h-[400px] rounded-[32px] border-3 border-[#0D0C11] shadow-editorial overflow-hidden">
+                <KineticReelPlayer 
+                  reel={waitingApprovalItem} 
+                  autoPlay={true}
+                  compact={true}
+                />
+              </div>
+            </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          4. WHAT VIRALYST RECOMMENDS NEXT (3–5 CARDS MAX)
-      ────────────────────────────────────────────────────────────── */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-brand-amber fill-brand-amber" />
-            <h2 className="text-xl sm:text-2xl font-black uppercase font-obviously tracking-tight">
-              WHAT VIRALYST RECOMMENDS NEXT
-            </h2>
-          </div>
-          <span className="text-xs font-bold text-gray-500">Autonomous Strategy</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          
-          {/* Card 1: Urgent Approval */}
-          {waitingApprovalItem && (
-            <div className="bg-[#FCE7F3] p-6 rounded-4xl border-2 border-brand-dark shadow-pop flex flex-col justify-between">
+            {/* Reel Review Metadata & Actions */}
+            <div className="sm:col-span-6 space-y-4">
               <div>
-                <span className="inline-block text-[10px] font-black uppercase px-2.5 py-0.5 bg-white rounded-full border border-brand-dark mb-3 text-pink-700">
-                  Ready for Review
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#6B6875] block mb-1">
+                  Scheduled Target: {waitingApprovalItem.scheduledFor}
                 </span>
-                <h3 className="font-obviously text-lg font-black uppercase leading-tight mb-2">
+                <h3 className="font-obviously text-2xl font-black uppercase leading-tight text-[#0D0C11]">
                   {waitingApprovalItem.title}
                 </h3>
-                <p className="text-xs text-gray-700 font-medium line-clamp-2 mb-4">
-                  {waitingApprovalItem.description}
-                </p>
               </div>
 
-              <div className="flex items-center gap-2 pt-2">
-                <button
-                  onClick={() => onReviewContent(waitingApprovalItem)}
-                  className="flex-1 py-2 bg-brand-dark text-white rounded-full font-black text-xs uppercase btn-pop-sm flex items-center justify-center gap-1.5"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>Review Reel</span>
-                </button>
+              <div className="bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#0D0C11]/20 text-xs font-semibold text-[#2A2930] leading-snug">
+                "{waitingApprovalItem.hook}"
+              </div>
+
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between font-mono text-[11px]">
+                  <span className="text-[#6B6875]">Pacing Cadence:</span>
+                  <span className="font-bold text-[#0D0C11]">{waitingApprovalItem.duration}</span>
+                </div>
+                <div className="flex justify-between font-mono text-[11px]">
+                  <span className="text-[#6B6875]">Core Objective:</span>
+                  <span className="font-bold text-[#0D0C11]">{waitingApprovalItem.objective}</span>
+                </div>
+              </div>
+
+              {/* Direct Verdict Actions */}
+              <div className="pt-2 space-y-2">
                 <button
                   onClick={() => onApproveContent(waitingApprovalItem.id)}
-                  className="px-3.5 py-2 bg-emerald-500 text-white rounded-full font-black text-xs uppercase btn-pop-sm flex items-center justify-center"
-                  title="Approve immediately"
+                  className="w-full py-3 bg-[#10B981] text-white rounded-full font-black text-xs uppercase tracking-wider border-2 border-[#0D0C11] btn-editorial flex items-center justify-center gap-2"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Approve For Broadcast</span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => onRequestChanges(waitingApprovalItem)}
+                    className="flex-1 py-2 bg-white text-[#0D0C11] rounded-full font-bold text-xs uppercase border-2 border-[#0D0C11] btn-editorial-sm"
+                  >
+                    Request Changes
+                  </button>
+                  <button
+                    onClick={() => onReviewContent(waitingApprovalItem)}
+                    className="px-4 py-2 bg-[#FAED8F] text-[#0D0C11] rounded-full font-black text-xs uppercase border-2 border-[#0D0C11] btn-editorial-sm"
+                    title="Inspect Cinema Theater"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* RIGHT COLUMN: Momentum Metrics & Autopilot Radar */}
+        <div className="lg:col-span-5 space-y-6">
+          
+          {/* Giant Velocity Number Card */}
+          <div className="bg-[#FAED8F] p-7 rounded-5xl border-3 border-[#0D0C11] shadow-editorial space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#0D0C11]">
+                WEEKLY RESIDUAL MOMENTUM
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full bg-white border border-[#0D0C11] text-[10px] font-black uppercase text-[#10B981]">
+                +31% SPIKE
+              </span>
+            </div>
+
+            <div className="flex items-baseline gap-3">
+              <div className="text-5xl sm:text-6xl font-black font-obviously tracking-tight text-[#0D0C11]">
+                248.5K
+              </div>
+              <span className="text-xs font-mono font-bold text-[#6B6875]">TOTAL VIEWS</span>
+            </div>
+
+            <p className="text-xs font-bold text-[#0D0C11] leading-relaxed border-t border-[#0D0C11]/20 pt-3">
+              Educational breakdowns are generating 3.2x more bookmark saves than narrative founder stories. Algorithm rewards the 24s format.
+            </p>
+          </div>
+
+          {/* High-Impact Directives from VIRALYST Brain */}
+          <div className="bg-white p-7 rounded-5xl border-3 border-[#0D0C11] shadow-editorial space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#FF5500]" />
+                <span className="font-obviously text-sm font-black uppercase text-[#0D0C11]">
+                  AUTONOMOUS DIRECTIVES
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-[#6B6875]">TOP SIGNALS</span>
+            </div>
+
+            <div className="space-y-3">
+              <div className="p-4 rounded-3xl bg-[#FAF7F2] border-2 border-[#0D0C11]/20 hover:border-[#0D0C11] transition-all flex flex-col justify-between gap-3">
+                <div>
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#6B6875] mb-1">
+                    <span>HOT NICHE PATTERN</span>
+                    <span className="text-[#10B981]">HIGH HEAT</span>
+                  </div>
+                  <h4 className="font-obviously text-base font-black uppercase text-[#0D0C11] leading-tight">
+                    Why Meetings Destroy Productivity
+                  </h4>
+                  <p className="text-xs text-[#6B6875] font-semibold mt-1">
+                    Resonating heavily across knowledge workers. Projected to cross 85k views.
+                  </p>
+                </div>
+                <button
+                  onClick={() => onOpenCreateWithTopic('Why meetings destroy productivity')}
+                  className="self-start px-4 py-1.5 bg-[#0D0C11] text-white rounded-full font-black text-xs uppercase btn-editorial-sm flex items-center gap-1.5"
+                >
+                  <span>Synthesize This Angle</span>
+                  <ArrowRight className="w-3 h-3 text-[#FAED8F]" />
+                </button>
+              </div>
+
+              <div className="p-4 rounded-3xl bg-[#FAF7F2] border-2 border-[#0D0C11]/20 hover:border-[#0D0C11] transition-all flex flex-col justify-between gap-3">
+                <div>
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#6B6875] mb-1">
+                    <span>CADENCE ADVICE</span>
+                    <span>PACING FIX</span>
+                  </div>
+                  <h4 className="font-obviously text-base font-black uppercase text-[#0D0C11] leading-tight">
+                    Shorten Opening Hook To 2.5s
+                  </h4>
+                  <p className="text-xs text-[#6B6875] font-semibold mt-1">
+                    Videos with intros under 3s achieved 78% completion rate this period.
+                  </p>
+                </div>
+                <button
+                  onClick={() => onNavigate('manager')}
+                  className="self-start px-4 py-1.5 bg-white text-[#0D0C11] rounded-full font-black text-xs uppercase border border-[#0D0C11] btn-editorial-sm flex items-center gap-1.5"
+                >
+                  <span>Instruct Manager</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </button>
               </div>
             </div>
-          )}
 
-          {/* Card 2: Trending Format */}
-          <div className="bg-[#CFFAFE] p-6 rounded-4xl border-2 border-brand-dark shadow-pop flex flex-col justify-between">
-            <div>
-              <span className="inline-block text-[10px] font-black uppercase px-2.5 py-0.5 bg-white rounded-full border border-brand-dark mb-3 text-cyan-800">
-                Format Insight
-              </span>
-              <h3 className="font-obviously text-lg font-black uppercase leading-tight mb-2">
-                Educational Breakdowns Beat Your Average
-              </h3>
-              <p className="text-xs text-gray-700 font-medium mb-4">
-                Videos explaining "why common methods fail" generated 38% higher saves this week.
-              </p>
-            </div>
-
-            <button
-              onClick={() => onOpenCreateWithTopic('Why common productivity systems fail teams')}
-              className="w-full py-2 bg-white text-brand-dark rounded-full font-black text-xs uppercase btn-pop-sm flex items-center justify-center gap-1.5"
-            >
-              <span>Create breakdown on X</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-
-          {/* Card 3: Niche Recommendation */}
-          <div className="bg-[#FFF8D6] p-6 rounded-4xl border-2 border-brand-dark shadow-pop flex flex-col justify-between">
-            <div>
-              <span className="inline-block text-[10px] font-black uppercase px-2.5 py-0.5 bg-white rounded-full border border-brand-dark mb-3 text-amber-800">
-                Next Best Move
-              </span>
-              <h3 className="font-obviously text-lg font-black uppercase leading-tight mb-2">
-                Create Reel Around Meeting Fatigue
-              </h3>
-              <p className="text-xs text-gray-700 font-medium mb-4">
-                High resonance query across software founders. Projected to cross 75k views.
-              </p>
-            </div>
-
-            <button
-              onClick={() => onOpenCreateWithTopic('Why meetings destroy productivity')}
-              className="w-full py-2 bg-brand-dark text-white rounded-full font-black text-xs uppercase btn-pop-sm flex items-center justify-center gap-1.5"
-            >
-              <span>Create this now</span>
-              <ArrowRight className="w-3 h-3 text-yellow-300" />
-            </button>
           </div>
 
         </div>
-      </div>
+
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. RECENT CONTENT PREVIEW (MINIMAL CARDS WITH IMPORTANT ACTIONS)
+          3. THE SPATIAL PROPAGATION PIPELINE (NOT 4 IDENTICAL STATUS BOXES)
+             Content items shown traveling through real production states
       ────────────────────────────────────────────────────────────── */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl sm:text-2xl font-black uppercase font-obviously tracking-tight">
-              RECENT CONTENT
-            </h2>
-            <span className="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full font-bold">
-              Latest Pieces
-            </span>
-          </div>
-
-          <button
-            onClick={() => onNavigate('content')}
-            className="text-xs font-black uppercase tracking-wider text-brand-orange hover:underline flex items-center gap-1"
-          >
-            <span>View All Workspace</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {recentItems.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white p-5 rounded-4xl border-2 border-brand-dark shadow-pop flex flex-col justify-between group"
-            >
-              <div>
-                {/* Visual Thumbnail Bar with theme */}
-                <div 
-                  onClick={() => onReviewContent(item)}
-                  className={`relative h-28 w-full rounded-2xl mb-4 border-2 border-brand-dark overflow-hidden flex items-center justify-center cursor-pointer ${
-                    item.videoTheme === 'amber' ? 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white' :
-                    item.videoTheme === 'yellow' ? 'bg-gradient-to-tr from-yellow-300 to-amber-400 text-brand-dark' :
-                    item.videoTheme === 'pink' ? 'bg-gradient-to-tr from-pink-400 to-rose-500 text-white' :
-                    'bg-gradient-to-tr from-cyan-400 to-blue-500 text-white'
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <div className="w-10 h-10 rounded-full bg-white/90 text-brand-dark flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform">
-                    <Play className="w-4 h-4 fill-brand-dark ml-0.5" />
-                  </div>
-                  <span className="absolute bottom-2 right-2 text-[10px] font-black bg-black/60 text-white px-2 py-0.5 rounded-md backdrop-blur-sm">
-                    {item.duration}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-brand-dark ${
-                    item.status === 'Ready for Review' ? 'bg-[#FCE7F3] text-pink-700' :
-                    item.status === 'Scheduled' ? 'bg-[#CFFAFE] text-cyan-800' :
-                    item.status === 'Published' ? 'bg-emerald-100 text-emerald-800' :
-                    'bg-amber-100 text-amber-800'
-                  }`}>
-                    {item.status}
-                  </span>
-                  <span className="text-[11px] text-gray-500 font-semibold">{item.date}</span>
-                </div>
-
-                <h3 className="font-obviously text-base font-black uppercase leading-snug line-clamp-2 mb-2">
-                  {item.title}
-                </h3>
-              </div>
-
-              {/* Actions based on status */}
-              <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-                {item.status === 'Ready for Review' ? (
-                  <>
-                    <button
-                      onClick={() => onReviewContent(item)}
-                      className="flex-1 py-1.5 bg-brand-dark text-white rounded-full font-bold text-xs uppercase btn-pop-sm text-center"
-                    >
-                      Review
-                    </button>
-                    <button
-                      onClick={() => onApproveContent(item.id)}
-                      className="px-3 py-1.5 bg-emerald-500 text-white rounded-full font-bold text-xs uppercase btn-pop-sm"
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => onRequestChanges(item)}
-                      className="px-2.5 py-1.5 bg-gray-100 text-gray-700 rounded-full font-bold text-xs uppercase border border-gray-300 hover:bg-gray-200"
-                      title="Request changes"
-                    >
-                      Edit
-                    </button>
-                  </>
-                ) : item.status === 'Published' ? (
-                  <div className="flex items-center justify-between w-full text-xs font-bold text-gray-700">
-                    <span>{item.stats.views} views</span>
-                    <button
-                      onClick={() => onNavigate('performance')}
-                      className="text-brand-orange hover:underline font-black uppercase"
-                    >
-                      View Result →
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-between w-full text-xs font-semibold text-gray-600">
-                    <span>{item.scheduledFor}</span>
-                    <button
-                      onClick={() => onReviewContent(item)}
-                      className="text-brand-dark font-bold hover:underline"
-                    >
-                      Inspect
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          6. IMPORTANT ACTIONS BAR (CLEAR & MINIMAL)
-      ────────────────────────────────────────────────────────────── */}
-      <div className="bg-[#FFFDF0] p-6 rounded-4xl border-2 border-brand-dark flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-brand-yellow-butter border border-brand-dark flex items-center justify-center font-black text-sm">
-            ⚡
-          </div>
+      <section className="bg-white p-7 sm:p-9 rounded-5xl border-3 border-[#0D0C11] shadow-editorial space-y-6">
+        
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-[#0D0C11]/10 pb-4">
           <div>
-            <div className="text-sm font-black uppercase font-obviously">Quick Client Actions</div>
-            <div className="text-xs text-gray-600">Only actions you ever actually need to take</div>
+            <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#6B6875]">
+              CONTINUOUS FLUID PIPELINE
+            </div>
+            <h2 className="font-obviously text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#0D0C11]">
+              PROPAGATION STREAM
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-4 text-xs font-mono font-bold">
+            <span className="flex items-center gap-1.5 text-[#0D0C11]">
+              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+              6 REELS TOTAL
+            </span>
+            <button
+              onClick={() => onNavigate('content')}
+              className="text-[#FF5500] hover:underline font-black uppercase flex items-center gap-1"
+            >
+              <span>Full Archive →</span>
+            </button>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          {waitingApprovalItem && (
-            <button
-              onClick={() => onReviewContent(waitingApprovalItem)}
-              className="px-4 py-2 bg-[#FCE7F3] text-pink-800 rounded-full font-black text-xs uppercase border border-brand-dark btn-pop-sm"
-            >
-              Review Reel
-            </button>
-          )}
-          <button
-            onClick={() => onNavigate('manager')}
-            className="px-4 py-2 bg-white text-brand-dark rounded-full font-black text-xs uppercase border border-brand-dark btn-pop-sm"
+        {/* Staggered Spatial Pipeline Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          
+          {/* Stage 1: Ingest & Synthesis */}
+          <div 
+            onClick={() => onNavigate('content', 'In Progress')}
+            className="p-5 rounded-4xl bg-[#FAF7F2] border-2 border-[#0D0C11] shadow-editorial-sm cursor-pointer hover:bg-yellow-50 transition-colors"
           >
-            Answer a Question
-          </button>
-          <button
-            onClick={() => onNavigate('performance')}
-            className="px-4 py-2 bg-white text-brand-dark rounded-full font-black text-xs uppercase border border-brand-dark btn-pop-sm"
+            <div className="flex items-center justify-between mb-3 text-xs font-mono font-bold">
+              <span className="text-[#6B6875]">01 / SYNTHESIZING</span>
+              <Clock className="w-4 h-4 text-[#FF9E00]" />
+            </div>
+            <div className="text-3xl font-black font-obviously text-[#0D0C11] mb-1">
+              {inProgressItems.length}
+            </div>
+            <p className="text-[11px] font-semibold text-[#6B6875] line-clamp-2">
+              Autonomous hook tuning & kinetic captions in progress.
+            </p>
+          </div>
+
+          {/* Stage 2: Ready for Verdict */}
+          <div 
+            onClick={() => onNavigate('content', 'Ready for Review')}
+            className="p-5 rounded-4xl bg-[#FAED8F] border-3 border-[#0D0C11] shadow-editorial cursor-pointer hover:-translate-y-1 transition-transform relative"
           >
-            View Result
-          </button>
+            <div className="absolute -top-2.5 right-4 bg-[#FF5500] text-white px-2 py-0.5 rounded-full text-[9px] font-mono font-black uppercase border border-[#0D0C11]">
+              ACTION
+            </div>
+            <div className="flex items-center justify-between mb-3 text-xs font-mono font-black">
+              <span className="text-[#0D0C11]">02 / VERDICT REQUIRED</span>
+              <AlertCircle className="w-4 h-4 text-[#FF5500]" />
+            </div>
+            <div className="text-3xl font-black font-obviously text-[#0D0C11] mb-1">
+              1
+            </div>
+            <p className="text-[11px] font-bold text-[#0D0C11] line-clamp-2">
+              Requires 1 tap to lock broadcast slot.
+            </p>
+          </div>
+
+          {/* Stage 3: Scheduled Queue */}
+          <div 
+            onClick={() => onNavigate('content', 'Scheduled')}
+            className="p-5 rounded-4xl bg-[#FAF7F2] border-2 border-[#0D0C11] shadow-editorial-sm cursor-pointer hover:bg-cyan-50 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-3 text-xs font-mono font-bold">
+              <span className="text-[#6B6875]">03 / BROADCAST QUEUE</span>
+              <Send className="w-4 h-4 text-[#0D0C11]" />
+            </div>
+            <div className="text-3xl font-black font-obviously text-[#0D0C11] mb-1">
+              {scheduledItems.length}
+            </div>
+            <p className="text-[11px] font-semibold text-[#6B6875] line-clamp-2">
+              Optimal time slots booked for maximum save rates.
+            </p>
+          </div>
+
+          {/* Stage 4: Live & Propagating */}
+          <div 
+            onClick={() => onNavigate('content', 'Published')}
+            className="p-5 rounded-4xl bg-[#FAF7F2] border-2 border-[#0D0C11] shadow-editorial-sm cursor-pointer hover:bg-emerald-50 transition-colors"
+          >
+            <div className="flex items-center justify-between mb-3 text-xs font-mono font-bold">
+              <span className="text-[#6B6875]">04 / IN LIVE ORBIT</span>
+              <Radio className="w-4 h-4 text-[#10B981]" />
+            </div>
+            <div className="text-3xl font-black font-obviously text-[#0D0C11] mb-1">
+              {publishedItems.length}
+            </div>
+            <p className="text-[11px] font-semibold text-[#6B6875] line-clamp-2">
+              Generating organic discovery & follower velocity.
+            </p>
+          </div>
+
         </div>
-      </div>
+
+      </section>
 
     </div>
   );

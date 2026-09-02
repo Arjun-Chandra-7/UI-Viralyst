@@ -34,36 +34,36 @@ export default function SettingsModal({ onClose }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-3xl bg-white rounded-5xl border-3 border-brand-dark shadow-pop overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D0C11]/75 backdrop-blur-md p-4">
+      <div className="relative w-full max-w-3xl bg-[#FAF7F2] rounded-6xl border-3 border-[#0D0C11] shadow-editorial-lg overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
         
         {/* Top Bar */}
-        <div className="p-6 bg-[#FFF8D6] border-b-2 border-brand-dark flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-white border border-brand-dark flex items-center justify-center text-xs font-black">
+        <div className="p-6 bg-white border-b-2 border-[#0D0C11] flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-[#FAED8F] border border-[#0D0C11] flex items-center justify-center text-xs font-black">
               ⚙
             </div>
-            <h3 className="font-obviously text-2xl uppercase font-black tracking-tight">
+            <h3 className="font-obviously text-2xl uppercase font-black tracking-tight text-[#0D0C11]">
               SETTINGS
             </h3>
-            <span className="text-[10px] uppercase font-bold text-gray-500 bg-white px-2 py-0.5 rounded-full border border-brand-dark">
-              Boring & Clean
+            <span className="text-[9px] font-mono uppercase font-black text-[#6B6875] bg-[#FAF7F2] px-2.5 py-0.5 rounded-full border border-[#0D0C11]">
+              Calm & Disciplined
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white text-brand-dark border-2 border-brand-dark flex items-center justify-center btn-pop-sm hover:bg-gray-100"
+            className="w-9 h-9 rounded-full bg-white text-[#0D0C11] border-2 border-[#0D0C11] flex items-center justify-center btn-editorial-sm"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Content Body: Sidebar + Form */}
+        {/* Content Body */}
         <div className="grid grid-cols-1 md:grid-cols-12 flex-1 overflow-y-auto">
           
           {/* Sidebar */}
-          <div className="md:col-span-4 bg-gray-50 p-4 border-b md:border-b-0 md:border-r border-gray-200 space-y-1">
+          <div className="md:col-span-4 bg-[#FAF7F2] p-4 border-b md:border-b-0 md:border-r-2 border-[#0D0C11]/10 space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -71,13 +71,13 @@ export default function SettingsModal({ onClose }) {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-left transition-colors ${
+                  className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-2xl text-xs font-mono font-black uppercase tracking-wider text-left transition-colors ${
                     isActive
-                      ? 'bg-brand-dark text-white'
-                      : 'text-gray-700 hover:bg-gray-200'
+                      ? 'bg-[#0D0C11] text-white shadow-editorial-sm'
+                      : 'text-[#2A2930] hover:bg-white'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-3.5 h-3.5" />
                   <span>{item.label}</span>
                 </button>
               );
@@ -85,12 +85,12 @@ export default function SettingsModal({ onClose }) {
           </div>
 
           {/* Form Panel */}
-          <div className="md:col-span-8 p-6 sm:p-8 space-y-6">
+          <div className="md:col-span-8 p-6 sm:p-8 space-y-6 bg-white">
             
             {savedSuccess && (
-              <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl border border-emerald-300 text-xs font-bold flex items-center gap-2">
+              <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl border border-emerald-400 text-xs font-bold flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Settings saved successfully!</span>
+                <span>Settings locked & saved successfully!</span>
               </div>
             )}
 
@@ -101,29 +101,29 @@ export default function SettingsModal({ onClose }) {
                 <div className="space-y-4">
                   <h4 className="font-obviously text-lg font-black uppercase mb-3">Account Credentials</h4>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Full Name</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Full Name</label>
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Email Address</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Email Address</label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Change Password</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Change Password</label>
                     <input
                       type="password"
                       placeholder="••••••••••••"
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                 </div>
@@ -132,32 +132,32 @@ export default function SettingsModal({ onClose }) {
               {/* Brand & Profile */}
               {activeTab === 'brand' && (
                 <div className="space-y-4">
-                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Brand Information</h4>
+                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Brand Identity</h4>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Company Name</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Company Name</label>
                     <input
                       type="text"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Website</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Website</label>
                     <input
                       type="url"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Instagram Handle</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Instagram Account Handle</label>
                     <input
                       type="text"
                       value={instagramAccount}
                       onChange={(e) => setInstagramAccount(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                 </div>
@@ -166,32 +166,32 @@ export default function SettingsModal({ onClose }) {
               {/* Content Preferences */}
               {activeTab === 'preferences' && (
                 <div className="space-y-4">
-                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Content Preferences</h4>
+                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Content Guardrails</h4>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Topics to Focus On</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Topics to Focus On</label>
                     <input
                       type="text"
                       value={topicsToFocus}
                       onChange={(e) => setTopicsToFocus(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Topics to Avoid</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Topics to Avoid</label>
                     <input
                       type="text"
                       value={topicsToAvoid}
                       onChange={(e) => setTopicsToAvoid(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase text-gray-700 mb-1">Tone of Voice</label>
+                    <label className="block text-[10px] font-mono font-black uppercase text-[#6B6875] mb-1">Editorial Tone</label>
                     <input
                       type="text"
                       value={tone}
                       onChange={(e) => setTone(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-brand-dark font-semibold text-sm bg-white"
+                      className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#0D0C11] font-bold text-sm bg-[#FAF7F2]"
                     />
                   </div>
                 </div>
@@ -200,14 +200,14 @@ export default function SettingsModal({ onClose }) {
               {/* Publishing */}
               {activeTab === 'publishing' && (
                 <div className="space-y-4">
-                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Publishing Permissions</h4>
-                  <div className="p-4 rounded-2xl border-2 border-brand-dark bg-[#FFFDF0] flex items-center justify-between">
+                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Publishing Stream</h4>
+                  <div className="p-4 rounded-2xl border-2 border-[#0D0C11] bg-[#FAF7F2] flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-black uppercase">Connected Instagram</div>
-                      <div className="text-sm font-bold text-brand-dark">{instagramAccount}</div>
+                      <div className="text-[10px] font-mono font-bold uppercase text-[#6B6875]">Connected Account</div>
+                      <div className="text-sm font-black font-mono text-[#0D0C11]">{instagramAccount}</div>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">
-                      Connected
+                    <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-mono font-black uppercase border border-emerald-400">
+                      LIVE
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -216,9 +216,9 @@ export default function SettingsModal({ onClose }) {
                       id="autoApprove"
                       checked={autoApprove}
                       onChange={(e) => setAutoApprove(e.target.checked)}
-                      className="w-4 h-4 rounded border-brand-dark text-brand-dark"
+                      className="w-4 h-4 rounded border-[#0D0C11] text-[#0D0C11]"
                     />
-                    <label htmlFor="autoApprove" className="text-xs font-semibold text-gray-700">
+                    <label htmlFor="autoApprove" className="text-xs font-semibold text-[#2A2930]">
                       Auto-publish scheduled reels once approved by client
                     </label>
                   </div>
@@ -229,22 +229,22 @@ export default function SettingsModal({ onClose }) {
               {activeTab === 'notifications' && (
                 <div className="space-y-3">
                   <h4 className="font-obviously text-lg font-black uppercase mb-3">Alert Preferences</h4>
-                  <div className="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200">
-                    <span className="text-xs font-bold text-gray-800">Email when reel is ready for review</span>
+                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#0D0C11]/20">
+                    <span className="text-xs font-bold text-[#0D0C11]">Email when reel is ready for client review</span>
                     <input
                       type="checkbox"
                       checked={notificationsReady}
                       onChange={(e) => setNotificationsReady(e.target.checked)}
-                      className="w-4 h-4 text-brand-dark"
+                      className="w-4 h-4 text-[#0D0C11]"
                     />
                   </div>
-                  <div className="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200">
-                    <span className="text-xs font-bold text-gray-800">Weekly performance summary</span>
+                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#0D0C11]/20">
+                    <span className="text-xs font-bold text-[#0D0C11]">Weekly performance momentum summary</span>
                     <input
                       type="checkbox"
                       checked={notificationsReport}
                       onChange={(e) => setNotificationsReport(e.target.checked)}
-                      className="w-4 h-4 text-brand-dark"
+                      className="w-4 h-4 text-[#0D0C11]"
                     />
                   </div>
                 </div>
@@ -253,30 +253,30 @@ export default function SettingsModal({ onClose }) {
               {/* Team */}
               {activeTab === 'team' && (
                 <div className="space-y-3">
-                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Team Members</h4>
-                  <div className="p-4 rounded-2xl border-2 border-brand-dark bg-gray-50 flex items-center justify-between">
+                  <h4 className="font-obviously text-lg font-black uppercase mb-3">Team Collaborators</h4>
+                  <div className="p-4 rounded-2xl border-2 border-[#0D0C11] bg-[#FAF7F2] flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-black uppercase">Arjun Chandra (You)</div>
-                      <div className="text-[11px] text-gray-500">Owner • Admin</div>
+                      <div className="text-xs font-black font-obviously uppercase">Arjun Chandra (You)</div>
+                      <div className="text-[11px] font-mono text-[#6B6875]">Owner • Executive Admin</div>
                     </div>
-                    <span className="text-[10px] font-bold bg-white px-2 py-1 rounded-full border border-gray-300">
-                      Primary
+                    <span className="text-[10px] font-mono font-bold bg-white px-2 py-1 rounded-full border border-[#0D0C11]">
+                      PRIMARY
                     </span>
                   </div>
                   <button
                     type="button"
-                    onClick={() => alert("Invite team modal - available on enterprise")}
-                    className="w-full py-2.5 bg-white text-brand-dark rounded-full font-bold text-xs uppercase border-2 border-brand-dark hover:bg-gray-100"
+                    onClick={() => alert("Enterprise collaborator seats active")}
+                    className="w-full py-2.5 bg-white text-[#0D0C11] rounded-full font-black text-xs uppercase border-2 border-[#0D0C11] btn-editorial-sm"
                   >
                     + Invite Team Member
                   </button>
                 </div>
               )}
 
-              <div className="pt-4 border-t border-gray-200 flex justify-end">
+              <div className="pt-4 border-t border-gray-100 flex justify-end">
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-brand-dark text-white rounded-full font-black text-xs uppercase tracking-wider border-2 border-brand-dark btn-pop"
+                  className="px-6 py-2.5 bg-[#0D0C11] text-white rounded-full font-black text-xs uppercase tracking-wider border-2 border-[#0D0C11] btn-editorial"
                 >
                   Save Settings
                 </button>
