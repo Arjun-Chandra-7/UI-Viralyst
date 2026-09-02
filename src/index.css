@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-butter: #FAED8F;
+    --brand-gold: #FACC15;
+    --brand-amber: #F59E0B;
+    --brand-orange: #EA580C;
+    --brand-dark: #12111A;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #FFFDF7;
+    color: #12111A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headlines styling matching Obviously Extended Black */
+  h1, h2, h3, .font-obviously {
+    font-family: 'Obviously Extended Black', 'Obviously', 'Syne', 'Archivo Black', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FEF9C3;
+}
+::-webkit-scrollbar-thumb {
+  background: #FACC15;
+  border-radius: 9999px;
+  border: 2px solid #FEF9C3;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F59E0B;
+}
+
+/* Tactile Pop Buttons (Aardvark Book Club Inspired) */
+.btn-pop {
+  transition: all 0.2s cubic-bezier(0.34, 1.57, 0.64, 1);
+  box-shadow: 0 6px 0px 0px #12111A;
+}
+.btn-pop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 0px 0px #12111A;
+}
+.btn-pop:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0px 0px #12111A;
+}
+
+.btn-pop-sm {
+  transition: all 0.2s cubic-bezier(0.34, 1.57, 0.64, 1);
+  box-shadow: 0 4px 0px 0px #12111A;
+}
+.btn-pop-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0px 0px #12111A;
+}
+.btn-pop-sm:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0px 0px #12111A;
+}
+
+/* Pill badges */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 1.5px solid #12111A;
+  font-weight: 600;
+  font-size: 0.875rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 0px 0px #12111A;
+  transition: transform 0.15s ease;
+}
+.pill-badge:hover {
+  transform: translateY(-1px);
+}
+
+/* Circular curved text path animation */
+@keyframes rotateCurved {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-path {
+  animation: rotateCurved 30s linear infinite;
+  transform-origin: center;
+}
+
+/* Wave layer curves */
+.wave-mask {
+  mask-image: radial-gradient(circle at 50% 100%, black 70%, transparent 100%);
+}
+
+/* Glass effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
