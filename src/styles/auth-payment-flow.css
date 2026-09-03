@@ -1,0 +1,642 @@
+/* ==========================================================================
+   VIRALYST AUTH, PRICING & PHONEPE PAYMENT FLOW
+   Strictly consistent with Aardvark / Viralyst Design System
+   ========================================================================== */
+
+/* 1. Global Modal Overlay */
+.v-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(11, 11, 15, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5em;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+  overflow-y: auto;
+}
+
+.v-modal-overlay.is--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.v-modal-container {
+  background: var(--paper, #F4F0E8);
+  color: var(--ink, #0B0B0F);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 520px;
+  padding: 2.8em 2.4em;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 2px solid rgba(11, 11, 15, 0.08);
+}
+
+.v-modal-container--wide {
+  max-width: 1080px;
+  padding: 2.5em 2.2em;
+}
+
+.v-modal-overlay.is--active .v-modal-container {
+  transform: translateY(0) scale(1);
+}
+
+.v-modal-close {
+  position: absolute;
+  top: 1.4em;
+  right: 1.4em;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(11, 11, 15, 0.06);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  color: var(--ink, #0B0B0F);
+}
+
+.v-modal-close:hover {
+  background: rgba(11, 11, 15, 0.12);
+  transform: scale(1.06);
+}
+
+/* 2. Google Verification Screen */
+.v-auth-header {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.v-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: rgba(255, 81, 70, 0.12);
+  border: 1px solid rgba(255, 81, 70, 0.3);
+  color: var(--coral-red, #FF5146);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 1.2em;
+}
+
+.v-auth-title {
+  font-family: var(--font-display);
+  font-size: 2.2em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink, #0B0B0F);
+  margin-bottom: 0.4em;
+}
+
+.v-auth-desc {
+  font-family: var(--font-body);
+  font-size: 1em;
+  line-height: 1.5;
+  color: rgba(11, 11, 15, 0.7);
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.v-google-btn {
+  width: 100%;
+  background: #FFFFFF;
+  border: 2px solid rgba(11, 11, 15, 0.12);
+  border-radius: 50px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #1F1F1F;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v-google-btn:hover {
+  background: #F8FAFC;
+  border-color: rgba(11, 11, 15, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.v-google-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Simulated Google Account Picker */
+.v-account-picker {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 11, 15, 0.1);
+  padding: 1.2em;
+  margin-top: 1.5em;
+}
+
+.v-account-picker-header {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: rgba(11, 11, 15, 0.5);
+  font-weight: 700;
+  margin-bottom: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.v-account-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1.5px solid transparent;
+}
+
+.v-account-option:hover {
+  background: #F1F5F9;
+  border-color: rgba(49, 92, 255, 0.2);
+}
+
+.v-account-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #315CFF 0%, #FEB6FA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.v-account-details {
+  flex: 1;
+  text-align: left;
+}
+
+.v-account-name {
+  font-family: var(--font-display);
+  font-size: 0.95em;
+  font-weight: 700;
+  color: #0B0B0F;
+}
+
+.v-account-email {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: rgba(11, 11, 15, 0.6);
+}
+
+.v-account-custom-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.8em;
+}
+
+.v-account-custom-input input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(11, 11, 15, 0.2);
+  font-family: var(--font-body);
+  font-size: 0.88em;
+}
+
+.v-account-custom-input button {
+  background: #0B0B0F;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: var(--font-display);
+  font-size: 0.85em;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 3. Plan Selection Grid */
+.v-plan-header {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.v-user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(11, 11, 15, 0.1);
+  padding: 4px 14px 4px 6px;
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #0B0B0F;
+  margin-bottom: 1em;
+}
+
+.v-user-chip-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #315CFF;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.v-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2em;
+}
+
+@media (max-width: 960px) {
+  .v-plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .v-plans-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.v-plan-card {
+  background: #FFFFFF;
+  border-radius: 22px;
+  padding: 1.8em 1.4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid rgba(11, 11, 15, 0.08);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v-plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.v-plan-card--free {
+  background: #F8F7FF;
+  border-color: #C5BCFF;
+}
+
+.v-plan-card--go {
+  background: #FFF9F5;
+  border-color: #FFC0B9;
+}
+
+.v-plan-card--plus {
+  background: #FFF5FB;
+  border-color: #FEB6FA;
+  box-shadow: 0 8px 30px rgba(254, 182, 250, 0.3);
+}
+
+.v-plan-card--pro {
+  background: #110F24;
+  border-color: #315CFF;
+  color: #FFFFFF;
+}
+
+.v-plan-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 0.8em;
+  width: fit-content;
+}
+
+.v-plan-badge--popular {
+  background: #F53F83;
+  color: #FFFFFF;
+}
+
+.v-plan-title {
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2em;
+}
+
+.v-plan-price {
+  font-family: var(--font-display);
+  font-size: 2.2em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0.4em 0 0.8em 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.v-plan-price span {
+  font-family: var(--font-body);
+  font-size: 0.45em;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.v-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 1.2em 0 1.8em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.88em;
+  line-height: 1.4;
+}
+
+.v-plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.v-plan-check {
+  color: #10B981;
+  font-weight: 800;
+}
+
+.v-plan-action-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 40px;
+  font-family: var(--font-display);
+  font-size: 0.95em;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.v-plan-action-btn--free {
+  background: #0B0B0F;
+  color: #FFFFFF;
+}
+
+.v-plan-action-btn--go {
+  background: #FF5146;
+  color: #FFFFFF;
+}
+
+.v-plan-action-btn--plus {
+  background: #F53F83;
+  color: #FFFFFF;
+}
+
+.v-plan-action-btn--pro {
+  background: #315CFF;
+  color: #FFFFFF;
+}
+
+.v-plan-action-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* 4. PhonePe Payment Gateway Modal */
+.phonepe-modal {
+  max-width: 460px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #FFFFFF;
+}
+
+.phonepe-header {
+  background: #5F259F;
+  color: #FFFFFF;
+  padding: 1.6em 1.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phonepe-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phonepe-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: #5F259F;
+}
+
+.phonepe-brand-text h4 {
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  font-weight: 800;
+  margin: 0;
+}
+
+.phonepe-brand-text p {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  opacity: 0.8;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.phonepe-body {
+  padding: 1.6em 1.8em;
+}
+
+.phonepe-order-card {
+  background: #F8F9FA;
+  border-radius: 14px;
+  padding: 1.2em;
+  margin-bottom: 1.4em;
+  border: 1px solid #E9ECEF;
+}
+
+.phonepe-order-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  margin-bottom: 6px;
+}
+
+.phonepe-order-amount {
+  font-family: var(--font-display);
+  font-size: 1.5em;
+  font-weight: 800;
+  color: #5F259F;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #CED4DA;
+}
+
+.phonepe-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.4em;
+  border-bottom: 1px solid #E9ECEF;
+  padding-bottom: 8px;
+}
+
+.phonepe-tab-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 0.88em;
+  font-weight: 700;
+  color: #6C757D;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.phonepe-tab-btn.is--active {
+  background: #EFE6FA;
+  color: #5F259F;
+}
+
+.phonepe-qr-wrap {
+  text-align: center;
+  padding: 1em 0;
+}
+
+.phonepe-qr-box {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 12px auto;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 2px solid #5F259F;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phonepe-qr-box svg {
+  width: 100%;
+  height: 100%;
+}
+
+.phonepe-qr-timer {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6C757D;
+}
+
+.phonepe-pay-btn {
+  width: 100%;
+  background: #5F259F;
+  color: #FFFFFF;
+  border: none;
+  padding: 14px;
+  border-radius: 40px;
+  font-family: var(--font-display);
+  font-size: 1.05em;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(95, 37, 159, 0.35);
+}
+
+.phonepe-pay-btn:hover {
+  background: #501F87;
+  transform: translateY(-2px);
+}
+
+/* 5. Setup View Screen */
+.v-setup-screen {
+  min-height: 100vh;
+  background: var(--paper, #F4F0E8);
+  color: var(--ink, #0B0B0F);
+  display: flex;
+  flex-direction: column;
+}
+
+.v-setup-navbar {
+  padding: 1.5em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(11, 11, 15, 0.08);
+}
+
+.v-setup-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4em 1.5em;
+  text-align: center;
+}
+
+.v-setup-blank-canvas {
+  width: 100%;
+  max-width: 820px;
+  min-height: 440px;
+  background: #FFFFFF;
+  border: 2px dashed rgba(11, 11, 15, 0.15);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 2em;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.04);
+}

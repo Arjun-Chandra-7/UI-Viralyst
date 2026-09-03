@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Viralyst — Workspace Setup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/webflow.css">
+  <link rel="stylesheet" href="/src/styles/slater.css">
+  <link rel="stylesheet" href="/src/styles/auth-payment-flow.css">
+  <link href="/assets/696a059da09e3c123fba6a5a_logo-circle.svg" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body style="background: var(--paper, #F4F0E8); color: var(--ink, #0B0B0F); min-height: 100vh; display: flex; flex-direction: column;">
+  <!-- Setup Navbar -->
+  <header style="padding: 1.5em 3em; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(11, 11, 15, 0.08); background: #FFFFFF;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/assets/696179694070e2fa9eca375f_logo.svg" alt="Viralyst Logo" style="height: 32px;" />
+      </a>
+      <span id="standalone-plan-badge" style="font-family: var(--font-mono); font-size: 11px; background: rgba(16, 185, 129, 0.12); color: #10B981; border: 1px solid #10B981; padding: 3px 12px; border-radius: 20px; font-weight: 700;">
+        ACTIVE SUBSCRIPTION &bull; VERIFIED
+      </span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #F8F9FA; border: 1.5px solid rgba(11, 11, 15, 0.08); padding: 4px 14px 4px 6px; border-radius: 30px; font-family: var(--font-mono); font-size: 11px; font-weight: 600;">
+        <span id="standalone-avatar" style="width: 22px; height: 22px; border-radius: 50%; background: #315CFF; color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;">A</span>
+        <span id="standalone-email">arjun.chandra@gmail.com</span>
+      </div>
+      <a href="/" style="font-family: var(--font-mono); font-size: 11px; color: #666; text-decoration: none; border: 1px solid rgba(11,11,15,0.2); padding: 6px 14px; border-radius: 20px;">
+        &larr; Return to Landing
+      </a>
+    </div>
+  </header>
+
+  <!-- Blank Setup Canvas Body -->
+  <main style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4em 1.5em; text-align: center;">
+    <div style="margin-bottom: 2em;">
+      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--coral-red, #FF5146); font-weight: 700; letter-spacing: 0.08em;">[STEP 01: WORKSPACE SETUP]</span>
+      <h1 style="font-family: var(--font-display); font-size: 3em; font-weight: 800; letter-spacing: -0.03em; margin: 0.2em 0 0.3em 0;">Workspace Setup</h1>
+      <p style="font-family: var(--font-body); font-size: 1.1em; color: rgba(11, 11, 15, 0.65); max-width: 540px; margin: 0 auto; line-height: 1.5;">
+        Your Google account is verified and subscription is active. Setup your brand profile and short-form channels to initialize your intelligence dashboard.
+      </p>
+    </div>
+
+    <!-- Clean Blank Canvas Container as requested -->
+    <div style="width: 100%; max-width: 840px; min-height: 460px; background: #FFFFFF; border: 2px dashed rgba(11, 11, 15, 0.15); border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3em 2em; box-shadow: 0 20px 45px rgba(0,0,0,0.03);">
+      <div style="width: 58px; height: 58px; border-radius: 50%; background: rgba(49, 92, 255, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2em;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#315CFF" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+      <div style="font-family: var(--font-display); font-size: 1.35em; font-weight: 800; margin-bottom: 0.4em;">
+        Setup Engine Initialized
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 12px; color: rgba(11, 11, 15, 0.5); max-width: 440px; line-height: 1.6;">
+        [BLANK CANVAS STANDBY &bull; AWAITING BRAND ONBOARDING CONFIGURATION]
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('viralyst_user') || 'null');
+    const sub = JSON.parse(localStorage.getItem('viralyst_subscription') || 'null');
+
+    if (user) {
+      document.getElementById('standalone-email').textContent = user.email || 'user@gmail.com';
+      document.getElementById('standalone-avatar').textContent = (user.name ? user.name[0] : 'U').toUpperCase();
+    }
+    if (sub) {
+      document.getElementById('standalone-plan-badge').textContent = (sub.planName || 'PLUS PLAN').toUpperCase() + ' ACTIVE • ' + (sub.reelsPerMonth || 40) + ' REELS/MO';
+    }
+  </script>
+</body>
+</html>
