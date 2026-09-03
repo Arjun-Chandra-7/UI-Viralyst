@@ -3564,3 +3564,23 @@ html[lang="fr"] .lang-en-only {
   letter-spacing: 0.05em !important;
 }
 
+
+
+/* Flow Section Typography Polish */
+.flow__hero {
+  padding-top: 5em !important;
+  padding-bottom: 2.5em !important;
+  overflow: visible !important;
+}
+
+.flow__hero-content {
+  padding: 0 1.5em !important;
+  overflow: visible !important;
+}
+
+.flow__hero-title {
+  padding-left: 0.1em !important;
+  overflow: visible !important;
+  margin-left: 0 !important;
+}
+
