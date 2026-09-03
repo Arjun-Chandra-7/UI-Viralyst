@@ -3146,26 +3146,13 @@ function initBoxSequence() {
 
     if (!element || !canvas) return;
 
-    const frames = parseInt(canvas.dataset.frames, 10) || 1;
-    const digits = parseInt(canvas.dataset.digits, 10) || 3;
-    const indexStart = parseInt(canvas.dataset.indexStart, 10) || 0;
-    const desktopSrc = canvas.dataset.desktopSrc || '';
-    const mobileSrc = canvas.dataset.mobileSrc || desktopSrc;
-    const staticSrc = canvas.dataset.staticSrc;
-    const filetype = canvas.dataset.filetype || 'webp';
     const startTrigger = wrap.dataset.scrollStart || 'top top';
     const endTrigger = wrap.dataset.scrollEnd || 'bottom top';
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    const baseUrl = isMobile ? mobileSrc : desktopSrc;
-    const lastIndex = indexStart + frames - 1;
+    const ctx = canvas.getContext('2d');
 
     let lastProgress = 0;
     let resizeTimer;
     let lastWindowWidth = window.innerWidth;
-
-    const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
       const dpr = window.devicePixelRatio || 1;
@@ -3175,206 +3162,443 @@ function initBoxSequence() {
       if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
         canvas.width = width * dpr;
         canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
       }
     }
 
-    function drawCover(img) {
-      if (!img || isDestroyed) return;
+    function drawDeconstruction(progress) {
+      if (isDestroyed || !ctx) return;
 
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
-      const scale = Math.max(canvasWidth / img.width, canvasHeight / img.height);
-      const x = (canvasWidth - img.width * scale) / 2;
-      const y = (canvasHeight - img.height * scale) / 2;
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, cw, ch);
 
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+      // Scale factor relative to reference 1000px height
+      const s = Math.min(cw / (900 * dpr), ch / (900 * dpr)) * dpr;
+      const cx = cw / 2;
+      const cy = ch / 2;
+
+      // Base dimensions of the Reel
+      const rw = 440 * s;
+      const rh = 720 * s;
+
+      // Easing helpers
+      const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+      const easeInOut = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+      // Background soft glow
+      const glowGrad = ctx.createRadialGradient(cx, cy, 50 * s, cx, cy, 400 * s);
+      glowGrad.addColorStop(0, 'rgba(112, 87, 255, 0.15)');
+      glowGrad.addColorStop(1, 'rgba(9, 9, 11, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, cw, ch);
+
+      // PHASE 1: p < 0.22 -> Active Reel Playing & Freeze
+      if (progress < 0.22) {
+        const freezeT = clamp(progress / 0.22, 0, 1);
+
+        // Ground shadow
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(cx, cy + rh / 2 + 30 * s, rw * 0.45, 18 * s, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(9, 9, 11, 0.4)';
+        ctx.fill();
+        ctx.restore();
+
+        // Main Reel Frame
+        drawReelBase(cx, cy, rw, rh, s, 0);
+
+        // Scan line sweep at freeze
+        if (progress > 0.12) {
+          const scanY = cy - rh / 2 + (rh * ((progress - 0.12) / 0.10));
+          ctx.save();
+          ctx.strokeStyle = '#20D5E5';
+          ctx.lineWidth = 3 * s;
+          ctx.shadowColor = '#20D5E5';
+          ctx.shadowBlur = 12 * s;
+          ctx.beginPath();
+          ctx.moveTo(cx - rw / 2 + 20 * s, scanY);
+          ctx.lineTo(cx + rw / 2 - 20 * s, scanY);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+      // PHASE 2 & 3: 0.22 <= progress < 0.80 -> Physical Layer Separation & Signal Extraction
+      else if (progress < 0.80) {
+        const factor = easeInOut(clamp((progress - 0.22) / 0.45, 0, 1));
+        const reorg = clamp((progress - 0.60) / 0.20, 0, 1);
+
+        // Layer 1: Storyboard Frame (Center-Left)
+        const sbX = cx - (110 * s * factor) + (40 * s * reorg);
+        const sbY = cy + (10 * s * factor);
+        drawStoryboardLayer(sbX, sbY, rw * 0.75, rh * 0.65, s, factor);
+
+        // Layer 2: Audio Spectrogram Strip (Center-Right)
+        const auX = cx + (120 * s * factor) - (30 * s * reorg);
+        const auY = cy - (20 * s * factor);
+        drawAudioLayer(auX, auY, rw * 0.70, rh * 0.45, s, factor);
+
+        // Layer 3: Hook Banner (Peels Top)
+        const hkX = cx - (15 * s * factor);
+        const hkY = cy - rh / 2 - (60 * s * factor) + (40 * s * reorg);
+        const hkRot = -0.08 * factor;
+        drawHookLayer(hkX, hkY, rw * 0.90, 95 * s, s, hkRot, factor);
+
+        // Layer 4: Timeline & Retention Curve (Peels Bottom)
+        const tmX = cx;
+        const tmY = cy + rh / 2 + (50 * s * factor) - (30 * s * reorg);
+        drawTimelineLayer(tmX, tmY, rw * 0.88, 110 * s, s, factor);
+
+        // Connector Signal Lines
+        if (factor > 0.4) {
+          ctx.save();
+          ctx.setLineDash([4 * s, 4 * s]);
+          ctx.strokeStyle = 'rgba(32, 213, 229, ' + (0.5 * factor) + ')';
+          ctx.lineWidth = 1.5 * s;
+          ctx.beginPath();
+          ctx.moveTo(hkX, hkY + 45 * s);
+          ctx.lineTo(sbX, sbY - rh * 0.25);
+          ctx.lineTo(auX, auY - rh * 0.15);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+      // PHASE 4: progress >= 0.80 -> Content Blueprint Assembly
+      else {
+        const assem = easeInOut(clamp((progress - 0.80) / 0.18, 0, 1));
+        drawBlueprintComplete(cx, cy, rw * 1.08, rh * 1.02, s, assem);
+      }
+    }
+
+    // Canvas drawing primitives
+    function drawReelBase(x, y, w, h, s, rot) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (rot) ctx.rotate(rot);
+
+      // Obsidian Body
+      roundRect(ctx, -w / 2, -h / 2, w, h, 28 * s);
+      ctx.fillStyle = '#09090B';
+      ctx.fill();
+      ctx.strokeStyle = '#F5F2EA';
+      ctx.lineWidth = 4 * s;
+      ctx.stroke();
+
+      // Video Area
+      const vw = w - 32 * s;
+      const vh = h * 0.62;
+      roundRect(ctx, -vw / 2, -h / 2 + 16 * s, vw, vh, 18 * s);
+      ctx.fillStyle = '#141824';
+      ctx.fill();
+
+      // Hook Banner on Video
+      roundRect(ctx, -vw / 2 + 14 * s, -h / 2 + 30 * s, vw - 28 * s, 68 * s, 10 * s);
+      ctx.fillStyle = 'rgba(9, 9, 11, 0.85)';
+      ctx.fill();
+      ctx.strokeStyle = '#FF4D3D';
+      ctx.lineWidth = 2 * s;
+      ctx.stroke();
+
+      ctx.fillStyle = '#FF4D3D';
+      ctx.font = 'bold ' + (15 * s) + 'px Degular, sans-serif';
+      ctx.fillText('CONTRARIAN HOOK', -vw / 2 + 28 * s, -h / 2 + 56 * s);
+      ctx.fillStyle = '#F5F2EA';
+      ctx.font = (13 * s) + 'px Degular, sans-serif';
+      ctx.fillText('Why 99% of hooks fail in 2s', -vw / 2 + 28 * s, -h / 2 + 82 * s);
+
+      // Waveform inside video
+      for (let i = 0; i < 20; i++) {
+        const bh = (18 + 75 * Math.sin(i * 0.45) ** 2) * s;
+        const bx = -vw / 2 + 35 * s + i * 16 * s;
+        roundRect(ctx, bx, -h / 2 + 230 * s - bh / 2, 7 * s, bh, 3 * s);
+        ctx.fillStyle = '#20D5E5';
+        ctx.fill();
+      }
+
+      // Bottom Scrubber
+      const sy = -h / 2 + vh - 20 * s;
+      ctx.strokeStyle = '#404555';
+      ctx.lineWidth = 4 * s;
+      ctx.beginPath();
+      ctx.moveTo(-vw / 2 + 20 * s, sy);
+      ctx.lineTo(vw / 2 - 20 * s, sy);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#CBFF4A';
+      ctx.beginPath();
+      ctx.moveTo(-vw / 2 + 20 * s, sy);
+      ctx.lineTo(-vw / 2 + 180 * s, sy);
+      ctx.stroke();
+
+      // Lower operational brief card
+      const bw = w - 32 * s;
+      const bh = h - vh - 48 * s;
+      roundRect(ctx, -bw / 2, h / 2 - bh - 16 * s, bw, bh, 18 * s);
+      ctx.fillStyle = '#F5F2EA';
+      ctx.fill();
+
+      ctx.fillStyle = '#09090B';
+      ctx.font = 'bold ' + (17 * s) + 'px Champ, sans-serif';
+      ctx.fillText('SIGNAL DECONSTRUCTION', -bw / 2 + 20 * s, h / 2 - bh + 22 * s);
+
+      ctx.fillStyle = '#555560';
+      ctx.font = (13 * s) + 'px Degular, sans-serif';
+      ctx.fillText('Pacing: 0.8s cuts • 142 BPM sync', -bw / 2 + 20 * s, h / 2 - bh + 48 * s);
+      ctx.restore();
+    }
+
+    function drawStoryboardLayer(x, y, w, h, s, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+      ctx.shadowBlur = 20 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 18 * s);
+      ctx.fillStyle = '#161B28';
+      ctx.fill();
+      ctx.strokeStyle = '#7057FF';
+      ctx.lineWidth = 3 * s;
+      ctx.stroke();
+
+      // Header Tag
+      roundRect(ctx, -w / 2 + 15 * s, -h / 2 + 15 * s, 140 * s, 26 * s, 6 * s);
+      ctx.fillStyle = '#7057FF';
+      ctx.fill();
+      ctx.fillStyle = '#F5F2EA';
+      ctx.font = 'bold ' + (11 * s) + 'px Degular, sans-serif';
+      ctx.fillText('STORYBOARD PANELS', -w / 2 + 24 * s, -h / 2 + 32 * s);
+
+      // 3 filmstrip frames
+      const ph = (h - 75 * s) / 3;
+      const panels = [
+        { t: '00:00 - THE INTERRUPT', c: '#FF4D3D' },
+        { t: '00:01 - TACTILE PROOF', c: '#20D5E5' },
+        { t: '00:03 - CONTEXT PIVOT', c: '#CBFF4A' }
+      ];
+      for (let i = 0; i < 3; i++) {
+        const py = -h / 2 + 50 * s + i * (ph + 6 * s);
+        roundRect(ctx, -w / 2 + 15 * s, py, w - 30 * s, ph, 8 * s);
+        ctx.fillStyle = '#0F121C';
+        ctx.fill();
+        ctx.strokeStyle = panels[i].c;
+        ctx.lineWidth = 1.5 * s;
+        ctx.stroke();
+
+        ctx.fillStyle = panels[i].c;
+        ctx.font = 'bold ' + (11 * s) + 'px Degular, sans-serif';
+        ctx.fillText(panels[i].t, -w / 2 + 25 * s, py + ph / 2 + 4 * s);
+      }
+      ctx.restore();
+    }
+
+    function drawAudioLayer(x, y, w, h, s, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+      ctx.shadowBlur = 20 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 18 * s);
+      ctx.fillStyle = '#121422';
+      ctx.fill();
+      ctx.strokeStyle = '#20D5E5';
+      ctx.lineWidth = 3 * s;
+      ctx.stroke();
+
+      // Header
+      ctx.fillStyle = '#20D5E5';
+      ctx.font = 'bold ' + (13 * s) + 'px Champ, sans-serif';
+      ctx.fillText('AUDIO SPECTROGRAM', -w / 2 + 20 * s, -h / 2 + 32 * s);
+
+      ctx.fillStyle = '#8590A8';
+      ctx.font = (11 * s) + 'px Degular, sans-serif';
+      ctx.fillText('Speech Cadence: 142 BPM', -w / 2 + 20 * s, -h / 2 + 52 * s);
+
+      // Spectrogram bars
+      const barCount = 18;
+      const bw = 8 * s;
+      const bg = 5 * s;
+      const startX = -w / 2 + 20 * s;
+      for (let i = 0; i < barCount; i++) {
+        const bh = (20 + 80 * Math.sin(i * 0.4 + f) ** 2) * s;
+        roundRect(ctx, startX + i * (bw + bg), h / 2 - 30 * s - bh, bw, bh, 3 * s);
+        ctx.fillStyle = i % 2 === 0 ? '#20D5E5' : '#CBFF4A';
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawHookLayer(x, y, w, h, s, rot, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rot);
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+      ctx.shadowBlur = 22 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
+      ctx.fillStyle = '#09090B';
+      ctx.fill();
+      ctx.strokeStyle = '#FF4D3D';
+      ctx.lineWidth = 3.5 * s;
+      ctx.stroke();
+
+      // Pill label
+      roundRect(ctx, -w / 2 + 18 * s, -h / 2 + 16 * s, 160 * s, 26 * s, 6 * s);
+      ctx.fillStyle = '#FF4D3D';
+      ctx.fill();
+      ctx.fillStyle = '#09090B';
+      ctx.font = 'bold ' + (11 * s) + 'px Degular, sans-serif';
+      ctx.fillText('EXTRACTED HOOK', -w / 2 + 28 * s, -h / 2 + 33 * s);
+
+      ctx.fillStyle = '#F5F2EA';
+      ctx.font = 'bold ' + (15 * s) + 'px Degular, sans-serif';
+      ctx.fillText('"Why 99% of short-form hooks fail"', -w / 2 + 18 * s, -h / 2 + 68 * s);
+
+      // Badge
+      roundRect(ctx, w / 2 - 110 * s, -h / 2 + 16 * s, 92 * s, 26 * s, 6 * s);
+      ctx.fillStyle = '#20D5E5';
+      ctx.fill();
+      ctx.fillStyle = '#09090B';
+      ctx.font = 'bold ' + (10 * s) + 'px Degular, sans-serif';
+      ctx.fillText('[RETENTION 96%]', w / 2 - 104 * s, -h / 2 + 33 * s);
+      ctx.restore();
+    }
+
+    function drawTimelineLayer(x, y, w, h, s, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+      ctx.shadowBlur = 20 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
+      ctx.fillStyle = '#0F121D';
+      ctx.fill();
+      ctx.strokeStyle = '#CBFF4A';
+      ctx.lineWidth = 3 * s;
+      ctx.stroke();
+
+      ctx.fillStyle = '#CBFF4A';
+      ctx.font = 'bold ' + (12 * s) + 'px Champ, sans-serif';
+      ctx.fillText('TIMELINE & CUT VELOCITY', -w / 2 + 20 * s, -h / 2 + 28 * s);
+
+      // Cut markers
+      const cuts = ['[0.0s HOOK]', '[0.8s CUT 1]', '[1.6s CUT 2]', '[2.4s PIVOT]'];
+      const cxStep = (w - 40 * s) / 4;
+      for (let i = 0; i < 4; i++) {
+        const bx = -w / 2 + 20 * s + i * cxStep;
+        roundRect(ctx, bx, -h / 2 + 42 * s, cxStep - 8 * s, 26 * s, 6 * s);
+        ctx.fillStyle = '#1A2030';
+        ctx.fill();
+        ctx.fillStyle = '#F5F2EA';
+        ctx.font = (10 * s) + 'px Degular, sans-serif';
+        ctx.fillText(cuts[i], bx + 6 * s, -h / 2 + 59 * s);
+      }
+
+      // Parabolic retention curve
+      ctx.strokeStyle = '#FF4D3D';
+      ctx.lineWidth = 2.5 * s;
+      ctx.beginPath();
+      ctx.moveTo(-w / 2 + 20 * s, h / 2 - 15 * s);
+      ctx.quadraticCurveTo(x - w / 4, -h / 2 + 75 * s, w / 2 - 20 * s, h / 2 - 25 * s);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawBlueprintComplete(x, y, w, h, s, assem) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(112, 87, 255, ' + (0.5 * assem) + ')';
+      ctx.shadowBlur = 35 * s * assem;
+
+      // Blueprint Canvas Body (Milk with obsidian border)
+      roundRect(ctx, -w / 2, -h / 2, w, h, 28 * s);
+      ctx.fillStyle = '#F5F2EA';
+      ctx.fill();
+      ctx.strokeStyle = '#09090B';
+      ctx.lineWidth = 5 * s;
+      ctx.stroke();
+
+      // Top Blueprint Header
+      roundRect(ctx, -w / 2 + 18 * s, -h / 2 + 18 * s, w - 36 * s, 85 * s, 16 * s);
+      ctx.fillStyle = '#09090B';
+      ctx.fill();
+
+      ctx.fillStyle = '#CBFF4A';
+      ctx.font = 'bold ' + (11 * s) + 'px Degular, sans-serif';
+      ctx.fillText('[VIRALYST BLUEPRINT #01]', -w / 2 + 36 * s, -h / 2 + 45 * s);
+
+      ctx.fillStyle = '#F5F2EA';
+      ctx.font = 'bold ' + (22 * s) + 'px Champ, sans-serif';
+      ctx.fillText('THE CONTRARIAN OPEN', -w / 2 + 36 * s, -h / 2 + 76 * s);
+
+      roundRect(ctx, w / 2 - 160 * s, -h / 2 + 35 * s, 125 * s, 30 * s, 8 * s);
+      ctx.fillStyle = '#7057FF';
+      ctx.fill();
+      ctx.fillStyle = '#F5F2EA';
+      ctx.font = 'bold ' + (11 * s) + 'px Degular, sans-serif';
+      ctx.fillText('READY TO SHOOT', w / 2 - 150 * s, -h / 2 + 55 * s);
+
+      // 4 Operational Sections
+      const secH = (h - 160 * s) / 4;
+      const specs = [
+        { label: '01 / HOOK SCRIPT', desc: 'Why 99% of short-form hooks fail in the first 2 seconds.', badge: 'CONTRARIAN', col: '#FF4D3D' },
+        { label: '02 / FRAME PACING', desc: '0.8s micro-cuts with tactile visual proof before dialogue.', badge: 'VELOCITY', col: '#7057FF' },
+        { label: '03 / AUDIO CADENCE', desc: '142 BPM rhythmic speech sync; seamless loop return.', badge: 'AUDIO MATCH', col: '#20D5E5' },
+        { label: '04 / CALL TO ACTION', desc: 'Comment trigger: Ask for disagreement to spark debate.', badge: 'RETENTION', col: '#CBFF4A' }
+      ];
+
+      for (let i = 0; i < 4; i++) {
+        const sy = -h / 2 + 120 * s + i * (secH + 8 * s);
+        roundRect(ctx, -w / 2 + 18 * s, sy, w - 36 * s, secH, 12 * s);
+        ctx.fillStyle = '#E8E3D8';
+        ctx.fill();
+
+        ctx.fillStyle = specs[i].col;
+        ctx.font = 'bold ' + (12 * s) + 'px Champ, sans-serif';
+        ctx.fillText(specs[i].label, -w / 2 + 36 * s, sy + 24 * s);
+
+        ctx.fillStyle = '#09090B';
+        ctx.font = (14 * s) + 'px Degular, sans-serif';
+        ctx.fillText(specs[i].desc, -w / 2 + 36 * s, sy + 50 * s);
+
+        roundRect(ctx, w / 2 - 135 * s, sy + 14 * s, 100 * s, 22 * s, 6 * s);
+        ctx.fillStyle = '#09090B';
+        ctx.fill();
+        ctx.fillStyle = specs[i].col;
+        ctx.font = 'bold ' + (10 * s) + 'px Degular, sans-serif';
+        ctx.fillText(specs[i].badge, w / 2 - 125 * s, sy + 29 * s);
+      }
+      ctx.restore();
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
     }
 
     function handleResize() {
       if (isDestroyed) return;
-
       const newWidth = window.innerWidth;
-      const widthChanged = newWidth !== lastWindowWidth;
-
-      if (!widthChanged) return;
-
+      if (newWidth === lastWindowWidth) return;
       lastWindowWidth = newWidth;
 
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         if (isDestroyed) return;
-
         resizeCanvas();
-        if (loaded.size) render(lastProgress);
+        drawDeconstruction(lastProgress);
         ScrollTrigger.refresh();
       }, 200);
-    }
-
-    function pad(num) {
-      return String(num).padStart(digits, '0');
-    }
-
-    function getUrl(i) {
-      return `${baseUrl}${pad(i)}.${filetype}`;
-    }
-
-    const loaded = new Map();
-    const loading = new Set();
-    const queue = [];
-    let processingQueue = false;
-
-    function loadFrame(i, onDone) {
-      if (isDestroyed) return;
-      if (loaded.has(i) || loading.has(i) || i < indexStart || i > lastIndex) return;
-
-      const url = getUrl(i);
-      loading.add(i);
-
-      (async () => {
-        try {
-          if (isDestroyed) return;
-
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-          if (isDestroyed) return;
-
-          const blob = await res.blob();
-          let asset;
-
-          if (window.createImageBitmap) {
-            asset = await createImageBitmap(blob, {
-              imageOrientation: 'from-image'
-            });
-          } else {
-            const img = new Image();
-            const objectUrl = URL.createObjectURL(blob);
-
-            try {
-              img.src = objectUrl;
-
-              if (img.decode) {
-                await img.decode();
-              } else {
-                await new Promise((resolve, reject) => {
-                  img.onload = resolve;
-                  img.onerror = reject;
-                });
-              }
-
-              asset = img;
-            } finally {
-              URL.revokeObjectURL(objectUrl);
-            }
-          }
-
-          if (isDestroyed) return;
-
-          loaded.set(i, asset);
-
-          if (typeof onDone === 'function') onDone();
-        } catch (error) {
-          if (!isDestroyed) {
-            console.warn('[ImageSequence] Failed to load frame', {
-              index: i,
-              url,
-              wrap,
-              error
-            });
-          }
-        } finally {
-          loading.delete(i);
-        }
-      })();
-    }
-
-    function processQueue() {
-      if (isDestroyed || processingQueue) return;
-
-      const next = queue.shift();
-      if (!next) return;
-
-      processingQueue = true;
-
-      const [a, b] = next;
-
-      if (b - a <= 1) {
-        processingQueue = false;
-        processQueue();
-        return;
-      }
-
-      const m = Math.floor((a + b) / 2);
-
-      loadFrame(m, () => {
-        if (isDestroyed) return;
-
-        queue.push([a, m], [m, b]);
-        processingQueue = false;
-        setTimeout(processQueue, 0);
-      });
-    }
-
-    function startLoading() {
-      loadFrame(indexStart, () => {
-        if (isDestroyed) return;
-
-        drawImageAt(indexStart);
-        loadFrame(lastIndex);
-        queue.push([indexStart, lastIndex]);
-        processQueue();
-        ScrollTrigger.refresh();
-      });
-    }
-
-    function findNearestLoaded(i) {
-      for (let r = 1; r <= 10; r++) {
-        if (loaded.has(i - r)) return i - r;
-        if (loaded.has(i + r)) return i + r;
-      }
-
-      const keys = Array.from(loaded.keys());
-      if (keys.length === 0) return null;
-
-      let nearest = keys[0];
-      let minDiff = Math.abs(i - nearest);
-
-      for (const k of keys) {
-        const diff = Math.abs(i - k);
-
-        if (diff < minDiff) {
-          nearest = k;
-          minDiff = diff;
-        }
-      }
-
-      return nearest;
-    }
-
-    function drawImageAt(i) {
-      if (isDestroyed) return;
-
-      const img = loaded.get(i);
-      if (!img) return;
-
-      drawCover(img);
-    }
-
-    function render(progress) {
-      if (isDestroyed) return;
-
-      const relative = progress * (frames - 1);
-      const index = indexStart + Math.round(relative);
-
-      if (loaded.has(index)) {
-        drawImageAt(index);
-      } else {
-        const nearest = findNearestLoaded(index);
-        if (nearest !== null) drawImageAt(nearest);
-      }
     }
 
     resizeCanvas();
@@ -3437,78 +3661,24 @@ function initBoxSequence() {
         ease: 'elastic.out(1, 0.75)',
         duration: 0.625,
         stagger: 0.011
-      }, 'start');
-    }
-
-    if (title) {
-      gsap.set(title, {
-        opacity: 0,
-        y: '1em'
       });
-
-      finalTimeline.to(title, {
-        opacity: 1,
-        y: '0em',
-        ease: 'elastic.out(1, 0.75)',
-        duration: 0.625
-      }, 'start');
     }
 
     if (buttons.length) {
-      gsap.set(buttons, {
-        rotate: gsap.utils.random(-16, 16),
-        scale: 0
-      });
-
-      finalTimeline.to(buttons, {
-        rotate: 0,
-        scale: 1,
-        ease: 'elastic.out(1, 0.75)',
-        duration: 0.625,
-        stagger: 0.026
-      }, 'start+=0.15');
+      gsap.set(buttons, { y: '1em', opacity: 0 });
+      finalTimeline.to(
+        buttons,
+        {
+          y: '0em',
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          stagger: 0.1
+        },
+        '-=0.25'
+      );
     }
 
-    boxSequenceDestroyFns.push(() => {
-      isDestroyed = true;
-
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimer);
-
-      loaded.clear();
-      loading.clear();
-      queue.length = 0;
-
-      tl.kill();
-      finalTimeline.kill();
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      delete wrap.dataset.sequenceInit;
-    });
-
-    if (reduceMotion) {
-      if (staticSrc) {
-        const staticImage = new Image();
-
-        staticImage.src = staticSrc;
-        staticImage.onload = () => {
-          if (!isDestroyed) drawCover(staticImage);
-        };
-
-        staticImage.onerror = () => {};
-        return;
-      }
-
-      loadFrame(indexStart, () => {
-        drawImageAt(indexStart);
-      });
-
-      return;
-    }
-
-    startLoading();
-    
     let textState = 'before';
     let finalState = 'before';
 
@@ -3519,16 +3689,15 @@ function initBoxSequence() {
       scrub: true,
       onUpdate: (self) => {
         if (isDestroyed) return;
-
         lastProgress = self.progress;
-        render(self.progress);
+        drawDeconstruction(self.progress);
 
-        if (self.progress >= 0.6) {
+        if (self.progress >= 0.65) {
           if (textState !== 'reversed') {
             tl.timeScale(3.5).reverse();
             textState = 'reversed';
           }
-        } else if (self.progress >= 0.3) {
+        } else if (self.progress >= 0.28) {
           if (textState !== 'played') {
             tl.timeScale(1.5).play();
             textState = 'played';
@@ -3540,7 +3709,7 @@ function initBoxSequence() {
           }
         }
 
-        if (self.progress >= 0.81) {
+        if (self.progress >= 0.82) {
           if (finalState !== 'played') {
             finalTimeline.timeScale(1.25).play();
             finalState = 'played';
@@ -3554,37 +3723,15 @@ function initBoxSequence() {
       }
     });
 
-    lastProgress = st.progress || 0;
-    render(lastProgress);
+    drawDeconstruction(st.progress || 0);
 
-    const mm = gsap.matchMedia();
-
-    mm.add('(min-width: 992px)', () => {
-      if (!isShort) createScrollAnim(-25);
-      if (isShort) createScrollAnim(0);
+    boxSequenceDestroyFns.push(() => {
+      isDestroyed = true;
+      window.removeEventListener('resize', handleResize);
+      st.kill();
+      tl.kill();
+      finalTimeline.kill();
     });
-
-    mm.add('(max-width: 991px)', () => {
-      if (!isShort) createScrollAnim(-50);
-      if (isShort) createScrollAnim(0);
-    });
-
-    function createScrollAnim(startY) {
-      gsap.to(canvas, {
-        keyframes: [
-          { yPercent: startY, duration: 0 },
-          { yPercent: 0, duration: 0.25 },
-          { yPercent: 0, duration: 0.75 }
-        ],
-        ease: 'none',
-        scrollTrigger: {
-          trigger: wrap,
-          start: startTrigger,
-          end: endTrigger,
-          scrub: true
-        }
-      });
-    }
   });
 }
 
