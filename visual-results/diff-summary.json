@@ -3,241 +3,241 @@
     "checkpoint": "desktop_1280_faq_opened",
     "width": 1280,
     "height": 800,
-    "diffPixels": 463232,
+    "diffPixels": 488422,
     "totalPixels": 1024000,
-    "diffPercent": 45.24
+    "diffPercent": 47.7
   },
   {
     "checkpoint": "desktop_1280_footer",
     "width": 1280,
     "height": 800,
-    "diffPixels": 457045,
+    "diffPixels": 460759,
     "totalPixels": 1024000,
-    "diffPercent": 44.63
+    "diffPercent": 45
   },
   {
     "checkpoint": "desktop_1280_hero_settled",
     "width": 1280,
     "height": 800,
-    "diffPixels": 822937,
+    "diffPixels": 847457,
     "totalPixels": 1024000,
-    "diffPercent": 80.36
+    "diffPercent": 82.76
   },
   {
     "checkpoint": "desktop_1280_section_benefits",
     "width": 1280,
     "height": 800,
-    "diffPixels": 805851,
+    "diffPixels": 840383,
     "totalPixels": 1024000,
-    "diffPercent": 78.7
+    "diffPercent": 82.07
   },
   {
     "checkpoint": "desktop_1280_section_books",
     "width": 1280,
     "height": 800,
-    "diffPixels": 269028,
+    "diffPixels": 264292,
     "totalPixels": 1024000,
-    "diffPercent": 26.27
+    "diffPercent": 25.81
   },
   {
     "checkpoint": "desktop_1280_section_box",
     "width": 1280,
     "height": 800,
-    "diffPixels": 906479,
+    "diffPixels": 912774,
     "totalPixels": 1024000,
-    "diffPercent": 88.52
+    "diffPercent": 89.14
   },
   {
     "checkpoint": "desktop_1280_section_faq",
     "width": 1280,
     "height": 800,
-    "diffPixels": 413588,
+    "diffPixels": 441736,
     "totalPixels": 1024000,
-    "diffPercent": 40.39
+    "diffPercent": 43.14
   },
   {
     "checkpoint": "desktop_1280_section_flow",
     "width": 1280,
     "height": 800,
-    "diffPixels": 826064,
+    "diffPixels": 415777,
     "totalPixels": 1024000,
-    "diffPercent": 80.67
+    "diffPercent": 40.6
   },
   {
     "checkpoint": "desktop_1280_section_genre",
     "width": 1280,
     "height": 800,
-    "diffPixels": 895790,
+    "diffPixels": 923270,
     "totalPixels": 1024000,
-    "diffPercent": 87.48
+    "diffPercent": 90.16
   },
   {
     "checkpoint": "desktop_1440_faq_opened",
     "width": 1440,
     "height": 900,
-    "diffPixels": 588238,
+    "diffPixels": 608877,
     "totalPixels": 1296000,
-    "diffPercent": 45.39
+    "diffPercent": 46.98
   },
   {
     "checkpoint": "desktop_1440_footer",
     "width": 1440,
     "height": 900,
-    "diffPixels": 579019,
+    "diffPixels": 579438,
     "totalPixels": 1296000,
-    "diffPercent": 44.68
+    "diffPercent": 44.71
   },
   {
     "checkpoint": "desktop_1440_hero_settled",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1045377,
+    "diffPixels": 1077101,
     "totalPixels": 1296000,
-    "diffPercent": 80.66
+    "diffPercent": 83.11
   },
   {
     "checkpoint": "desktop_1440_intro_logo",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1288289,
+    "diffPixels": 1284776,
     "totalPixels": 1296000,
-    "diffPercent": 99.41
+    "diffPercent": 99.13
   },
   {
     "checkpoint": "desktop_1440_intro_reveal",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1068801,
+    "diffPixels": 1071502,
     "totalPixels": 1296000,
-    "diffPercent": 82.47
+    "diffPercent": 82.68
   },
   {
     "checkpoint": "desktop_1440_intro_t0",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1288713,
+    "diffPixels": 1289358,
     "totalPixels": 1296000,
-    "diffPercent": 99.44
+    "diffPercent": 99.49
   },
   {
     "checkpoint": "desktop_1440_section_benefits",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1027301,
+    "diffPixels": 1072930,
     "totalPixels": 1296000,
-    "diffPercent": 79.27
+    "diffPercent": 82.79
   },
   {
     "checkpoint": "desktop_1440_section_books",
     "width": 1440,
     "height": 900,
-    "diffPixels": 344425,
+    "diffPixels": 342700,
     "totalPixels": 1296000,
-    "diffPercent": 26.58
+    "diffPercent": 26.44
   },
   {
     "checkpoint": "desktop_1440_section_box",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1146846,
+    "diffPixels": 1154623,
     "totalPixels": 1296000,
-    "diffPercent": 88.49
+    "diffPercent": 89.09
   },
   {
     "checkpoint": "desktop_1440_section_faq",
     "width": 1440,
     "height": 900,
-    "diffPixels": 526470,
+    "diffPixels": 557522,
     "totalPixels": 1296000,
-    "diffPercent": 40.62
+    "diffPercent": 43.02
   },
   {
     "checkpoint": "desktop_1440_section_flow",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1043821,
+    "diffPixels": 530550,
     "totalPixels": 1296000,
-    "diffPercent": 80.54
+    "diffPercent": 40.94
   },
   {
     "checkpoint": "desktop_1440_section_genre",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1136868,
+    "diffPixels": 1171149,
     "totalPixels": 1296000,
-    "diffPercent": 87.72
+    "diffPercent": 90.37
   },
   {
     "checkpoint": "desktop_1920_faq_opened",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 884053,
+    "diffPixels": 937123,
     "totalPixels": 2073600,
-    "diffPercent": 42.63
+    "diffPercent": 45.19
   },
   {
     "checkpoint": "desktop_1920_footer",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 991284,
+    "diffPixels": 989148,
     "totalPixels": 2073600,
-    "diffPercent": 47.8
+    "diffPercent": 47.7
   },
   {
     "checkpoint": "desktop_1920_hero_settled",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 1756544,
+    "diffPixels": 1811350,
     "totalPixels": 2073600,
-    "diffPercent": 84.71
+    "diffPercent": 87.35
   },
   {
     "checkpoint": "desktop_1920_section_benefits",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 1847261,
+    "diffPixels": 1937584,
     "totalPixels": 2073600,
-    "diffPercent": 89.08
+    "diffPercent": 93.44
   },
   {
     "checkpoint": "desktop_1920_section_books",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 467835,
+    "diffPixels": 483496,
     "totalPixels": 2073600,
-    "diffPercent": 22.56
+    "diffPercent": 23.32
   },
   {
     "checkpoint": "desktop_1920_section_box",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 1832754,
+    "diffPixels": 1841540,
     "totalPixels": 2073600,
-    "diffPercent": 88.39
+    "diffPercent": 88.81
   },
   {
     "checkpoint": "desktop_1920_section_faq",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 778596,
+    "diffPixels": 829353,
     "totalPixels": 2073600,
-    "diffPercent": 37.55
+    "diffPercent": 40
   },
   {
     "checkpoint": "desktop_1920_section_flow",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 1696755,
+    "diffPixels": 822001,
     "totalPixels": 2073600,
-    "diffPercent": 81.83
+    "diffPercent": 39.64
   },
   {
     "checkpoint": "desktop_1920_section_genre",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 1853485,
+    "diffPixels": 1900416,
     "totalPixels": 2073600,
-    "diffPercent": 89.38
+    "diffPercent": 91.65
   },
   {
     "checkpoint": "flow_settled",
@@ -251,160 +251,160 @@
     "checkpoint": "mobile_390_faq_opened",
     "width": 390,
     "height": 844,
-    "diffPixels": 191938,
+    "diffPixels": 206300,
     "totalPixels": 329160,
-    "diffPercent": 58.31
+    "diffPercent": 62.67
   },
   {
     "checkpoint": "mobile_390_footer",
     "width": 390,
     "height": 844,
-    "diffPixels": 204031,
+    "diffPixels": 204973,
     "totalPixels": 329160,
-    "diffPercent": 61.99
+    "diffPercent": 62.27
   },
   {
     "checkpoint": "mobile_390_hero_settled",
     "width": 390,
     "height": 844,
-    "diffPixels": 279244,
+    "diffPixels": 284148,
     "totalPixels": 329160,
-    "diffPercent": 84.84
+    "diffPercent": 86.33
   },
   {
     "checkpoint": "mobile_390_menu_open",
     "width": 390,
     "height": 844,
-    "diffPixels": 283635,
+    "diffPixels": 267275,
     "totalPixels": 329160,
-    "diffPercent": 86.17
+    "diffPercent": 81.2
   },
   {
     "checkpoint": "mobile_390_section_benefits",
     "width": 390,
     "height": 844,
-    "diffPixels": 231379,
+    "diffPixels": 244845,
     "totalPixels": 329160,
-    "diffPercent": 70.29
+    "diffPercent": 74.38
   },
   {
     "checkpoint": "mobile_390_section_books",
     "width": 390,
     "height": 844,
-    "diffPixels": 121396,
+    "diffPixels": 140512,
     "totalPixels": 329160,
-    "diffPercent": 36.88
+    "diffPercent": 42.69
   },
   {
     "checkpoint": "mobile_390_section_box",
     "width": 390,
     "height": 844,
-    "diffPixels": 272863,
+    "diffPixels": 272991,
     "totalPixels": 329160,
-    "diffPercent": 82.9
+    "diffPercent": 82.94
   },
   {
     "checkpoint": "mobile_390_section_faq",
     "width": 390,
     "height": 844,
-    "diffPixels": 172596,
+    "diffPixels": 181794,
     "totalPixels": 329160,
-    "diffPercent": 52.44
+    "diffPercent": 55.23
   },
   {
     "checkpoint": "mobile_390_section_flow",
     "width": 390,
     "height": 844,
-    "diffPixels": 173562,
+    "diffPixels": 156301,
     "totalPixels": 329160,
-    "diffPercent": 52.73
+    "diffPercent": 47.48
   },
   {
     "checkpoint": "mobile_390_section_genre",
     "width": 390,
     "height": 844,
-    "diffPixels": 278433,
+    "diffPixels": 292546,
     "totalPixels": 329160,
-    "diffPercent": 84.59
+    "diffPercent": 88.88
   },
   {
     "checkpoint": "tablet_768_faq_opened",
     "width": 768,
     "height": 1024,
-    "diffPixels": 451988,
+    "diffPixels": 455671,
     "totalPixels": 786432,
-    "diffPercent": 57.47
+    "diffPercent": 57.94
   },
   {
     "checkpoint": "tablet_768_footer",
     "width": 768,
     "height": 1024,
-    "diffPixels": 388645,
+    "diffPixels": 392790,
     "totalPixels": 786432,
-    "diffPercent": 49.42
+    "diffPercent": 49.95
   },
   {
     "checkpoint": "tablet_768_hero_settled",
     "width": 768,
     "height": 1024,
-    "diffPixels": 689686,
+    "diffPixels": 704517,
     "totalPixels": 786432,
-    "diffPercent": 87.7
+    "diffPercent": 89.58
   },
   {
     "checkpoint": "tablet_768_menu_open",
     "width": 768,
     "height": 1024,
-    "diffPixels": 733973,
+    "diffPixels": 719868,
     "totalPixels": 786432,
-    "diffPercent": 93.33
+    "diffPercent": 91.54
   },
   {
     "checkpoint": "tablet_768_section_benefits",
     "width": 768,
     "height": 1024,
-    "diffPixels": 610600,
+    "diffPixels": 633900,
     "totalPixels": 786432,
-    "diffPercent": 77.64
+    "diffPercent": 80.6
   },
   {
     "checkpoint": "tablet_768_section_books",
     "width": 768,
     "height": 1024,
-    "diffPixels": 317562,
+    "diffPixels": 268405,
     "totalPixels": 786432,
-    "diffPercent": 40.38
+    "diffPercent": 34.13
   },
   {
     "checkpoint": "tablet_768_section_box",
     "width": 768,
     "height": 1024,
-    "diffPixels": 692153,
+    "diffPixels": 697998,
     "totalPixels": 786432,
-    "diffPercent": 88.01
+    "diffPercent": 88.76
   },
   {
     "checkpoint": "tablet_768_section_faq",
     "width": 768,
     "height": 1024,
-    "diffPixels": 422509,
+    "diffPixels": 428489,
     "totalPixels": 786432,
-    "diffPercent": 53.72
+    "diffPercent": 54.49
   },
   {
     "checkpoint": "tablet_768_section_flow",
     "width": 768,
     "height": 1024,
-    "diffPixels": 601193,
+    "diffPixels": 472744,
     "totalPixels": 786432,
-    "diffPercent": 76.45
+    "diffPercent": 60.11
   },
   {
     "checkpoint": "tablet_768_section_genre",
     "width": 768,
     "height": 1024,
-    "diffPixels": 707027,
+    "diffPixels": 713063,
     "totalPixels": 786432,
-    "diffPercent": 89.9
+    "diffPercent": 90.67
   }
 ]
