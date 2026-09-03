@@ -1,0 +1,1135 @@
+{
+  "1920x1080": {
+    "docHeight": 16554,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "16px",
+    "headerHeight": 106,
+    "heroTitleFontSize": "160px",
+    "heroTitleLineHeight": "128px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 106,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 1400,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 1400,
+        "height": 1553,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 2953,
+        "height": 1115,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 4044,
+        "height": 3240,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 7284,
+        "height": 1853,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 9137,
+        "height": 1080,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 10217,
+        "height": 913,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 11130,
+        "height": 1292,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 12422,
+        "height": 446,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 12869,
+        "height": 1570,
+        "width": 1920
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 14439,
+        "height": 1555,
+        "width": 1920
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 15835,
+        "height": 719,
+        "width": 1920
+      }
+    ]
+  },
+  "1728x1117": {
+    "docHeight": 15299,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "14.4px",
+    "headerHeight": 95,
+    "heroTitleFontSize": "144px",
+    "heroTitleLineHeight": "115.2px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 95,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 1260,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 1260,
+        "height": 1398,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 2658,
+        "height": 1004,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 3640,
+        "height": 3351,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 6991,
+        "height": 1667,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 8658,
+        "height": 972,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 9630,
+        "height": 822,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 10452,
+        "height": 1163,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 11616,
+        "height": 402,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 12017,
+        "height": 1379,
+        "width": 1728
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 13396,
+        "height": 1399,
+        "width": 1728
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 14651,
+        "height": 648,
+        "width": 1728
+      }
+    ]
+  },
+  "1440x900": {
+    "docHeight": 12666,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "12px",
+    "headerHeight": 80,
+    "heroTitleFontSize": "120px",
+    "heroTitleLineHeight": "96px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 80,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 1050,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 1050,
+        "height": 1165,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 2215,
+        "height": 836,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 3033,
+        "height": 2700,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 5733,
+        "height": 1390,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 7123,
+        "height": 810,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 7933,
+        "height": 685,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 8618,
+        "height": 971,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 9588,
+        "height": 335,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 9923,
+        "height": 1149,
+        "width": 1440
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 11072,
+        "height": 1167,
+        "width": 1440
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 12119,
+        "height": 547,
+        "width": 1440
+      }
+    ]
+  },
+  "1366x768": {
+    "docHeight": 11784,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "11.3833px",
+    "headerHeight": 75,
+    "heroTitleFontSize": "113.833px",
+    "heroTitleLineHeight": "91.0667px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 75,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 996,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 996,
+        "height": 1105,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 2101,
+        "height": 793,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2877,
+        "height": 2304,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 5181,
+        "height": 1318,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 6499,
+        "height": 768,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 7268,
+        "height": 650,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 7917,
+        "height": 922,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 8839,
+        "height": 318,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 9157,
+        "height": 1090,
+        "width": 1366
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 10247,
+        "height": 1131,
+        "width": 1366
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 11264,
+        "height": 521,
+        "width": 1366
+      }
+    ]
+  },
+  "1280x800": {
+    "docHeight": 11264,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "10.6667px",
+    "headerHeight": 71,
+    "heroTitleFontSize": "106.667px",
+    "heroTitleLineHeight": "85.3333px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 71,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 933,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 933,
+        "height": 1036,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1969,
+        "height": 743,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2697,
+        "height": 2400,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 5097,
+        "height": 1235,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 6332,
+        "height": 720,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 7052,
+        "height": 609,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 7661,
+        "height": 864,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 8525,
+        "height": 298,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 8823,
+        "height": 1021,
+        "width": 1280
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 9844,
+        "height": 1036,
+        "width": 1280
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 10773,
+        "height": 491,
+        "width": 1280
+      }
+    ]
+  },
+  "1024x768": {
+    "docHeight": 9418,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "8.53333px",
+    "headerHeight": 57,
+    "heroTitleFontSize": "85.3333px",
+    "heroTitleLineHeight": "68.2667px",
+    "isNavVisible": true,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 57,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 747,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 747,
+        "height": 834,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1581,
+        "height": 595,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2163,
+        "height": 2304,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 4467,
+        "height": 988,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 5455,
+        "height": 576,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 6031,
+        "height": 487,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 6518,
+        "height": 694,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 7211,
+        "height": 243,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 7455,
+        "height": 817,
+        "width": 1024
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 8272,
+        "height": 831,
+        "width": 1024
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 9018,
+        "height": 400,
+        "width": 1024
+      }
+    ]
+  },
+  "768x1024": {
+    "docHeight": 11450,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "14.7338px",
+    "headerHeight": 74,
+    "heroTitleFontSize": "88.4029px",
+    "heroTitleLineHeight": "70.7223px",
+    "isNavVisible": false,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 74,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 1063,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 1063,
+        "height": 744,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1808,
+        "height": 709,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2502,
+        "height": 3072,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 5574,
+        "height": 803,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 6377,
+        "height": 888,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 7266,
+        "height": 481,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 7747,
+        "height": 1221,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 8969,
+        "height": 315,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 9210,
+        "height": 751,
+        "width": 768
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 9961,
+        "height": 895,
+        "width": 768
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 10819,
+        "height": 631,
+        "width": 768
+      }
+    ]
+  },
+  "430x932": {
+    "docHeight": 11130,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "17.1144px",
+    "headerHeight": 86,
+    "heroTitleFontSize": "55.6219px",
+    "heroTitleLineHeight": "44.4975px",
+    "isNavVisible": false,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 86,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 932,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 932,
+        "height": 864,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1796,
+        "height": 824,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2602,
+        "height": 2796,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 5398,
+        "height": 817,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 6215,
+        "height": 497,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 6712,
+        "height": 619,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 7331,
+        "height": 952,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 8283,
+        "height": 267,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 8465,
+        "height": 949,
+        "width": 430
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 9414,
+        "height": 1047,
+        "width": 430
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 10419,
+        "height": 712,
+        "width": 430
+      }
+    ]
+  },
+  "393x852": {
+    "docHeight": 10209,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "15.6418px",
+    "headerHeight": 78,
+    "heroTitleFontSize": "50.8358px",
+    "heroTitleLineHeight": "40.6687px",
+    "isNavVisible": false,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 78,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 852,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 852,
+        "height": 789,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1641,
+        "height": 753,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2378,
+        "height": 2556,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 4934,
+        "height": 747,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 5681,
+        "height": 455,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 6136,
+        "height": 589,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 6725,
+        "height": 872,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 7597,
+        "height": 247,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 7766,
+        "height": 868,
+        "width": 393
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 8633,
+        "height": 957,
+        "width": 393
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 9552,
+        "height": 657,
+        "width": 393
+      }
+    ]
+  },
+  "390x844": {
+    "docHeight": 10126,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "15.5224px",
+    "headerHeight": 78,
+    "heroTitleFontSize": "50.4478px",
+    "heroTitleLineHeight": "40.3582px",
+    "isNavVisible": false,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 78,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 844,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 844,
+        "height": 783,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1627,
+        "height": 747,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2359,
+        "height": 2532,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 4891,
+        "height": 741,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 5632,
+        "height": 451,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 6083,
+        "height": 585,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 6668,
+        "height": 865,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 7533,
+        "height": 246,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 7701,
+        "height": 861,
+        "width": 390
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 8562,
+        "height": 950,
+        "width": 390
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 9473,
+        "height": 653,
+        "width": 390
+      }
+    ]
+  },
+  "375x812": {
+    "docHeight": 9766,
+    "htmlFontSize": "16px",
+    "bodyFontSize": "14.9254px",
+    "headerHeight": 75,
+    "heroTitleFontSize": "48.5075px",
+    "heroTitleLineHeight": "38.806px",
+    "isNavVisible": false,
+    "isToggleVisible": true,
+    "sections": [
+      {
+        "tag": "header",
+        "className": "header",
+        "y": 0,
+        "height": 75,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "hero is--bg-yellow",
+        "y": 0,
+        "height": 812,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "books is--bg-white",
+        "y": 812,
+        "height": 753,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "flow is--inner-clip is--bg-soft-pink",
+        "y": 1565,
+        "height": 718,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "box",
+        "y": 2268,
+        "height": 2436,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "genre is--bright-pink",
+        "y": 4704,
+        "height": 712,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "benefits",
+        "y": 5417,
+        "height": 434,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "faq is--bg-white",
+        "y": 5851,
+        "height": 562,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "gift",
+        "y": 6413,
+        "height": 832,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "badge",
+        "y": 7245,
+        "height": 238,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "choice is--outer-clip is--bg-yellow",
+        "y": 7408,
+        "height": 850,
+        "width": 375
+      },
+      {
+        "tag": "section",
+        "className": "exclusive is--bg-white",
+        "y": 8258,
+        "height": 913,
+        "width": 375
+      },
+      {
+        "tag": "footer",
+        "className": "footer",
+        "y": 9134,
+        "height": 631,
+        "width": 375
+      }
+    ]
+  }
+}

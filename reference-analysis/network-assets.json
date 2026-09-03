@@ -1,0 +1,567 @@
+[
+  {
+    "url": "https://www.aardvarkbookclub.com/",
+    "type": "document",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.css",
+    "type": "stylesheet",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/css/aardvark-book-club.webflow.shared.3d9712638.min.css",
+    "type": "stylesheet",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/696179694070e2fa9eca375f_logo.svg",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/js/webflow.b049d1f4.f16853c5fa980dfd.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/js/webflow.schunk.7c514c4b18297836.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/@barba/prefetch@2.2.0/dist/barba-prefetch.umd.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/@barba/core@2.10.3/dist/barba.umd.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=696173cb00865d1b386e4af8",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/DrawSVGPlugin.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/InertiaPlugin.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/smooothy@0.0.35/dist/smooothy.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/minisearch@7.1.2/dist/umd/index.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.15/dist/CustomEase.min.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://slater.app/18601/54934.css",
+    "type": "stylesheet",
+    "status": 200
+  },
+  {
+    "url": "https://slater.app/18601/54937.js",
+    "type": "script",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69d9101ad898fcfb64f0566d_rain-trophy.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69d9101a8979322a32c810d2_rain-party.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/69a33078e92fb49d85319481/6a95dd114588ec2d7b5f3852_earlymazywood.png",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69c520c7360396435501e587_degular-bold.woff2",
+    "type": "font",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/69a33078e92fb49d85319481/6a95de8306c788ece7de135f_crone.png",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/69a33078e92fb49d85319481/6a95dfdce3d0286b64aa3e9c_thesecretdinner.png",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/69a33078e92fb49d85319481/6a95e0dc6d550cec545ea990_blacktail.png",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/69a33078e92fb49d85319481/6a95e1af249a44c6440815ef_scion.png",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/696a059da09e3c123fba6a5a_logo-circle.svg",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69849eba6ebf97ec498a7a57_01_step-illustration.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69849eba1f866c516a514ade_02_step-illustration.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69849ebaea8f91077664d474_03_step-illustration.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/6a354b17bd64236c99a93c7e_Step%20Illustration.webp",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69c6d9f6cb0f4ec3190ce451_box-title.svg",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69960373d1c35e0dd8ec560d_button-app-store.svg",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/6996037302aa4574b3eecab8_button-google-play.svg",
+    "type": "image",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/6963d2cdeaa0084ad1abd7f0_Champ-ExtraBold.woff",
+    "type": "font",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/69c51e46ef7236cf68eaef2e_degular-semibold.woff2",
+    "type": "font",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.prod.website-files.com/696173cb00865d1b386e4af8/6963d3bce4c07135f1d68628_hello-organichand-webfont.woff2",
+    "type": "font",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_000.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_119.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_059.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_029.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_089.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_014.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_044.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_074.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_104.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://www.aardvarkbookclub.com/faq",
+    "type": "xhr",
+    "status": 200
+  },
+  {
+    "url": "https://www.aardvarkbookclub.com/allbooks",
+    "type": "xhr",
+    "status": 200
+  },
+  {
+    "url": "https://www.aardvarkbookclub.com/gifting",
+    "type": "xhr",
+    "status": 200
+  },
+  {
+    "url": "https://www.aardvarkbookclub.com/",
+    "type": "xhr",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_007.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_021.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://slater.app/18601/54934.css",
+    "type": "stylesheet",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_036.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_051.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_066.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_081.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_096.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-000.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_111.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-119.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-059.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_003.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-029.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_010.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-089.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_017.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-014.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_025.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-044.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_032.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-074.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_040.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_047.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-104.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_055.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-007.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_062.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-021.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_070.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-036.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_077.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-051.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_085.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-066.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_092.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-081.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_100.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-096.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_107.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-111.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_115.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-003.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_001.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-010.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_005.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-017.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_008.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-025.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_012.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-032.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_015.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-040.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_019.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-047.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_023.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-055.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_027.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-062.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/frame_030.webp",
+    "type": "fetch",
+    "status": 200
+  },
+  {
+    "url": "https://aardvark-book-club.b-cdn.net/box/frame-070.webp",
+    "type": "fetch",
+    "status": 200
+  }
+]
