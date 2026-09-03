@@ -583,6 +583,7 @@ function initAfterEnterFunctions(next) {
   if (has("[data-pop-up]")) initPopUp();
   if (has("[data-books-list-slider]")) initBooksListSlider();
   if (has("[data-books-slider]")) initBooksSlider();
+  initExclusiveFilterTabs();
   if (has("[data-exclusive-slider]")) initExclusiveSlider();
   if (has("[data-accordion]")) initAccordion();
   if (has("[data-faq-sidebar]")) initFaqSidebar();
@@ -3219,17 +3220,20 @@ function initBoxSequence() {
       // 1. Reel Media Background (Monolithic)
       ctx.save();
       roundRect(ctx, 4 * s, 4 * s, rw, rh, 22 * s);
-      ctx.fillStyle = '#0B0B0F';
+      ctx.fillStyle = '#17122C';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(244, 240, 232, 0.2)';
+      ctx.strokeStyle = 'rgba(255, 81, 70, 0.4)';
+      ctx.shadowColor = 'rgba(255, 81, 70, 0.3)';
+      ctx.shadowBlur = 16 * s;
       ctx.lineWidth = 2 * s;
       ctx.stroke();
       ctx.clip();
 
       // Atmospheric radial fill
       const grad = ctx.createRadialGradient(cx, cy * 0.7, 20 * s, cx, cy, 260 * s);
-      grad.addColorStop(0, '#1c1524');
-      grad.addColorStop(1, '#0B0B0F');
+      grad.addColorStop(0, '#2E2254');
+      grad.addColorStop(0.6, '#1B1438');
+      grad.addColorStop(1, '#100D24');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, cw, ch);
 
@@ -5529,4 +5533,40 @@ document.addEventListener('click', (e) => {
     // Ignore invalid selectors
   }
 });
+
+
+
+// ============================================
+// EXCLUSIVE FILTER TABS INTERACTIVITY
+// ============================================
+function initExclusiveFilterTabs() {
+  const tabs = document.querySelectorAll('.exclusive-tab-btn');
+  const items = document.querySelectorAll('[data-exclusive-slider-item]');
+  if (tabs.length === 0) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('is--active'));
+      tab.classList.add('is--active');
+
+      const filter = tab.getAttribute('data-filter');
+      items.forEach((item, index) => {
+        gsap.to(item, {
+          scale: 0.96,
+          opacity: 0.5,
+          duration: 0.2,
+          onComplete: () => {
+            gsap.to(item, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.3,
+              delay: index * 0.05,
+              ease: 'power2.out'
+            });
+          }
+        });
+      });
+    });
+  });
+}
 

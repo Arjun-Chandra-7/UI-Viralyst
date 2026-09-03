@@ -3584,3 +3584,352 @@ html[lang="fr"] .lang-en-only {
   margin-left: 0 !important;
 }
 
+
+
+/* Hero H1 and Content Geometry Fix */
+@media screen and (min-width: 992px) {
+  .hero__content {
+    flex: 1 1 58% !important;
+    max-width: 860px !important;
+    z-index: 10 !important;
+  }
+
+  .hero__title {
+    font-size: clamp(3.2em, 5.2vw, 5.6em) !important;
+    line-height: 0.94 !important;
+    letter-spacing: -0.035em !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+    margin-bottom: 0.25em !important;
+  }
+
+  .hero__visual {
+    flex: 1 1 42% !important;
+    max-width: 540px !important;
+  }
+}
+
+.reel-field__item {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, z-index 0.1s ease !important;
+}
+
+.reel-field__item:hover {
+  transform: translateY(-12px) scale(1.05) !important;
+  z-index: 12 !important;
+}
+
+
+
+/* ==========================================================================
+   COLOR & INTERACTIVITY OVERHAUL (REMOVE TOO MUCH BLACK)
+   ========================================================================== */
+
+/* 1. Hero Content & H1 Geometry */
+@media screen and (min-width: 992px) {
+  .hero__inner {
+    min-height: 85vh !important;
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+  }
+
+  .hero__content {
+    flex: 1 1 58% !important;
+    max-width: 860px !important;
+    z-index: 10 !important;
+  }
+
+  .hero__title {
+    font-size: clamp(3.2em, 5.2vw, 5.6em) !important;
+    line-height: 0.94 !important;
+    letter-spacing: -0.035em !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+    margin-bottom: 0.25em !important;
+  }
+
+  .hero__visual {
+    flex: 1 1 42% !important;
+    max-width: 560px !important;
+  }
+}
+
+/* 2. Banner Marquee: Prevent text cutting out */
+.badge {
+  overflow: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+  padding: 1.5em 0 !important;
+}
+
+.badge__inner {
+  width: 125vw !important;
+  margin-left: -12vw !important;
+  overflow: visible !important;
+}
+
+.badge__item-title-outer {
+  place-self: start !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+.badge__item-title {
+  padding-left: 3vw !important;
+  padding-right: 3vw !important;
+  white-space: nowrap !important;
+}
+
+/* 3. Section 2 Slider: Restore Vibrant Template Colors */
+.books-slider__item-bg-ears {
+  display: none !important;
+}
+
+.books-slider__list-item:nth-child(1) .books-slider__item-outer,
+.books-slider__list-item:nth-child(1) .books-slider__item-bg,
+.books-slider__list-item:nth-child(1) .books-slider__item-bg-bottom {
+  background-color: #2D1B54 !important;
+}
+
+.books-slider__list-item:nth-child(2) .books-slider__item-outer,
+.books-slider__list-item:nth-child(2) .books-slider__item-bg,
+.books-slider__list-item:nth-child(2) .books-slider__item-bg-bottom {
+  background-color: #FEB6FA !important;
+}
+
+.books-slider__list-item:nth-child(3) .books-slider__item-outer,
+.books-slider__list-item:nth-child(3) .books-slider__item-bg,
+.books-slider__list-item:nth-child(3) .books-slider__item-bg-bottom {
+  background-color: #C5BCFF !important;
+}
+
+.books-slider__list-item:nth-child(4) .books-slider__item-outer,
+.books-slider__list-item:nth-child(4) .books-slider__item-bg,
+.books-slider__list-item:nth-child(4) .books-slider__item-bg-bottom {
+  background-color: #F5D45A !important;
+}
+
+.books-slider__list-item:nth-child(5) .books-slider__item-outer,
+.books-slider__list-item:nth-child(5) .books-slider__item-bg,
+.books-slider__list-item:nth-child(5) .books-slider__item-bg-bottom {
+  background-color: #FF5146 !important;
+}
+
+.books-slider__list-item:nth-child(6) .books-slider__item-outer,
+.books-slider__list-item:nth-child(6) .books-slider__item-bg,
+.books-slider__list-item:nth-child(6) .books-slider__item-bg-bottom {
+  background-color: #315CFF !important;
+}
+
+/* Text & Button styles on light cards (Pink, Lilac, Yellow) */
+.books-slider__list-item:nth-child(2) .books-slider__item-title,
+.books-slider__list-item:nth-child(3) .books-slider__item-title,
+.books-slider__list-item:nth-child(4) .books-slider__item-title {
+  color: #0B0B0F !important;
+}
+
+.books-slider__list-item:nth-child(2) .books-slider__item-author,
+.books-slider__list-item:nth-child(3) .books-slider__item-author,
+.books-slider__list-item:nth-child(4) .books-slider__item-author {
+  color: rgba(11, 11, 15, 0.75) !important;
+}
+
+/* Card hover physics */
+.books-slider__item-outer {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease !important;
+  cursor: pointer !important;
+}
+
+.books-slider__item-outer:hover {
+  transform: translateY(-10px) scale(1.02) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 4. Section 3 (How Viralyst Works): Clean Tactile White Cards */
+.flow {
+  background-color: var(--paper, #F4F0E8) !important;
+  padding-bottom: 5em !important;
+}
+
+.flow-step-card {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  padding: 2.2em 1.8em !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  border: 2px solid rgba(11, 11, 15, 0.08) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.flow-step-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12) !important;
+}
+
+.flow-step-card:nth-child(1) { border-top: 5px solid #FF5146 !important; }
+.flow-step-card:nth-child(2) { border-top: 5px solid #315CFF !important; }
+.flow-step-card:nth-child(3) { border-top: 5px solid #8B5CF6 !important; }
+.flow-step-card:nth-child(4) { border-top: 5px solid #10B981 !important; }
+
+.flow-step-card__num {
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 0.6em !important;
+}
+
+.flow-step-card:nth-child(1) .flow-step-card__num { color: #FF5146 !important; }
+.flow-step-card:nth-child(2) .flow-step-card__num { color: #315CFF !important; }
+.flow-step-card:nth-child(3) .flow-step-card__num { color: #8B5CF6 !important; }
+.flow-step-card:nth-child(4) .flow-step-card__num { color: #10B981 !important; }
+
+.flow-step-card__title {
+  font-family: var(--font-display) !important;
+  font-size: 1.6em !important;
+  font-weight: 800 !important;
+  color: #0B0B0F !important;
+  line-height: 1.15 !important;
+  margin-bottom: 0.5em !important;
+}
+
+.flow-step-card__desc {
+  font-family: var(--font-body) !important;
+  font-size: 0.95em !important;
+  color: rgba(11, 11, 15, 0.7) !important;
+  line-height: 1.5 !important;
+  margin-bottom: 1.5em !important;
+}
+
+.flow-step-card__footer {
+  margin-top: auto !important;
+  padding: 0.8em 1em !important;
+  background: #F7F5F0 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(11, 11, 15, 0.06) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.flow-step-card__pill {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+.flow-step-card:nth-child(1) .flow-step-card__pill { color: #FF5146 !important; }
+.flow-step-card:nth-child(2) .flow-step-card__pill { color: #315CFF !important; }
+.flow-step-card:nth-child(3) .flow-step-card__pill { color: #8B5CF6 !important; }
+.flow-step-card:nth-child(4) .flow-step-card__pill { color: #10B981 !important; }
+
+/* 5. Section 4 (Deconstruction / Scan): Vibrant Stage, NOT Pitch Black */
+.scan-section {
+  background: radial-gradient(circle at 50% 45%, #241D4E 0%, #13102C 65%, #0A0818 100%) !important;
+}
+
+.scan-section__title {
+  color: #FFFFFF !important;
+}
+
+.scan-section__desc {
+  color: rgba(244, 240, 232, 0.8) !important;
+}
+
+/* 6. Section 8 (Manager): Warm Paper Atmosphere & Tagline Curve */
+.manager-section {
+  background-color: var(--paper, #F4F0E8) !important;
+  color: #0B0B0F !important;
+  position: relative !important;
+  padding: 4em 0 6em 0 !important;
+}
+
+.manager-section__title {
+  color: #0B0B0F !important;
+}
+
+.manager-section__desc {
+  color: rgba(11, 11, 15, 0.75) !important;
+}
+
+.tagline-curve__svg {
+  color: #FF5146 !important;
+}
+
+/* 7. Section 10 (Exclusive): Interactive Filter & Vibrant Cards */
+.exclusive.is--bg-white {
+  background-color: #FAF8F5 !important;
+  padding: 5em 0 !important;
+}
+
+.exclusive-filter-tabs {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 2em !important;
+  flex-wrap: wrap !important;
+}
+
+.exclusive-tab-btn {
+  padding: 8px 18px !important;
+  border-radius: 30px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  border: 1.5px solid rgba(11, 11, 15, 0.15) !important;
+  background: #FFFFFF !important;
+  color: #0B0B0F !important;
+  transition: all 0.25s ease !important;
+}
+
+.exclusive-tab-btn.is--active,
+.exclusive-tab-btn:hover {
+  background: #FF5146 !important;
+  color: #FFFFFF !important;
+  border-color: #FF5146 !important;
+}
+
+
+
+/* Banner Ribbon Left Crop Fix */
+.badge__item {
+  width: calc(100% + 30vw) !important;
+  margin-left: -15vw !important;
+}
+
+.badge__item-title-outer {
+  padding-left: 5vw !important;
+  padding-right: 5vw !important;
+}
+
+
+
+/* Continuous Banner Ribbon Marquee */
+@keyframes badgeMarqueeLeft {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes badgeMarqueeRight {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.badge__item.is--first .badge__item-title {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  animation: badgeMarqueeLeft 30s linear infinite !important;
+  will-change: transform !important;
+}
+
+.badge__item:not(.is--first) .badge__item-title {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  animation: badgeMarqueeRight 30s linear infinite !important;
+  will-change: transform !important;
+}
+
