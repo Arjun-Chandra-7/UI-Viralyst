@@ -2544,3 +2544,43 @@ html[lang="fr"] .lang-en-only {
   }
 }
 
+
+
+/* -----------------------------------------
+ * HERO SIGNAL CORE DEFINITIVE POSITIONING
+ * ----------------------------------------- */
+@media (min-width: 992px) {
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height, 6.625em));
+  }
+  .hero__content {
+    max-width: 52vw !important;
+    position: relative;
+    z-index: 5;
+  }
+  .hero__visual {
+    display: flex !important;
+    position: absolute !important;
+    right: 2% !important;
+    top: 50% !important;
+    transform: translateY(-46%) !important;
+    z-index: 4 !important;
+    pointer-events: auto;
+  }
+  .hero__visual-img {
+    display: block !important;
+    width: clamp(26em, 34vw, 40em) !important;
+    height: auto !important;
+    filter: drop-shadow(0 25px 50px rgba(9, 9, 11, 0.35)) !important;
+  }
+}
+
