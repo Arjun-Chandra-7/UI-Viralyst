@@ -543,9 +543,36 @@
 
     const googleBtn = document.getElementById('v-google-signin-btn');
     const accountPicker = document.getElementById('v-account-picker');
-    if (googleBtn && accountPicker) {
-      googleBtn.addEventListener('click', () => {
-        accountPicker.style.display = accountPicker.style.display === 'none' ? 'block' : 'none';
+    const statusEl = document.getElementById('v-auth-status');
+
+    if (googleBtn) {
+      googleBtn.addEventListener('click', async () => {
+        if (typeof window.loginWithRealGoogle === 'function') {
+          if (statusEl) {
+            statusEl.style.display = 'block';
+            statusEl.textContent = 'Opening authentic Google Sign-In popup...';
+          }
+          try {
+            const user = await window.loginWithRealGoogle();
+            if (user) {
+              completeGoogleAuth(user.displayName || user.email.split('@')[0], user.email);
+              return;
+            }
+          } catch (err) {
+            console.warn('Real Google Auth error or credentials pending:', err);
+            if (statusEl) {
+              statusEl.style.display = 'block';
+              if (err.code === 'auth/configuration-not-found' || err.code === 'auth/invalid-api-key' || !err.code) {
+                statusEl.innerHTML = '<span style="color:#FF5146;">Firebase credentials required.</span><br/>Please provide your Firebase config in the chat.';
+              } else {
+                statusEl.textContent = 'Google Auth: ' + (err.message || 'Cancelled');
+              }
+            }
+          }
+        }
+        if (accountPicker) {
+          accountPicker.style.display = 'block';
+        }
       });
     }
 
