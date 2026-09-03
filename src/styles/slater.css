@@ -2310,3 +2310,237 @@ html[lang="fr"] .lang-en-only {
   display: flex;
   justify-content: center;
 }
+
+
+/* -----------------------------------------
+ * WHAT VIRALYST READS: THE SIGNAL ORBIT
+ * ----------------------------------------- */
+.reads-section {
+  position: relative;
+  background-color: var(--violet, #6257FF);
+  color: var(--white, #F3F0E9);
+  padding: 7em 0 8em 0;
+  overflow: hidden;
+}
+.reads-section__header {
+  text-align: center;
+  max-width: 54em;
+  margin: 0 auto 4em auto;
+  padding: 0 1.5em;
+}
+.reads-section__tag {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pale-yellow, #C6FF4A);
+  background: rgba(9, 9, 11, 0.4);
+  padding: 0.4em 1em;
+  border-radius: 2em;
+  margin-bottom: 1.2em;
+  border: 1px solid rgba(198, 255, 74, 0.3);
+}
+.reads-section__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: var(--font-size-heading-l, 6em);
+  line-height: 0.95;
+  font-weight: 800;
+  margin: 0 0 0.3em 0;
+  letter-spacing: -0.02em;
+}
+.reads-section__desc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: var(--font-size-paragraph-medium, 1.75em);
+  line-height: 1.35;
+  opacity: 0.9;
+  max-width: 32em;
+  margin: 0 auto;
+}
+.signal-orbit__stage {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  min-height: 680px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signal-orbit__core {
+  position: relative;
+  width: 320px;
+  height: 520px;
+  background: #09090B;
+  border-radius: 28px;
+  border: 3px solid #F3F0E9;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  box-sizing: border-box;
+}
+.orbit-core__screen {
+  flex: 1;
+  background: #141824;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+}
+.orbit-core__hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  color: #F3F0E9;
+}
+.orbit-core__rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF3B45;
+  display: inline-block;
+  margin-right: 6px;
+  animation: recPulse 1.5s infinite;
+}
+@keyframes recPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.orbit-core__center-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 60px;
+}
+.orbit-core__wave-bar {
+  width: 4px;
+  background: #2997FF;
+  border-radius: 2px;
+  animation: wavePulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes wavePulse {
+  0% { height: 12px; }
+  100% { height: 48px; }
+}
+.orbit-core__hud-bottom {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FF3B45;
+  background: rgba(9, 9, 11, 0.85);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #FF3B45;
+}
+.orbit-core__footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: #D8D8DE;
+}
+.orbit-card {
+  position: absolute;
+  width: 270px;
+  padding: 18px 20px;
+  background: #09090B;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  z-index: 6;
+  border: 2px solid #2997FF;
+  box-sizing: border-box;
+}
+.orbit-card--visual {
+  top: 30px;
+  left: calc(50% - 440px);
+  border-color: #C6FF4A;
+}
+.orbit-card--transcript {
+  top: 30px;
+  right: calc(50% - 440px);
+  border-color: #FF3B45;
+}
+.orbit-card--captions {
+  top: calc(50% - 70px);
+  left: calc(50% - 480px);
+  border-color: #FF2878;
+}
+.orbit-card--audio {
+  top: calc(50% - 70px);
+  right: calc(50% - 480px);
+  border-color: #2997FF;
+}
+.orbit-card--pacing {
+  bottom: 20px;
+  left: calc(50% - 135px);
+  border-color: #6257FF;
+}
+.orbit-card__label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: block;
+}
+.orbit-card--visual .orbit-card__label { color: #C6FF4A; }
+.orbit-card--transcript .orbit-card__label { color: #FF3B45; }
+.orbit-card--captions .orbit-card__label { color: #FF2878; }
+.orbit-card--audio .orbit-card__label { color: #2997FF; }
+.orbit-card--pacing .orbit-card__label { color: #F3F0E9; }
+
+.orbit-card__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #F3F0E9;
+  margin: 0 0 6px 0;
+}
+.orbit-card__desc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #D8D8DE;
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .signal-orbit__stage {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    padding: 0 1.5em;
+    box-sizing: border-box;
+  }
+  .signal-orbit__core {
+    width: 100%;
+    max-width: 320px;
+    height: 480px;
+    margin-bottom: 10px;
+  }
+  .orbit-card {
+    position: static !important;
+    width: 100% !important;
+    max-width: 340px !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+}
+
