@@ -3328,7 +3328,7 @@ function initBoxSequence() {
 
         ctx.fillStyle = 'rgba(49, 92, 255, ' + auAlpha + ')';
         ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText('[03 / AUDIO] 142 BPM Speech Sync', 26 * s, 188 * s);
+        ctx.fillText('[03 / AUDIO] Speech & Rhythm Cadence', 26 * s, 188 * s);
 
         for (let i = 0; i < 22; i++) {
           const bh = (8 + 24 * Math.sin(i * 0.45 + p * 8) ** 2) * s;
@@ -3353,7 +3353,7 @@ function initBoxSequence() {
 
         ctx.fillStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';
         ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText('[04 / PACING] 0.8s Cut • 1.6s Pivot • Loop', 26 * s, 254 * s);
+        ctx.fillText('[04 / PACING] Micro-Cut • Visual Pivot • Loop', 26 * s, 254 * s);
 
         // Timeline tick marks
         ctx.strokeStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';

@@ -1,2 +1,2 @@
 // Entrypoint for application tooling and typescript validation
-console.log('Aardvark Reconstruction loaded successfully.');
+console.log('Viralyst Platform loaded successfully.');

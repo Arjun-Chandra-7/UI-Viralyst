@@ -3536,7 +3536,7 @@ html[lang="fr"] .lang-en-only {
 
 
 
-/* Remove Aardvark animal ears and normalize slider card backgrounds */
+/* Remove animal ears and normalize slider card backgrounds */
 .books-slider__item-bg-ears {
   display: none !important;
 }
