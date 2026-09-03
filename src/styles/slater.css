@@ -3746,86 +3746,6 @@ html[lang="fr"] .lang-en-only {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* 4. Section 3 (How Viralyst Works): Clean Tactile White Cards */
-.flow {
-  background-color: var(--paper, #F4F0E8) !important;
-  padding-bottom: 5em !important;
-}
-
-.flow-step-card {
-  background: #FFFFFF !important;
-  border-radius: 20px !important;
-  padding: 2.2em 1.8em !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-  border: 2px solid rgba(11, 11, 15, 0.08) !important;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-}
-
-.flow-step-card:hover {
-  transform: translateY(-8px) !important;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12) !important;
-}
-
-.flow-step-card:nth-child(1) { border-top: 5px solid #FF5146 !important; }
-.flow-step-card:nth-child(2) { border-top: 5px solid #315CFF !important; }
-.flow-step-card:nth-child(3) { border-top: 5px solid #8B5CF6 !important; }
-.flow-step-card:nth-child(4) { border-top: 5px solid #10B981 !important; }
-
-.flow-step-card__num {
-  font-family: var(--font-mono) !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
-  margin-bottom: 0.6em !important;
-}
-
-.flow-step-card:nth-child(1) .flow-step-card__num { color: #FF5146 !important; }
-.flow-step-card:nth-child(2) .flow-step-card__num { color: #315CFF !important; }
-.flow-step-card:nth-child(3) .flow-step-card__num { color: #8B5CF6 !important; }
-.flow-step-card:nth-child(4) .flow-step-card__num { color: #10B981 !important; }
-
-.flow-step-card__title {
-  font-family: var(--font-display) !important;
-  font-size: 1.6em !important;
-  font-weight: 800 !important;
-  color: #0B0B0F !important;
-  line-height: 1.15 !important;
-  margin-bottom: 0.5em !important;
-}
-
-.flow-step-card__desc {
-  font-family: var(--font-body) !important;
-  font-size: 0.95em !important;
-  color: rgba(11, 11, 15, 0.7) !important;
-  line-height: 1.5 !important;
-  margin-bottom: 1.5em !important;
-}
-
-.flow-step-card__footer {
-  margin-top: auto !important;
-  padding: 0.8em 1em !important;
-  background: #F7F5F0 !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(11, 11, 15, 0.06) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-
-.flow-step-card__pill {
-  font-family: var(--font-mono) !important;
-  font-size: 10px !important;
-  font-weight: 700 !important;
-}
-
-.flow-step-card:nth-child(1) .flow-step-card__pill { color: #FF5146 !important; }
-.flow-step-card:nth-child(2) .flow-step-card__pill { color: #315CFF !important; }
-.flow-step-card:nth-child(3) .flow-step-card__pill { color: #8B5CF6 !important; }
-.flow-step-card:nth-child(4) .flow-step-card__pill { color: #10B981 !important; }
-
 /* 5. Section 4 (Deconstruction / Scan): Vibrant Stage, NOT Pitch Black */
 .scan-section {
   background: radial-gradient(circle at 50% 45%, #241D4E 0%, #13102C 65%, #0A0818 100%) !important;
@@ -3931,5 +3851,106 @@ html[lang="fr"] .lang-en-only {
   white-space: nowrap !important;
   animation: badgeMarqueeRight 30s linear infinite !important;
   will-change: transform !important;
+}
+
+
+
+/* ==========================================================================
+   WHAT VIRALYST READS - INTERACTIVE & ANIMATED ENHANCEMENTS
+   ========================================================================== */
+
+@keyframes readsScanSweeper {
+  0% { top: 15%; opacity: 0.8; }
+  50% { top: 55%; opacity: 1; }
+  100% { top: 82%; opacity: 0.8; }
+}
+
+@keyframes audioWaveBounce {
+  0% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1.1); }
+  100% { transform: scaleY(0.4); }
+}
+
+@keyframes signalPulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 81, 70, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(255, 81, 70, 0.6); }
+}
+
+.reads-v3__center .v-lens {
+  animation: readsScanSweeper 4s ease-in-out infinite alternate !important;
+  box-shadow: 0 0 25px rgba(255, 81, 70, 0.5) !important;
+}
+
+.signal-totem {
+  cursor: pointer !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+}
+
+.signal-totem:hover,
+.signal-totem.is--active {
+  transform: translateY(-6px) scale(1.02) !important;
+  z-index: 10 !important;
+}
+
+.signal-totem--words:hover,
+.signal-totem--words.is--active {
+  border-color: #FF5146 !important;
+  box-shadow: 0 15px 35px rgba(255, 81, 70, 0.25) !important;
+}
+
+.signal-totem--visual:hover,
+.signal-totem--visual.is--active {
+  border-color: #C5BCFF !important;
+  box-shadow: 0 15px 35px rgba(197, 188, 255, 0.25) !important;
+}
+
+.signal-totem--captions:hover,
+.signal-totem--captions.is--active {
+  border-color: #F53F83 !important;
+  box-shadow: 0 15px 35px rgba(245, 63, 131, 0.25) !important;
+}
+
+.signal-totem--audio:hover,
+.signal-totem--audio.is--active {
+  border-color: #315CFF !important;
+  box-shadow: 0 15px 35px rgba(49, 92, 255, 0.25) !important;
+}
+
+.signal-totem--cuts:hover,
+.signal-totem--cuts.is--active {
+  border-color: #F5D45A !important;
+  box-shadow: 0 15px 35px rgba(245, 212, 90, 0.25) !important;
+}
+
+.signal-totem__wave-bar {
+  display: inline-block !important;
+  width: 3px !important;
+  background: #315CFF !important;
+  border-radius: 2px !important;
+  animation: audioWaveBounce 0.8s ease-in-out infinite alternate !important;
+}
+
+.signal-totem__wave-bar:nth-child(1) { animation-delay: 0.1s; height: 12px; }
+.signal-totem__wave-bar:nth-child(2) { animation-delay: 0.3s; height: 18px; }
+.signal-totem__wave-bar:nth-child(3) { animation-delay: 0.2s; height: 14px; }
+.signal-totem__wave-bar:nth-child(4) { animation-delay: 0.5s; height: 22px; }
+.signal-totem__wave-bar:nth-child(5) { animation-delay: 0.15s; height: 16px; }
+.signal-totem__wave-bar:nth-child(6) { animation-delay: 0.4s; height: 20px; }
+.signal-totem__wave-bar:nth-child(7) { animation-delay: 0.25s; height: 10px; }
+
+
+
+/* Flow Handwritten Subtitle Polish */
+.flow__text-wrap {
+  width: auto !important;
+  max-width: 400px !important;
+}
+
+.flow__text.u-handwritten-regular {
+  font-family: var(--font-handwriting) !important;
+  font-size: 1.6em !important;
+  line-height: 1.1 !important;
+  color: #32225F !important;
 }
 

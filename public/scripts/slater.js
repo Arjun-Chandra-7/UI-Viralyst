@@ -584,6 +584,7 @@ function initAfterEnterFunctions(next) {
   if (has("[data-books-list-slider]")) initBooksListSlider();
   if (has("[data-books-slider]")) initBooksSlider();
   initExclusiveFilterTabs();
+  initReadsTotems();
   if (has("[data-exclusive-slider]")) initExclusiveSlider();
   if (has("[data-accordion]")) initAccordion();
   if (has("[data-faq-sidebar]")) initFaqSidebar();
@@ -5565,6 +5566,80 @@ function initExclusiveFilterTabs() {
             });
           }
         });
+      });
+    });
+  });
+}
+
+
+
+// ============================================
+// WHAT VIRALYST READS - TOTEM INTERACTIVITY
+// ============================================
+function initReadsTotems() {
+
+  const pills = document.querySelectorAll('.reads-pill');
+  if (pills.length > 0) {
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => {
+          p.classList.remove('is--active');
+          p.style.background = 'rgba(255, 255, 255, 0.08)';
+          p.style.color = 'var(--paper)';
+        });
+        pill.classList.add('is--active');
+        pill.style.background = '#FF5146';
+        pill.style.color = '#FFFFFF';
+
+        const tab = pill.getAttribute('data-reads-tab');
+        const totems = document.querySelectorAll('.signal-totem');
+        totems.forEach(t => {
+          if (tab === 'all' || t.classList.contains('signal-totem--' + tab)) {
+            gsap.to(t, { opacity: 1, scale: 1, duration: 0.3 });
+          } else {
+            gsap.to(t, { opacity: 0.45, scale: 0.96, duration: 0.3 });
+          }
+        });
+      });
+    });
+  }
+
+
+  const totems = document.querySelectorAll('.signal-totem');
+  const centralReel = document.querySelector('.reads-v3__center .reel-specimen');
+  const centralTag = document.querySelector('.reads-v3__center .reel-specimen__hook-text');
+  const centralStatus = document.querySelector('.reads-v3__center [data-reads-status]');
+
+  if (totems.length === 0 || !centralReel) return;
+
+  totems.forEach(totem => {
+    totem.addEventListener('mouseenter', () => {
+      totems.forEach(t => t.classList.remove('is--active'));
+      totem.classList.add('is--active');
+
+      const label = totem.querySelector('.signal-totem__label')?.textContent || '';
+      const title = totem.querySelector('.signal-totem__title')?.textContent || '';
+
+      if (centralStatus) {
+        centralStatus.textContent = 'FOCUSED: ' + title.toUpperCase();
+      }
+
+      gsap.to(centralReel, {
+        scale: 1.02,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+
+    totem.addEventListener('mouseleave', () => {
+      totem.classList.remove('is--active');
+      if (centralStatus) {
+        centralStatus.textContent = 'SYNCHRONIZING 5 DOMAINS';
+      }
+      gsap.to(centralReel, {
+        scale: 1,
+        duration: 0.3,
+        ease: 'power2.out'
       });
     });
   });
