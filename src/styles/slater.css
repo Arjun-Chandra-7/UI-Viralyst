@@ -2856,3 +2856,711 @@ html[lang="fr"] .lang-en-only {
   }
 }
 
+
+
+/* ==========================================================================
+   VIRALYST V3 SIGNATURE SYSTEM: PRIMITIVES & PROTOTYPES
+   ========================================================================== */
+
+:root {
+  --ink: #0B0B0F;
+  --paper: #F4F0E8;
+  --coral-red: #FF5146;
+  --signal-blue: #315CFF;
+  --hot-rose: #F53F83;
+  --pale-lilac: #C5BCFF;
+  --warm-yellow: #F5D45A;
+  --acid: #BEFF47;
+  
+  --font-display: "Bricolage Grotesque", -apple-system, sans-serif;
+  --font-body: "Instrument Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+/* --------------------------------------------------------------------------
+   PRIMITIVE 01: REEL SPECIMEN
+   -------------------------------------------------------------------------- */
+.reel-specimen {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background-color: var(--ink);
+  border-radius: 1.75em;
+  border: 1.5px solid rgba(244, 240, 232, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25em;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.reel-specimen__media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.reel-specimen__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 11, 15, 0.6) 0%, rgba(11, 11, 15, 0.2) 40%, rgba(11, 11, 15, 0.85) 100%);
+  z-index: 2;
+}
+
+.reel-specimen__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.reel-specimen__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reel-specimen__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--coral-red);
+  background: rgba(255, 81, 70, 0.12);
+  padding: 0.3em 0.8em;
+  border-radius: 1em;
+  border: 1px solid rgba(255, 81, 70, 0.25);
+  text-transform: uppercase;
+}
+
+.reel-specimen__time {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  color: rgba(244, 240, 232, 0.6);
+}
+
+.reel-specimen__body {
+  margin-top: auto;
+  margin-bottom: 1.2em;
+}
+
+.reel-specimen__hook-text {
+  font-family: var(--font-display);
+  font-size: 1.35em;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--paper);
+  margin: 0 0 0.4em 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.reel-specimen__caption-box {
+  background: rgba(244, 240, 232, 0.92);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82em;
+  font-weight: 600;
+  padding: 0.4em 0.75em;
+  border-radius: 0.5em;
+  display: inline-block;
+}
+
+.reel-specimen__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(244, 240, 232, 0.12);
+  padding-top: 0.75em;
+}
+
+.reel-specimen__audio-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.reel-specimen__wave-bar {
+  width: 2.5px;
+  background: var(--signal-blue);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   PRIMITIVE 02: THE V-LENS
+   -------------------------------------------------------------------------- */
+.v-lens {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 4.5em;
+  border-top: 2px solid var(--coral-red);
+  border-bottom: 2px solid var(--coral-red);
+  background: linear-gradient(180deg, rgba(255, 81, 70, 0.15) 0%, rgba(49, 92, 255, 0.12) 100%);
+  backdrop-filter: contrast(115%) brightness(110%);
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  box-shadow: 0 0 20px rgba(255, 81, 70, 0.3), inset 0 0 15px rgba(255, 81, 70, 0.15);
+}
+
+.v-lens__bracket {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 24px;
+  fill: var(--coral-red);
+}
+.v-lens__bracket--left { left: 4px; }
+.v-lens__bracket--right { right: 4px; transform: translateY(-50%) rotate(180deg); }
+
+.v-lens__meta {
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.25em 0.6em;
+  border-radius: 0.4em;
+  border: 1px solid var(--coral-red);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.v-lens__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acid);
+}
+
+/* --------------------------------------------------------------------------
+   PRIMITIVE 03: SIGNAL RIBBON
+   -------------------------------------------------------------------------- */
+.signal-ribbon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 28px;
+  height: 100%;
+  background: rgba(11, 11, 15, 0.85);
+  border: 1px solid rgba(244, 240, 232, 0.12);
+  border-radius: 0.6em;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.signal-ribbon__track {
+  flex: 1;
+  width: 100%;
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signal-ribbon__track--words { background: rgba(255, 81, 70, 0.25); border-left: 2px solid var(--coral-red); }
+.signal-ribbon__track--visual { background: rgba(197, 188, 255, 0.25); border-left: 2px solid var(--pale-lilac); }
+.signal-ribbon__track--captions { background: rgba(245, 63, 131, 0.25); border-left: 2px solid var(--hot-rose); }
+.signal-ribbon__track--audio { background: rgba(49, 92, 255, 0.25); border-left: 2px solid var(--signal-blue); }
+.signal-ribbon__track--edit { background: rgba(245, 212, 90, 0.25); border-left: 2px solid var(--warm-yellow); }
+
+.signal-ribbon__glyph {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--paper);
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   PROTOTYPE 01: HERO REEL FIELD
+   -------------------------------------------------------------------------- */
+.hero__visual-field {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.reel-field__item {
+  position: absolute;
+  width: 310px;
+  height: 520px;
+  border-radius: 1.8em;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reel-field__item--back-left {
+  left: 5%;
+  top: 8%;
+  transform: rotate(-7deg) scale(0.86);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.reel-field__item--back-right {
+  right: 5%;
+  top: 12%;
+  transform: rotate(8deg) scale(0.84);
+  z-index: 2;
+  opacity: 0.75;
+}
+
+.reel-field__item--center-hero {
+  left: 24%;
+  top: 6%;
+  transform: rotate(-1deg) scale(1);
+  z-index: 4;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 40px rgba(49, 92, 255, 0.15);
+}
+
+.reel-field__indicator {
+  position: absolute;
+  top: -1.2em;
+  right: -1.2em;
+  z-index: 10;
+  background: var(--ink);
+  border: 1.5px solid var(--coral-red);
+  border-radius: 2em;
+  padding: 0.4em 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.reel-field__indicator-text {
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--paper);
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   PROTOTYPE 02: SIGNATURE SCAN SECTION (SCAN, DON'T EXPLODE)
+   -------------------------------------------------------------------------- */
+.scan-section {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  width: 100%;
+}
+
+.scan-section__wrap {
+  width: 100%;
+  height: 300svh;
+  position: relative;
+}
+
+.scan-section__sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 2em 1.5em;
+}
+
+.scan-section__header {
+  text-align: center;
+  max-width: 48em;
+  margin-bottom: 2em;
+  z-index: 5;
+}
+
+.scan-section__tag {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--coral-red);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+
+.scan-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5em, 5vw, 4.2em);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--paper);
+  margin: 0 0 0.25em 0;
+  letter-spacing: -0.02em;
+}
+
+.scan-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 1.15em;
+  color: rgba(244, 240, 232, 0.7);
+  margin: 0 auto;
+}
+
+.scan-section__stage {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-canvas-container {
+  position: relative;
+  width: 360px;
+  height: 520px;
+  border-radius: 1.8em;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(49, 92, 255, 0.2);
+  border: 2px solid rgba(244, 240, 232, 0.2);
+}
+
+.scan-companion {
+  position: absolute;
+  width: 260px;
+  height: 420px;
+  border-radius: 1.4em;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scan-companion--left {
+  left: 2%;
+  transform: translateX(-30px) rotate(-6deg) scale(0.9);
+}
+
+.scan-companion--right {
+  right: 2%;
+  transform: translateX(30px) rotate(6deg) scale(0.9);
+}
+
+.scan-companion.is--active {
+  opacity: 0.85;
+  transform: translateX(0) rotate(var(--rot, 0deg)) scale(0.95);
+}
+
+.scan-pattern-trace {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: dashed 2px var(--coral-red);
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   PROTOTYPE 03: WHAT VIRALYST READS (5 SIGNAL TOTEMS)
+   -------------------------------------------------------------------------- */
+.reads-v3 {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 7em 0 8em 0;
+  overflow: hidden;
+}
+
+.reads-v3__header {
+  text-align: center;
+  max-width: 44em;
+  margin: 0 auto 4em auto;
+}
+
+.reads-v3__tag {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--signal-blue);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+  display: inline-block;
+}
+
+.reads-v3__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8em, 5.5vw, 5em);
+  font-weight: 800;
+  line-height: 0.98;
+  color: var(--paper);
+  margin: 0 0 0.4em 0;
+  letter-spacing: -0.02em;
+}
+
+.reads-v3__desc {
+  font-family: var(--font-body);
+  font-size: 1.25em;
+  line-height: 1.45;
+  color: rgba(244, 240, 232, 0.7);
+  margin: 0 auto;
+}
+
+.reads-v3__constellation {
+  display: grid;
+  grid-template-columns: 1fr 340px 1fr;
+  gap: 2.5em;
+  align-items: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
+
+.reads-v3__column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.signal-totem {
+  background: rgba(244, 240, 232, 0.04);
+  border: 1px solid rgba(244, 240, 232, 0.12);
+  border-radius: 1.4em;
+  padding: 1.4em 1.6em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.signal-totem:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244, 240, 232, 0.25);
+}
+
+.signal-totem__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signal-totem__label {
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.signal-totem--words .signal-totem__label { color: var(--coral-red); }
+.signal-totem--visual .signal-totem__label { color: var(--pale-lilac); }
+.signal-totem--captions .signal-totem__label { color: var(--hot-rose); }
+.signal-totem--audio .signal-totem__label { color: var(--signal-blue); }
+.signal-totem--edit .signal-totem__label { color: var(--warm-yellow); }
+
+.signal-totem__title {
+  font-family: var(--font-display);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--paper);
+  margin: 0;
+}
+
+.signal-totem__body {
+  font-family: var(--font-body);
+  font-size: 0.95em;
+  color: rgba(244, 240, 232, 0.65);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.signal-totem__graphic {
+  background: rgba(11, 11, 15, 0.7);
+  border-radius: 0.8em;
+  padding: 0.8em 1em;
+  border: 1px solid rgba(244, 240, 232, 0.08);
+}
+
+@media (max-width: 991px) {
+  .reads-v3__constellation {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+  .reads-v3__center-reel {
+    order: -1;
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+
+
+/* Hero Visual Field V3 Precise Layout */
+.hero.is--bg-yellow {
+  background-color: var(--paper, #F4F0E8) !important;
+}
+
+.hero__bg-svg {
+  opacity: 0.18 !important;
+}
+
+.hero__visual {
+  position: relative !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 560px !important;
+  margin-left: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.hero__visual-field {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  height: 600px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.reel-field__item {
+  position: absolute !important;
+  width: 280px !important;
+  height: 480px !important;
+  border-radius: 1.8em !important;
+}
+
+.reel-field__item--back-left {
+  left: 0% !important;
+  top: 10% !important;
+  transform: rotate(-7deg) scale(0.88) !important;
+  z-index: 1 !important;
+  opacity: 0.82 !important;
+}
+
+.reel-field__item--back-right {
+  right: 2% !important;
+  top: 14% !important;
+  transform: rotate(7deg) scale(0.86) !important;
+  z-index: 2 !important;
+  opacity: 0.82 !important;
+}
+
+.reel-field__item--center-hero {
+  left: 19% !important;
+  top: 8% !important;
+  transform: rotate(-1deg) scale(1) !important;
+  z-index: 4 !important;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 40px rgba(49, 92, 255, 0.15) !important;
+}
+
+
+
+/* Hero Robust Two-Column Layout */
+@media screen and (min-width: 992px) {
+  .hero__inner {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: calc(100vh - 120px) !important;
+    padding: 3.5em 0 !important;
+  }
+
+  .hero__content {
+    flex: 1 1 52% !important;
+    max-width: 640px !important;
+    z-index: 10 !important;
+  }
+
+  .hero__visual {
+    flex: 1 1 48% !important;
+    max-width: 580px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 5 !important;
+  }
+
+  .hero__visual-field {
+    width: 100% !important;
+    max-width: 540px !important;
+    height: 560px !important;
+  }
+}
+
+
+
+.hero__visual {
+  position: relative !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+
+.hero__visual-field {
+  margin-top: 3.5em !important;
+}
+
+.reel-field__item--center-hero {
+  top: 4% !important;
+}
+
+
+
+/* Remove Aardvark animal ears and normalize slider card backgrounds */
+.books-slider__item-bg-ears {
+  display: none !important;
+}
+
+.books-slider__item-bg {
+  background-color: var(--ink, #0B0B0F) !important;
+}
+
+.books-slider__item-bg-bottom {
+  background-color: var(--ink, #0B0B0F) !important;
+}
+
+.books-slider__item-outer {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.books-slider__item-title {
+  font-family: var(--font-display) !important;
+}
+
+.books-slider__item-genre {
+  font-family: var(--font-mono) !important;
+  color: var(--coral-red) !important;
+  letter-spacing: 0.05em !important;
+}
+

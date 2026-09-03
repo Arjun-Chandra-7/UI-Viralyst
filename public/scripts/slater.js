@@ -742,8 +742,8 @@ function runPageOnceAnimation(next) {
 
     tl.set(introHomeVisual, {
       opacity: 0,
-      y: "5em",
-      rotate: -43,
+      y: "3em",
+      rotate: 0,
     });
 
     tl.set(introHomeEasterEgg, {
@@ -1063,10 +1063,10 @@ function runPageOnceAnimation(next) {
     tl.to(introHomeVisual, {
       opacity: 1,
       y: "0em",
-      rotate: -21,
-      duration: 0.75,
-      delay: 0.5,
-      ease: 'elastic.out(1, 0.72)',
+      rotate: 0,
+      duration: 0.85,
+      delay: 0.3,
+      ease: 'power3.out',
     }, "start+=1.1");
   }
 
@@ -1525,8 +1525,8 @@ function runPageEnterAnimation(next) {
 
     tl.set(introHomeVisual, {
       opacity: 0,
-      y: "5em",
-      rotate: -43,
+      y: "3em",
+      rotate: 0,
     });
 
     tl.set(introHomeEasterEgg, {
@@ -1835,10 +1835,10 @@ function runPageEnterAnimation(next) {
     tl.to(introHomeVisual, {
       opacity: 1,
       y: "0em",
-      rotate: -21,
-      duration: 0.75,
-      delay: 0.5,
-      ease: 'elastic.out(1, 0.72)',
+      rotate: 0,
+      duration: 0.85,
+      delay: 0.3,
+      ease: 'power3.out',
     }, "startEnter+=0.4");
   }
 
@@ -3125,6 +3125,29 @@ function destroyBoxSequence() {
   boxSequenceDestroyFns = [];
 }
 
+function roundRect(ctx, x, y, width, height, radius) {
+  if (typeof radius === 'undefined') radius = 5;
+  if (typeof radius === 'number') {
+    radius = { tl: radius, tr: radius, br: radius, bl: radius };
+  } else {
+    var defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
+    for (var side in defaultRadius) {
+      radius[side] = radius[side] || defaultRadius[side];
+    }
+  }
+  ctx.beginPath();
+  ctx.moveTo(x + radius.tl, y);
+  ctx.lineTo(x + width - radius.tr, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+  ctx.lineTo(x + width, y + height - radius.br);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+  ctx.lineTo(x + radius.bl, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+  ctx.lineTo(x, y + radius.tl);
+  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+  ctx.closePath();
+}
+
 function initBoxSequence() {
   boxSequenceDestroyFns = [];
 
@@ -3138,13 +3161,12 @@ function initBoxSequence() {
 
     const element = wrap.querySelector('[data-box-sequence-element]');
     const canvas = element && element.querySelector('[data-box-sequence-canvas]');
-    const finalText = wrap.querySelector('[data-box-sequence-text-final]');
     const buttons = wrap.querySelectorAll('[data-box-sequence-button]');
+    const companionLeft = wrap.querySelector('[data-companion="left"]');
+    const companionRight = wrap.querySelector('[data-companion="right"]');
 
     if (!element || !canvas) return;
 
-    const startTrigger = 'top top';
-    const endTrigger = 'bottom bottom';
     const ctx = canvas.getContext('2d');
 
     let currentProgress = 0;
@@ -3155,14 +3177,12 @@ function initBoxSequence() {
 
     function resizeCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = element.clientWidth;
-      const height = element.clientHeight;
+      const width = canvas.clientWidth || 360;
+      const height = canvas.clientHeight || 520;
 
       if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
         canvas.width = width * dpr;
         canvas.height = height * dpr;
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
         cachedWidth = width * dpr;
         cachedHeight = height * dpr;
       }
@@ -3172,13 +3192,13 @@ function initBoxSequence() {
       if (!isTicking && !isDestroyed) {
         isTicking = true;
         requestAnimationFrame(() => {
-          renderSignalDeconstruction(currentProgress);
+          renderVLensScan(currentProgress);
           isTicking = false;
         });
       }
     }
 
-    function renderSignalDeconstruction(p) {
+    function renderVLensScan(p) {
       if (isDestroyed || !ctx) return;
 
       const cw = cachedWidth || canvas.width;
@@ -3187,468 +3207,255 @@ function initBoxSequence() {
 
       ctx.clearRect(0, 0, cw, ch);
 
-      if (p < -0.05 || p > 1.05) return;
-
-      // Adaptive sizing: generous mobile scale with vertical flow
-      const isMob = cw < 650 * dpr;
-      const s = isMob 
-        ? (cw / (420 * dpr)) * dpr 
-        : Math.min(cw / (1050 * dpr), ch / (820 * dpr)) * dpr;
+      const s = Math.min(cw / (360 * dpr), ch / (520 * dpr)) * dpr;
       const cx = cw / 2;
-      const cy = ch / 2 + 10 * s;
-      const rw = isMob ? Math.min(cw * 0.88, 320 * s) : 320 * s;
-      const rh = isMob ? Math.min(ch * 0.65, 480 * s) : 490 * s;
+      const cy = ch / 2;
+      const rw = cw - 8 * s;
+      const rh = ch - 8 * s;
 
       const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
       const ease = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-      // Ambient radial glow
-      const glow = ctx.createRadialGradient(cx, cy, 30 * s, cx, cy, 420 * s);
-      glow.addColorStop(0, 'rgba(98, 87, 255, 0.15)');
-      glow.addColorStop(1, 'rgba(9, 9, 11, 0)');
-      ctx.fillStyle = glow;
+      // 1. Reel Media Background (Monolithic)
+      ctx.save();
+      roundRect(ctx, 4 * s, 4 * s, rw, rh, 22 * s);
+      ctx.fillStyle = '#0B0B0F';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(244, 240, 232, 0.2)';
+      ctx.lineWidth = 2 * s;
+      ctx.stroke();
+      ctx.clip();
+
+      // Atmospheric radial fill
+      const grad = ctx.createRadialGradient(cx, cy * 0.7, 20 * s, cx, cy, 260 * s);
+      grad.addColorStop(0, '#1c1524');
+      grad.addColorStop(1, '#0B0B0F');
+      ctx.fillStyle = grad;
       ctx.fillRect(0, 0, cw, ch);
 
-      // Section Top HUD
-      ctx.save();
-      ctx.fillStyle = '#C6FF4A';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText('[VIRALYST ENGINE: MULTIMODAL SHORT-FORM DECONSTRUCTION]', cx, 40 * s);
-      ctx.restore();
+      // Camera HUD Header
+      ctx.fillStyle = '#FF5146';
+      ctx.beginPath();
+      ctx.arc(24 * s, 26 * s, 4.5 * s, 0, Math.PI * 2);
+      ctx.fill();
 
-      // STATE 01 & 02: p < 0.20 -> Reel Enters, Plays & Freezes
-      if (p < 0.20) {
+      ctx.fillStyle = '#F4F0E8';
+      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('REC 00:02:18 • 60FPS', 36 * s, 30 * s);
+
+      ctx.fillStyle = 'rgba(244, 240, 232, 0.6)';
+      ctx.textAlign = 'right';
+      ctx.fillText('4K 60', cw - 24 * s, 30 * s);
+      ctx.textAlign = 'left';
+
+      // 2. V-LENS SCAN MECHANISM
+      let lensY = -100 * s;
+      let scanFactor = 0;
+
+      if (p >= 0.20 && p < 0.40) {
+        // V-Lens enters top
+        const enterProgress = ease((p - 0.20) / 0.20);
+        lensY = 40 * s + (40 * s * enterProgress);
+        scanFactor = 0.05 * enterProgress;
+      } else if (p >= 0.40 && p < 0.68) {
+        // V-Lens traverses from top to bottom
+        scanFactor = ease((p - 0.40) / 0.28);
+        lensY = 60 * s + (rh - 120 * s) * scanFactor;
+      } else if (p >= 0.68) {
+        // V-Lens settled near bottom
+        lensY = rh - 55 * s;
+        scanFactor = 1;
+      }
+
+      // Render revealed signals inside the Reel behind the V-Lens
+      if (scanFactor > 0.1) {
+        // Signal 01: Hook Syntax (Top)
+        const hookAlpha = clamp((scanFactor - 0.1) / 0.2, 0, 1);
         ctx.save();
-        ctx.beginPath();
-        ctx.ellipse(cx, cy + rh / 2 + 20 * s, rw * 0.44, 14 * s, 0, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillStyle = 'rgba(255, 81, 70, ' + (0.15 * hookAlpha) + ')';
+        roundRect(ctx, 16 * s, 50 * s, rw - 32 * s, 54 * s, 10 * s);
         ctx.fill();
-        ctx.restore();
-
-        drawReelSolid(cx, cy, rw, rh, s, p);
-
-        if (p > 0.10) {
-          const scanProgress = (p - 0.10) / 0.10;
-          const scanY = cy - rh / 2 + (rh * scanProgress);
-          ctx.save();
-          ctx.strokeStyle = '#2997FF';
-          ctx.lineWidth = 3.5 * s;
-          ctx.shadowColor = '#2997FF';
-          ctx.shadowBlur = 12 * s;
-          ctx.beginPath();
-          ctx.moveTo(cx - rw / 2 + 15 * s, scanY);
-          ctx.lineTo(cx + rw / 2 - 15 * s, scanY);
-          ctx.stroke();
-          ctx.restore();
-        }
-      }
-      // STATE 03 - 07: 0.20 <= p < 0.68 -> 5-Layer Adaptive Separation
-      else if (p < 0.68) {
-        const factor = ease(clamp((p - 0.18) / 0.35, 0, 1));
-        const reorg = clamp((p - 0.52) / 0.16, 0, 1);
-
-        let hkW, hkH, hkX, hkY;
-        let sbW, sbH, sbX, sbY;
-        let capW, capH, capX, capY;
-        let auW, auH, auX, auY;
-        let tmW, tmH, tmX, tmY;
-
-        if (isMob) {
-          // Vertical cascading stack on mobile
-          hkW = Math.min(cw * 0.90, 340 * s);
-          hkH = 50 * s;
-          hkX = cx;
-          hkY = cy - 180 * s * factor;
-
-          sbW = Math.min(cw * 0.90, 340 * s);
-          sbH = 95 * s;
-          sbX = cx;
-          sbY = cy - 85 * s * factor;
-
-          capW = Math.min(cw * 0.90, 340 * s);
-          capH = 44 * s;
-          capX = cx;
-          capY = cy + 5 * s * factor;
-
-          auW = Math.min(cw * 0.90, 340 * s);
-          auH = 95 * s;
-          auX = cx;
-          auY = cy + 95 * s * factor;
-
-          tmW = Math.min(cw * 0.90, 340 * s);
-          tmH = 50 * s;
-          tmX = cx;
-          tmY = cy + 185 * s * factor;
-        } else {
-          // Desktop Cruciform Constellation
-          hkW = 340 * s;
-          hkH = 62 * s;
-          hkX = cx;
-          hkY = cy - (185 * s * factor) + (20 * s * reorg);
-
-          sbW = 220 * s;
-          sbH = 260 * s;
-          sbX = cx - (195 * s * factor) + (20 * s * reorg);
-          sbY = cy + (10 * s * factor);
-
-          capW = 260 * s;
-          capH = 46 * s;
-          capX = cx;
-          capY = cy + (12 * s * factor) - (10 * s * reorg);
-
-          auW = 220 * s;
-          auH = 260 * s;
-          auX = cx + (195 * s * factor) - (20 * s * reorg);
-          auY = cy + (10 * s * factor);
-
-          tmW = 340 * s;
-          tmH = 64 * s;
-          tmX = cx;
-          tmY = cy + (200 * s * factor) - (15 * s * reorg);
-        }
-
-        drawHookLayer(hkX, hkY, hkW, hkH, s, factor);
-        drawVisualLayer(sbX, sbY, sbW, sbH, s, factor);
-        drawCaptionLayer(capX, capY, capW, capH, s, factor);
-        drawAudioLayer(auX, auY, auW, auH, s, factor);
-        drawEditLayer(tmX, tmY, tmW, tmH, s, factor);
-
-        // Laser Connection Traces connecting all 5 layers
-        if (factor > 0.3) {
-          ctx.save();
-          ctx.setLineDash([4 * s, 4 * s]);
-          ctx.strokeStyle = 'rgba(41, 151, 255, ' + (0.55 * factor) + ')';
-          ctx.lineWidth = 1.5 * s;
-          ctx.beginPath();
-          ctx.moveTo(hkX, hkY + hkH / 2);
-          ctx.lineTo(sbX + sbW / 2, sbY);
-          ctx.lineTo(capX, capY);
-          ctx.lineTo(auX - auW / 2, auY);
-          ctx.lineTo(tmX, tmY - tmH / 2);
-          ctx.stroke();
-          ctx.restore();
-        }
-      }
-      // STATE 08 & 09: p >= 0.68 -> Assembled Content Direction Blueprint
-      else {
-        const assem = ease(clamp((p - 0.68) / 0.16, 0, 1));
-        drawContentDirection(cx, cy + 15 * s, rw * 1.12, rh * 0.86, s, assem);
-      }
-    }
-
-    function drawReelSolid(x, y, w, h, s, progress) {
-      ctx.save();
-      ctx.translate(x, y);
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 26 * s);
-      ctx.fillStyle = '#09090B';
-      ctx.fill();
-      ctx.strokeStyle = '#F3F0E9';
-      ctx.lineWidth = 3.5 * s;
-      ctx.stroke();
-
-      const vw = w - 24 * s;
-      const vh = h * 0.65;
-      roundRect(ctx, -vw / 2, -h / 2 + 12 * s, vw, vh, 18 * s);
-      ctx.fillStyle = '#141824';
-      ctx.fill();
-
-      // Camera recording HUD
-      ctx.fillStyle = '#FF3B45';
-      ctx.beginPath();
-      ctx.arc(-vw / 2 + 25 * s, -h / 2 + 30 * s, 5 * s, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('REC 00:02:18 • 60FPS', -vw / 2 + 38 * s, -h / 2 + 34 * s);
-
-      // Hook overlay
-      roundRect(ctx, -vw / 2 + 12 * s, -h / 2 + 55 * s, vw - 24 * s, 58 * s, 10 * s);
-      ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
-      ctx.fill();
-      ctx.strokeStyle = '#FF3B45';
-      ctx.lineWidth = 2 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#FF3B45';
-      ctx.font = '700 ' + (12 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('[HOOK: CONTRARIAN OPEN]', -vw / 2 + 24 * s, -h / 2 + 78 * s);
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Why 99% of short-form hooks fail in 2s', -vw / 2 + 24 * s, -h / 2 + 98 * s);
-
-      // Waveform
-      for (let i = 0; i < 18; i++) {
-        const bh = (16 + 55 * Math.sin(i * 0.48) ** 2) * s;
-        const bx = -vw / 2 + 30 * s + i * 14 * s;
-        roundRect(ctx, bx, -h / 2 + 205 * s - bh / 2, 6 * s, bh, 2.5 * s);
-        ctx.fillStyle = '#2997FF';
-        ctx.fill();
-      }
-
-      // Bottom Scrubber
-      const sy = -h / 2 + vh - 16 * s;
-      ctx.strokeStyle = '#404555';
-      ctx.lineWidth = 3.5 * s;
-      ctx.beginPath();
-      ctx.moveTo(-vw / 2 + 16 * s, sy);
-      ctx.lineTo(vw / 2 - 16 * s, sy);
-      ctx.stroke();
-
-      ctx.strokeStyle = '#C6FF4A';
-      ctx.beginPath();
-      ctx.moveTo(-vw / 2 + 16 * s, sy);
-      ctx.lineTo(-vw / 2 + 150 * s, sy);
-      ctx.stroke();
-
-      // Lower brief info
-      const bw = w - 24 * s;
-      const bh = h - vh - 36 * s;
-      roundRect(ctx, -bw / 2, h / 2 - bh - 12 * s, bw, bh, 16 * s);
-      ctx.fillStyle = '#F3F0E9';
-      ctx.fill();
-
-      ctx.fillStyle = '#09090B';
-      ctx.font = '700 ' + (14 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('SIGNAL CORE ARCHETYPE', -bw / 2 + 16 * s, h / 2 - bh + 22 * s);
-
-      ctx.fillStyle = '#555560';
-      ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Analyzing Visual • Hook • Captions • Cadence', -bw / 2 + 16 * s, h / 2 - bh + 44 * s);
-      ctx.restore();
-    }
-
-    function drawHookLayer(x, y, w, h, s, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(255, 59, 69, 0.35)';
-      ctx.shadowBlur = 14 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 14 * s);
-      ctx.fillStyle = '#09090B';
-      ctx.fill();
-      ctx.strokeStyle = '#FF3B45';
-      ctx.lineWidth = 2.5 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#FF3B45';
-      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[01 / HOOK SCRIPT]', -w / 2 + 16 * s, -h / 2 + 24 * s);
-
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (13 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('"Stop writing hooks like it is 2023."', -w / 2 + 16 * s, -h / 2 + 46 * s);
-      ctx.restore();
-    }
-
-    function drawVisualLayer(x, y, w, h, s, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(98, 87, 255, 0.3)';
-      ctx.shadowBlur = 16 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
-      ctx.fillStyle = '#141826';
-      ctx.fill();
-      ctx.strokeStyle = '#6257FF';
-      ctx.lineWidth = 2.5 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#6257FF';
-      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[02 / VISUAL CUES]', -w / 2 + 16 * s, -h / 2 + 24 * s);
-
-      const ph = (h - 55 * s) / 3;
-      const panels = [
-        { t: '00:00 - THE INTERRUPT', c: '#FF3B45' },
-        { t: '00:01 - TACTILE PROOF', c: '#2997FF' },
-        { t: '00:03 - CONTEXT PIVOT', c: '#C6FF4A' }
-      ];
-      for (let i = 0; i < 3; i++) {
-        const py = -h / 2 + 38 * s + i * (ph + 5 * s);
-        roundRect(ctx, -w / 2 + 12 * s, py, w - 24 * s, ph, 8 * s);
-        ctx.fillStyle = '#0B0E17';
-        ctx.fill();
-        ctx.strokeStyle = panels[i].c;
-        ctx.lineWidth = 1.2 * s;
+        ctx.strokeStyle = 'rgba(255, 81, 70, ' + (0.6 * hookAlpha) + ')';
+        ctx.lineWidth = 1.5 * s;
         ctx.stroke();
 
-        ctx.fillStyle = panels[i].c;
-        ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(panels[i].t, -w / 2 + 18 * s, py + ph / 2 + 4 * s);
+        ctx.fillStyle = 'rgba(255, 81, 70, ' + hookAlpha + ')';
+        ctx.font = '700 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText('[01 / HOOK: CONTRARIAN OPEN]', 26 * s, 70 * s);
+
+        ctx.fillStyle = 'rgba(244, 240, 232, ' + hookAlpha + ')';
+        ctx.font = '600 ' + (12.5 * s) + 'px "Bricolage Grotesque", sans-serif';
+        ctx.fillText('"Stop writing hooks like it is 2023."', 26 * s, 90 * s);
+        ctx.restore();
       }
-      ctx.restore();
-    }
 
-    function drawCaptionLayer(x, y, w, h, s, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(255, 40, 120, 0.35)';
-      ctx.shadowBlur = 14 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 12 * s);
-      ctx.fillStyle = 'rgba(15, 12, 22, 0.95)';
-      ctx.fill();
-      ctx.strokeStyle = '#FF2878';
-      ctx.lineWidth = 2 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#FF2878';
-      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[03 / KINETIC CAPTIONS]', -w / 2 + 14 * s, -h / 2 + 18 * s);
-
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '500 ' + (12 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Dynamic word-by-word reveal aligned to speech', -w / 2 + 14 * s, -h / 2 + 36 * s);
-      ctx.restore();
-    }
-
-    function drawAudioLayer(x, y, w, h, s, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(41, 151, 255, 0.3)';
-      ctx.shadowBlur = 16 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
-      ctx.fillStyle = '#111422';
-      ctx.fill();
-      ctx.strokeStyle = '#2997FF';
-      ctx.lineWidth = 2.5 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#2997FF';
-      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[04 / AUDIO FREQUENCY]', -w / 2 + 16 * s, -h / 2 + 24 * s);
-
-      ctx.fillStyle = '#8590A8';
-      ctx.font = '500 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('Cadence: 142 BPM Speech Sync', -w / 2 + 16 * s, -h / 2 + 42 * s);
-
-      const barCount = 15;
-      const bw = (w - 36 * s) / (barCount * 1.5);
-      const bg = bw * 0.5;
-      const startX = -w / 2 + 18 * s;
-      for (let i = 0; i < barCount; i++) {
-        const maxBh = h * 0.42;
-        const bh = (8 * s + maxBh * Math.sin(i * 0.45 + f) ** 2);
-        roundRect(ctx, startX + i * (bw + bg), h / 2 - 12 * s - bh, bw, bh, 2 * s);
-        ctx.fillStyle = i % 2 === 0 ? '#2997FF' : '#C6FF4A';
+      if (scanFactor > 0.35) {
+        // Signal 02: Kinetic Caption Timing (Mid-top)
+        const capAlpha = clamp((scanFactor - 0.35) / 0.25, 0, 1);
+        ctx.save();
+        ctx.fillStyle = 'rgba(245, 63, 131, ' + (0.15 * capAlpha) + ')';
+        roundRect(ctx, 16 * s, 115 * s, rw - 32 * s, 42 * s, 8 * s);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(245, 63, 131, ' + (0.6 * capAlpha) + ')';
+        ctx.lineWidth = 1.5 * s;
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(245, 63, 131, ' + capAlpha + ')';
+        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText('[02 / CAPTION] 00:01.2 • Dynamic Reveal', 26 * s, 132 * s);
+
+        ctx.fillStyle = 'rgba(244, 240, 232, ' + capAlpha + ')';
+        ctx.font = (11 * s) + 'px "Instrument Sans", sans-serif';
+        ctx.fillText('Aligned to natural vocal inflection', 26 * s, 148 * s);
+        ctx.restore();
       }
-      ctx.restore();
-    }
 
-    function drawEditLayer(x, y, w, h, s, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(198, 255, 74, 0.3)';
-      ctx.shadowBlur = 14 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 14 * s);
-      ctx.fillStyle = '#0C0F1A';
-      ctx.fill();
-      ctx.strokeStyle = '#C6FF4A';
-      ctx.lineWidth = 2.5 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#C6FF4A';
-      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[05 / PACING & CUT VELOCITY]', -w / 2 + 16 * s, -h / 2 + 20 * s);
-
-      const cuts = ['[0.0s HOOK]', '[0.8s CUT 1]', '[1.6s CUT 2]', '[2.4s PIVOT]'];
-      const cxStep = (w - 32 * s) / 4;
-      for (let i = 0; i < 4; i++) {
-        const bx = -w / 2 + 16 * s + i * cxStep;
-        roundRect(ctx, bx, -h / 2 + 30 * s, cxStep - 6 * s, 24 * s, 5 * s);
-        ctx.fillStyle = '#161C2C';
+      if (scanFactor > 0.6) {
+        // Signal 03: Audio Spectrum Waveform (Mid)
+        const auAlpha = clamp((scanFactor - 0.6) / 0.25, 0, 1);
+        ctx.save();
+        ctx.fillStyle = 'rgba(49, 92, 255, ' + (0.15 * auAlpha) + ')';
+        roundRect(ctx, 16 * s, 170 * s, rw - 32 * s, 54 * s, 10 * s);
         ctx.fill();
-        ctx.fillStyle = '#F3F0E9';
-        ctx.font = '500 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(cuts[i], bx + 4 * s, -h / 2 + 45 * s);
+        ctx.strokeStyle = 'rgba(49, 92, 255, ' + (0.6 * auAlpha) + ')';
+        ctx.lineWidth = 1.5 * s;
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(49, 92, 255, ' + auAlpha + ')';
+        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText('[03 / AUDIO] 142 BPM Speech Sync', 26 * s, 188 * s);
+
+        for (let i = 0; i < 22; i++) {
+          const bh = (8 + 24 * Math.sin(i * 0.45 + p * 8) ** 2) * s;
+          const bx = 26 * s + i * 13 * s;
+          roundRect(ctx, bx, 214 * s - bh, 4 * s, bh, 2 * s);
+          ctx.fillStyle = 'rgba(49, 92, 255, ' + auAlpha + ')';
+          ctx.fill();
+        }
+        ctx.restore();
       }
-      ctx.restore();
-    }
 
-    function drawContentDirection(x, y, w, h, s, assem) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(98, 87, 255, ' + (0.5 * assem) + ')';
-      ctx.shadowBlur = 25 * s * assem;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 24 * s);
-      ctx.fillStyle = '#F3F0E9';
-      ctx.fill();
-      ctx.strokeStyle = '#09090B';
-      ctx.lineWidth = 4 * s;
-      ctx.stroke();
-
-      // Header
-      roundRect(ctx, -w / 2 + 14 * s, -h / 2 + 14 * s, w - 28 * s, 68 * s, 14 * s);
-      ctx.fillStyle = '#09090B';
-      ctx.fill();
-
-      ctx.fillStyle = '#C6FF4A';
-      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[VIRALYST CONTENT DIRECTION]', -w / 2 + 28 * s, -h / 2 + 36 * s);
-
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '700 ' + (18 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('THE CONTRARIAN OPEN', -w / 2 + 28 * s, -h / 2 + 62 * s);
-
-      roundRect(ctx, w / 2 - 130 * s, -h / 2 + 26 * s, 105 * s, 26 * s, 6 * s);
-      ctx.fillStyle = '#6257FF';
-      ctx.fill();
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('READY TO SHOOT', w / 2 - 120 * s, -h / 2 + 43 * s);
-
-      // 4 Operational Direction Modules
-      const secH = (h - 130 * s) / 4;
-      const specs = [
-        { label: '01 / HOOK SCRIPT', desc: 'Why 99% of short-form hooks fail in the first 2 seconds.', badge: 'CONTRARIAN', col: '#FF3B45' },
-        { label: '02 / FRAME PACING', desc: '0.8s micro-cuts with tactile visual proof before dialogue.', badge: 'VELOCITY', col: '#6257FF' },
-        { label: '03 / AUDIO CADENCE', desc: '142 BPM rhythmic speech sync; seamless loop return.', badge: 'AUDIO MATCH', col: '#2997FF' },
-        { label: '04 / CALL TO ACTION', desc: 'Comment trigger: Ask for disagreement to spark debate.', badge: 'RETENTION', col: '#FF2878' }
-      ];
-
-      for (let i = 0; i < 4; i++) {
-        const sy = -h / 2 + 96 * s + i * (secH + 6 * s);
-        roundRect(ctx, -w / 2 + 14 * s, sy, w - 28 * s, secH, 10 * s);
-        ctx.fillStyle = '#E8E4DA';
+      if (scanFactor > 0.8) {
+        // Signal 04: Cut Velocity Timeline (Bottom)
+        const cutAlpha = clamp((scanFactor - 0.8) / 0.2, 0, 1);
+        ctx.save();
+        ctx.fillStyle = 'rgba(245, 212, 90, ' + (0.15 * cutAlpha) + ')';
+        roundRect(ctx, 16 * s, 235 * s, rw - 32 * s, 44 * s, 8 * s);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(245, 212, 90, ' + (0.6 * cutAlpha) + ')';
+        ctx.lineWidth = 1.5 * s;
+        ctx.stroke();
 
-        ctx.fillStyle = specs[i].col;
-        ctx.font = '700 ' + (11 * s) + 'px "Bricolage Grotesque", sans-serif';
-        ctx.fillText(specs[i].label, -w / 2 + 26 * s, sy + 20 * s);
+        ctx.fillStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';
+        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText('[04 / PACING] 0.8s Cut • 1.6s Pivot • Loop', 26 * s, 254 * s);
 
-        ctx.fillStyle = '#09090B';
+        // Timeline tick marks
+        ctx.strokeStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';
+        ctx.lineWidth = 2 * s;
+        ctx.beginPath();
+        ctx.moveTo(26 * s, 268 * s);
+        ctx.lineTo(rw - 26 * s, 268 * s);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Default raw Reel content at bottom before scan
+      if (scanFactor < 0.7) {
+        ctx.fillStyle = '#F4F0E8';
+        ctx.font = '700 ' + (15 * s) + 'px "Bricolage Grotesque", sans-serif';
+        ctx.fillText('THE CONTRARIAN OPEN', 24 * s, rh - 50 * s);
+
+        ctx.fillStyle = 'rgba(244, 240, 232, 0.65)';
         ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
-        ctx.fillText(specs[i].desc, -w / 2 + 26 * s, sy + 42 * s);
-
-        roundRect(ctx, w / 2 - 110 * s, sy + 10 * s, 85 * s, 20 * s, 5 * s);
-        ctx.fillStyle = '#09090B';
-        ctx.fill();
-        ctx.fillStyle = specs[i].col;
-        ctx.font = '600 ' + (9 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(specs[i].badge, w / 2 - 102 * s, sy + 23 * s);
+        ctx.fillText('Original Raw Reel Specimen', 24 * s, rh - 30 * s);
       }
-      ctx.restore();
-    }
 
-    function roundRect(ctx, x, y, width, height, radius) {
-      ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
-      ctx.closePath();
+      // 3. Draw The Active V-Lens Frame
+      if (p >= 0.20) {
+        ctx.save();
+        ctx.strokeStyle = '#FF5146';
+        ctx.lineWidth = 2.5 * s;
+        ctx.shadowColor = '#FF5146';
+        ctx.shadowBlur = 10 * s;
+
+        // Top and bottom scanning laser rails
+        ctx.beginPath();
+        ctx.moveTo(8 * s, lensY - 18 * s);
+        ctx.lineTo(rw - 8 * s, lensY - 18 * s);
+        ctx.moveTo(8 * s, lensY + 18 * s);
+        ctx.lineTo(rw - 8 * s, lensY + 18 * s);
+        ctx.stroke();
+
+        // Lens body gradient
+        const lensGrad = ctx.createLinearGradient(0, lensY - 18 * s, 0, lensY + 18 * s);
+        lensGrad.addColorStop(0, 'rgba(255, 81, 70, 0.25)');
+        lensGrad.addColorStop(1, 'rgba(49, 92, 255, 0.2)');
+        ctx.fillStyle = lensGrad;
+        ctx.fillRect(8 * s, lensY - 18 * s, rw - 16 * s, 36 * s);
+
+        // V-Lens aperture brackets > <
+        ctx.fillStyle = '#FF5146';
+        ctx.beginPath();
+        ctx.moveTo(14 * s, lensY - 12 * s);
+        ctx.lineTo(24 * s, lensY);
+        ctx.lineTo(14 * s, lensY + 12 * s);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(rw - 14 * s, lensY - 12 * s);
+        ctx.lineTo(rw - 24 * s, lensY);
+        ctx.lineTo(rw - 14 * s, lensY + 12 * s);
+        ctx.stroke();
+
+        // Lens badge
+        roundRect(ctx, cx - 80 * s, lensY - 10 * s, 160 * s, 20 * s, 4 * s);
+        ctx.fillStyle = '#0B0B0F';
+        ctx.fill();
+        ctx.strokeStyle = '#FF5146';
+        ctx.lineWidth = 1 * s;
+        ctx.stroke();
+
+        ctx.fillStyle = '#BEFF47';
+        ctx.beginPath();
+        ctx.arc(cx - 68 * s, lensY, 3.5 * s, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#F4F0E8';
+        ctx.font = '600 ' + (8.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('V-LENS ACTIVE • 60FPS', cx + 6 * s, lensY + 3 * s);
+        ctx.textAlign = 'left';
+        ctx.restore();
+      }
+
+      // 4. Signal Ribbon Generation along right edge (p >= 0.65)
+      if (p >= 0.65) {
+        const ribbonProgress = clamp((p - 0.65) / 0.15, 0, 1);
+        const rx = rw - 20 * s;
+        const ry = 50 * s;
+        const rH = (rh - 100 * s) * ribbonProgress;
+
+        ctx.save();
+        roundRect(ctx, rx, ry, 12 * s, rH, 4 * s);
+        ctx.fillStyle = 'rgba(11, 11, 15, 0.9)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(244, 240, 232, 0.2)';
+        ctx.stroke();
+
+        const colors = ['#FF5146', '#C5BCFF', '#F53F83', '#315CFF', '#F5D45A'];
+        const segH = rH / 5;
+        for (let i = 0; i < 5; i++) {
+          if (i * segH < rH) {
+            roundRect(ctx, rx + 2 * s, ry + i * segH + 2 * s, 8 * s, Math.max(segH - 4 * s, 2), 2 * s);
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      }
+
+      ctx.restore(); // end clip
     }
 
     function handleResize() {
@@ -3667,30 +3474,6 @@ function initBoxSequence() {
 
     const finalTimeline = gsap.timeline({ paused: true });
 
-    if (finalText) {
-      const finalTextSplit = new SplitText(finalText, {
-        type: 'words, chars',
-        tag: 'span',
-        charsClass: 'split-char',
-        wordsClass: 'split-word'
-      });
-
-      gsap.set(finalTextSplit.words, { display: 'inline-block' });
-      gsap.set(finalTextSplit.chars, {
-        display: 'inline-block',
-        opacity: 0,
-        y: '0.3em'
-      });
-
-      finalTimeline.to(finalTextSplit.chars, {
-        opacity: 1,
-        y: '0em',
-        ease: 'power3.out',
-        duration: 0.5,
-        stagger: 0.01
-      });
-    }
-
     if (buttons.length) {
       gsap.set(buttons, { y: '1em', opacity: 0 });
       finalTimeline.to(
@@ -3699,34 +3482,37 @@ function initBoxSequence() {
           y: '0em',
           opacity: 1,
           duration: 0.4,
-          ease: 'power3.out',
-          stagger: 0.1
-        },
-        '-=0.2'
+          ease: 'power3.out'
+        }
       );
     }
 
-    let finalState = 'before';
+    let companionState = false;
 
     const st = ScrollTrigger.create({
       trigger: wrap,
-      start: startTrigger,
-      end: endTrigger,
-      scrub: 0.3,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.2,
       onUpdate: (self) => {
         if (isDestroyed) return;
         currentProgress = self.progress;
         scheduleRender();
 
-        if (self.progress >= 0.68) {
-          if (finalState !== 'played') {
-            finalTimeline.timeScale(1.25).play();
-            finalState = 'played';
+        // 80% - 100%: Companion Reels Enter Showing Shared Pattern
+        if (self.progress >= 0.80) {
+          if (!companionState) {
+            companionState = true;
+            if (companionLeft) companionLeft.classList.add('is--active');
+            if (companionRight) companionRight.classList.add('is--active');
+            finalTimeline.play();
           }
         } else {
-          if (finalState !== 'before') {
-            finalTimeline.timeScale(3).reverse();
-            finalState = 'before';
+          if (companionState) {
+            companionState = false;
+            if (companionLeft) companionLeft.classList.remove('is--active');
+            if (companionRight) companionRight.classList.remove('is--active');
+            finalTimeline.reverse();
           }
         }
       }
