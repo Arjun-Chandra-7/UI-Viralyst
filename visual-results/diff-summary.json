@@ -3,241 +3,241 @@
     "checkpoint": "desktop_1280_faq_opened",
     "width": 1280,
     "height": 800,
-    "diffPixels": 0,
+    "diffPixels": 26858,
     "totalPixels": 1024000,
-    "diffPercent": 0
+    "diffPercent": 2.62
   },
   {
     "checkpoint": "desktop_1280_footer",
     "width": 1280,
     "height": 800,
-    "diffPixels": 0,
+    "diffPixels": 119242,
     "totalPixels": 1024000,
-    "diffPercent": 0
+    "diffPercent": 11.64
   },
   {
     "checkpoint": "desktop_1280_hero_settled",
     "width": 1280,
     "height": 800,
-    "diffPixels": 8390,
+    "diffPixels": 69950,
     "totalPixels": 1024000,
-    "diffPercent": 0.82
+    "diffPercent": 6.83
   },
   {
     "checkpoint": "desktop_1280_section_benefits",
     "width": 1280,
     "height": 800,
-    "diffPixels": 2059,
+    "diffPixels": 124426,
     "totalPixels": 1024000,
-    "diffPercent": 0.2
+    "diffPercent": 12.15
   },
   {
     "checkpoint": "desktop_1280_section_books",
     "width": 1280,
     "height": 800,
-    "diffPixels": 66744,
+    "diffPixels": 258267,
     "totalPixels": 1024000,
-    "diffPercent": 6.52
+    "diffPercent": 25.22
   },
   {
     "checkpoint": "desktop_1280_section_box",
     "width": 1280,
     "height": 800,
-    "diffPixels": 0,
+    "diffPixels": 2276,
     "totalPixels": 1024000,
-    "diffPercent": 0
+    "diffPercent": 0.22
   },
   {
     "checkpoint": "desktop_1280_section_faq",
     "width": 1280,
     "height": 800,
-    "diffPixels": 0,
+    "diffPixels": 38970,
     "totalPixels": 1024000,
-    "diffPercent": 0
+    "diffPercent": 3.81
   },
   {
     "checkpoint": "desktop_1280_section_flow",
     "width": 1280,
     "height": 800,
-    "diffPixels": 108791,
+    "diffPixels": 119998,
     "totalPixels": 1024000,
-    "diffPercent": 10.62
+    "diffPercent": 11.72
   },
   {
     "checkpoint": "desktop_1280_section_genre",
     "width": 1280,
     "height": 800,
-    "diffPixels": 0,
+    "diffPixels": 6611,
     "totalPixels": 1024000,
-    "diffPercent": 0
+    "diffPercent": 0.65
   },
   {
     "checkpoint": "desktop_1440_faq_opened",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 32315,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 2.49
   },
   {
     "checkpoint": "desktop_1440_footer",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 148836,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 11.48
   },
   {
     "checkpoint": "desktop_1440_hero_settled",
     "width": 1440,
     "height": 900,
-    "diffPixels": 195,
+    "diffPixels": 105323,
     "totalPixels": 1296000,
-    "diffPercent": 0.02
+    "diffPercent": 8.13
   },
   {
     "checkpoint": "desktop_1440_intro_logo",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 8953,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 0.69
   },
   {
     "checkpoint": "desktop_1440_intro_reveal",
     "width": 1440,
     "height": 900,
-    "diffPixels": 26370,
+    "diffPixels": 275252,
     "totalPixels": 1296000,
-    "diffPercent": 2.03
+    "diffPercent": 21.24
   },
   {
     "checkpoint": "desktop_1440_intro_t0",
     "width": 1440,
     "height": 900,
-    "diffPixels": 2,
+    "diffPixels": 11706,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 0.9
   },
   {
     "checkpoint": "desktop_1440_section_benefits",
     "width": 1440,
     "height": 900,
-    "diffPixels": 1735,
+    "diffPixels": 155619,
     "totalPixels": 1296000,
-    "diffPercent": 0.13
+    "diffPercent": 12.01
   },
   {
     "checkpoint": "desktop_1440_section_books",
     "width": 1440,
     "height": 900,
-    "diffPixels": 108960,
+    "diffPixels": 329190,
     "totalPixels": 1296000,
-    "diffPercent": 8.41
+    "diffPercent": 25.4
   },
   {
     "checkpoint": "desktop_1440_section_box",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 2712,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 0.21
   },
   {
     "checkpoint": "desktop_1440_section_faq",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 48346,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 3.73
   },
   {
     "checkpoint": "desktop_1440_section_flow",
     "width": 1440,
     "height": 900,
-    "diffPixels": 129430,
+    "diffPixels": 186301,
     "totalPixels": 1296000,
-    "diffPercent": 9.99
+    "diffPercent": 14.38
   },
   {
     "checkpoint": "desktop_1440_section_genre",
     "width": 1440,
     "height": 900,
-    "diffPixels": 0,
+    "diffPixels": 7945,
     "totalPixels": 1296000,
-    "diffPercent": 0
+    "diffPercent": 0.61
   },
   {
     "checkpoint": "desktop_1920_faq_opened",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 0,
+    "diffPixels": 17197,
     "totalPixels": 2073600,
-    "diffPercent": 0
+    "diffPercent": 0.83
   },
   {
     "checkpoint": "desktop_1920_footer",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 116,
+    "diffPixels": 245736,
     "totalPixels": 2073600,
-    "diffPercent": 0.01
+    "diffPercent": 11.85
   },
   {
     "checkpoint": "desktop_1920_hero_settled",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 217,
+    "diffPixels": 192465,
     "totalPixels": 2073600,
-    "diffPercent": 0.01
+    "diffPercent": 9.28
   },
   {
     "checkpoint": "desktop_1920_section_benefits",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 449,
+    "diffPixels": 285636,
     "totalPixels": 2073600,
-    "diffPercent": 0.02
+    "diffPercent": 13.77
   },
   {
     "checkpoint": "desktop_1920_section_books",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 103182,
+    "diffPixels": 449226,
     "totalPixels": 2073600,
-    "diffPercent": 4.98
+    "diffPercent": 21.66
   },
   {
     "checkpoint": "desktop_1920_section_box",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 0,
+    "diffPixels": 5409,
     "totalPixels": 2073600,
-    "diffPercent": 0
+    "diffPercent": 0.26
   },
   {
     "checkpoint": "desktop_1920_section_faq",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 0,
+    "diffPixels": 51337,
     "totalPixels": 2073600,
-    "diffPercent": 0
+    "diffPercent": 2.48
   },
   {
     "checkpoint": "desktop_1920_section_flow",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 214809,
+    "diffPixels": 299825,
     "totalPixels": 2073600,
-    "diffPercent": 10.36
+    "diffPercent": 14.46
   },
   {
     "checkpoint": "desktop_1920_section_genre",
     "width": 1920,
     "height": 1080,
-    "diffPixels": 0,
+    "diffPixels": 12044,
     "totalPixels": 2073600,
-    "diffPercent": 0
+    "diffPercent": 0.58
   },
   {
     "checkpoint": "flow_settled",
@@ -251,49 +251,49 @@
     "checkpoint": "mobile_390_faq_opened",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 10339,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 3.14
   },
   {
     "checkpoint": "mobile_390_footer",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 55242,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 16.78
   },
   {
     "checkpoint": "mobile_390_hero_settled",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 59811,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 18.17
   },
   {
     "checkpoint": "mobile_390_menu_open",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 4128,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 1.25
   },
   {
     "checkpoint": "mobile_390_section_benefits",
     "width": 390,
     "height": 844,
-    "diffPixels": 1,
+    "diffPixels": 31884,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 9.69
   },
   {
     "checkpoint": "mobile_390_section_books",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 120736,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 36.68
   },
   {
     "checkpoint": "mobile_390_section_box",
@@ -307,104 +307,104 @@
     "checkpoint": "mobile_390_section_faq",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 9938,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 3.02
   },
   {
     "checkpoint": "mobile_390_section_flow",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 25548,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 7.76
   },
   {
     "checkpoint": "mobile_390_section_genre",
     "width": 390,
     "height": 844,
-    "diffPixels": 0,
+    "diffPixels": 2915,
     "totalPixels": 329160,
-    "diffPercent": 0
+    "diffPercent": 0.89
   },
   {
     "checkpoint": "tablet_768_faq_opened",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 84714,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 10.77
   },
   {
     "checkpoint": "tablet_768_footer",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 51584,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 6.56
   },
   {
     "checkpoint": "tablet_768_hero_settled",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 171806,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 21.85
   },
   {
     "checkpoint": "tablet_768_menu_open",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 3612,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 0.46
   },
   {
     "checkpoint": "tablet_768_section_benefits",
     "width": 768,
     "height": 1024,
-    "diffPixels": 240,
+    "diffPixels": 101263,
     "totalPixels": 786432,
-    "diffPercent": 0.03
+    "diffPercent": 12.88
   },
   {
     "checkpoint": "tablet_768_section_books",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 219093,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 27.86
   },
   {
     "checkpoint": "tablet_768_section_box",
     "width": 768,
     "height": 1024,
-    "diffPixels": 289217,
+    "diffPixels": 0,
     "totalPixels": 786432,
-    "diffPercent": 36.78
+    "diffPercent": 0
   },
   {
     "checkpoint": "tablet_768_section_faq",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 97111,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 12.35
   },
   {
     "checkpoint": "tablet_768_section_flow",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 52622,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 6.69
   },
   {
     "checkpoint": "tablet_768_section_genre",
     "width": 768,
     "height": 1024,
-    "diffPixels": 0,
+    "diffPixels": 3484,
     "totalPixels": 786432,
-    "diffPercent": 0
+    "diffPercent": 0.44
   }
 ]
