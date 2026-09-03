@@ -555,7 +555,7 @@
           try {
             const user = await window.loginWithRealGoogle();
             if (user) {
-              completeGoogleAuth(user.displayName || user.email.split('@')[0], user.email);
+              completeGoogleAuth(user.displayName || user.email.split('@')[0], user.email, user.photoURL);
               return;
             }
           } catch (err) {
