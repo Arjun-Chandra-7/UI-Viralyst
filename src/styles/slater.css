@@ -2584,3 +2584,275 @@ html[lang="fr"] .lang-en-only {
   }
 }
 
+
+
+/* -----------------------------------------
+ * SECTION 8: VIRALYST MANAGER STUDIO (FIXED READING AREA)
+ * ----------------------------------------- */
+.manager-section {
+  position: relative;
+  background-color: var(--black, #09090B);
+  color: var(--white, #F3F0E9);
+  padding: 6em 0 7em 0;
+  overflow: hidden;
+  z-index: 2;
+}
+.manager-section__inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4em;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
+.manager-section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 44em;
+}
+.manager-section__badge-wrap {
+  margin-bottom: 1.2em;
+}
+.manager-section__badge {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green, #C6FF4A);
+  background: rgba(198, 255, 74, 0.1);
+  padding: 0.4em 1em;
+  border-radius: 2em;
+  border: 1px solid rgba(198, 255, 74, 0.3);
+}
+.manager-section__title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: var(--font-size-heading-l, 5.5em);
+  line-height: 0.96;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white, #F3F0E9);
+  margin: 0 0 0.35em 0;
+}
+.manager-section__desc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: var(--font-size-paragraph-medium, 1.5em);
+  line-height: 1.4;
+  color: #D8D8DE;
+  margin: 0 0 2em 0;
+  max-width: 34em;
+}
+.manager-section__action {
+  margin-bottom: 3em;
+}
+.manager-section__pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2em;
+  width: 100%;
+}
+.manager-pillar {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.9em 1.2em;
+  border-radius: 1.2em;
+  border: 1px solid rgba(216, 216, 222, 0.15);
+}
+.manager-pillar__icon {
+  width: 3.2em;
+  height: 3.2em;
+  background: var(--white, #F3F0E9);
+  border-radius: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.manager-pillar__icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+.manager-pillar__info {
+  display: flex;
+  flex-direction: column;
+}
+.manager-pillar__label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--bright-pink, #FF3B45);
+  letter-spacing: 0.06em;
+}
+.manager-pillar__val {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--white, #F3F0E9);
+}
+
+/* Manager Right Column Artifact */
+.manager-section__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.manager-response-card {
+  width: 100%;
+  max-width: 440px;
+  background: #141824;
+  border: 2.5px solid var(--violet, #6257FF);
+  border-radius: 1.8em;
+  padding: 1.8em;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(98, 87, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+}
+.manager-response-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(216, 216, 222, 0.15);
+  padding-bottom: 1em;
+}
+.manager-response-card__hud {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75em;
+  color: var(--white, #F3F0E9);
+}
+.manager-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green, #C6FF4A);
+  animation: pulseDot 1.6s infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+.manager-score-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--green, #C6FF4A);
+}
+.manager-cue-item {
+  background: rgba(9, 9, 11, 0.65);
+  border: 1px solid rgba(98, 87, 255, 0.3);
+  border-radius: 1em;
+  padding: 1.1em 1.2em;
+}
+.manager-cue-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--cyan, #2997FF);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.3em;
+}
+.manager-cue-title {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--white, #F3F0E9);
+  margin: 0 0 0.3em 0;
+}
+.manager-cue-text {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 0.9em;
+  color: #D8D8DE;
+  margin: 0;
+  line-height: 1.35;
+}
+.manager-response-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8em;
+  border-top: 1px solid rgba(216, 216, 222, 0.15);
+  padding-top: 0.9em;
+  color: #D8D8DE;
+}
+
+@media (max-width: 991px) {
+  .manager-section__inner {
+    grid-template-columns: 1fr;
+    gap: 3em;
+  }
+  .manager-section__title {
+    font-size: 3.5em;
+  }
+  .manager-section__pillars {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------
+ * SECTION 4: DECONSTRUCTION CLEAN OVERLAY FIX
+ * ----------------------------------------- */
+.box__header {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.box__content {
+  pointer-events: none;
+}
+.box__action {
+  pointer-events: auto;
+}
+
+
+
+/* -----------------------------------------
+ * SECTION 4: BOX ELEMENT & CONTENT POLISH
+ * ----------------------------------------- */
+.box__element {
+  background-color: var(--black, #09090B) !important;
+}
+.box__content {
+  pointer-events: none;
+  justify-content: flex-end !important;
+  padding-bottom: 4em !important;
+  padding-top: 0 !important;
+  height: 100% !important;
+}
+.box__content-text-wrap {
+  margin-bottom: 1em !important;
+}
+.box__action {
+  pointer-events: auto;
+  padding-top: 0 !important;
+}
+
+
+
+@media (max-width: 767px) {
+  .manager-section {
+    padding: 4.5em 0 5em 0 !important;
+  }
+  .manager-section__title {
+    font-size: 2.5em !important;
+    line-height: 1.05 !important;
+  }
+  .manager-section__desc {
+    font-size: 1.05em !important;
+    margin-bottom: 1.5em !important;
+  }
+  .manager-section__action {
+    margin-bottom: 2em !important;
+  }
+}
+

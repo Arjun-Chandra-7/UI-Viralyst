@@ -3138,25 +3138,22 @@ function initBoxSequence() {
 
     const element = wrap.querySelector('[data-box-sequence-element]');
     const canvas = element && element.querySelector('[data-box-sequence-canvas]');
-    const text = wrap.querySelector('[data-box-sequence-handwritten-text]');
     const finalText = wrap.querySelector('[data-box-sequence-text-final]');
     const buttons = wrap.querySelectorAll('[data-box-sequence-button]');
 
     if (!element || !canvas) return;
 
-    const startTrigger = wrap.dataset.scrollStart || 'top top';
-    const endTrigger = wrap.dataset.scrollEnd || 'bottom top';
+    const startTrigger = 'top top';
+    const endTrigger = 'bottom bottom';
     const ctx = canvas.getContext('2d');
 
     let currentProgress = 0;
-    let targetProgress = 0;
     let isTicking = false;
     let cachedWidth = 0;
     let cachedHeight = 0;
     let resizeTimer;
 
     function resizeCanvas() {
-      // PERFORMANCE RULE: Cap DPR at 1.5 to guarantee solid 60FPS on 4K/Retina displays
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const width = element.clientWidth;
       const height = element.clientHeight;
@@ -3171,7 +3168,6 @@ function initBoxSequence() {
       }
     }
 
-    // High performance render loop
     function scheduleRender() {
       if (!isTicking && !isDestroyed) {
         isTicking = true;
@@ -3191,343 +3187,386 @@ function initBoxSequence() {
 
       ctx.clearRect(0, 0, cw, ch);
 
-      // Offscreen culling: skip rendering when completely scrolled past
       if (p < -0.05 || p > 1.05) return;
 
-      const s = Math.min(cw / (900 * dpr), ch / (900 * dpr)) * dpr;
+      // Adaptive sizing: generous mobile scale with vertical flow
+      const isMob = cw < 650 * dpr;
+      const s = isMob 
+        ? (cw / (420 * dpr)) * dpr 
+        : Math.min(cw / (1050 * dpr), ch / (820 * dpr)) * dpr;
       const cx = cw / 2;
-      const cy = ch / 2;
-      const rw = 440 * s;
-      const rh = 720 * s;
+      const cy = ch / 2 + 10 * s;
+      const rw = isMob ? Math.min(cw * 0.88, 320 * s) : 320 * s;
+      const rh = isMob ? Math.min(ch * 0.65, 480 * s) : 490 * s;
 
       const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
       const ease = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-      // Soft ambient radial glow
-      const glow = ctx.createRadialGradient(cx, cy, 40 * s, cx, cy, 380 * s);
-      glow.addColorStop(0, 'rgba(98, 87, 255, 0.12)');
+      // Ambient radial glow
+      const glow = ctx.createRadialGradient(cx, cy, 30 * s, cx, cy, 420 * s);
+      glow.addColorStop(0, 'rgba(98, 87, 255, 0.15)');
       glow.addColorStop(1, 'rgba(9, 9, 11, 0)');
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, cw, ch);
 
+      // Section Top HUD
+      ctx.save();
+      ctx.fillStyle = '#C6FF4A';
+      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('[VIRALYST ENGINE: MULTIMODAL SHORT-FORM DECONSTRUCTION]', cx, 40 * s);
+      ctx.restore();
+
       // STATE 01 & 02: p < 0.20 -> Reel Enters, Plays & Freezes
       if (p < 0.20) {
-        // Ground shadow
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(cx, cy + rh / 2 + 25 * s, rw * 0.44, 16 * s, 0, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(9, 9, 11, 0.45)';
+        ctx.ellipse(cx, cy + rh / 2 + 20 * s, rw * 0.44, 14 * s, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fill();
         ctx.restore();
 
         drawReelSolid(cx, cy, rw, rh, s, p);
 
-        // Scanline sweep at freeze
         if (p > 0.10) {
           const scanProgress = (p - 0.10) / 0.10;
           const scanY = cy - rh / 2 + (rh * scanProgress);
           ctx.save();
           ctx.strokeStyle = '#2997FF';
-          ctx.lineWidth = 3 * s;
+          ctx.lineWidth = 3.5 * s;
           ctx.shadowColor = '#2997FF';
-          ctx.shadowBlur = 10 * s;
+          ctx.shadowBlur = 12 * s;
           ctx.beginPath();
-          ctx.moveTo(cx - rw / 2 + 20 * s, scanY);
-          ctx.lineTo(cx + rw / 2 - 20 * s, scanY);
+          ctx.moveTo(cx - rw / 2 + 15 * s, scanY);
+          ctx.lineTo(cx + rw / 2 - 15 * s, scanY);
           ctx.stroke();
           ctx.restore();
         }
       }
-      // STATE 03 - 07: 0.20 <= p < 0.80 -> 5-Layer 3D Separation, Signals & Orbit
-      else if (p < 0.80) {
-        const factor = ease(clamp((p - 0.20) / 0.45, 0, 1));
-        const reorg = clamp((p - 0.60) / 0.20, 0, 1);
+      // STATE 03 - 07: 0.20 <= p < 0.68 -> 5-Layer Adaptive Separation
+      else if (p < 0.68) {
+        const factor = ease(clamp((p - 0.18) / 0.35, 0, 1));
+        const reorg = clamp((p - 0.52) / 0.16, 0, 1);
 
-        // Layer 1: Visual Storyboard Frame (Center-Left)
-        const sbX = cx - (110 * s * factor) + (40 * s * reorg);
-        const sbY = cy + (10 * s * factor);
-        drawVisualLayer(sbX, sbY, rw * 0.74, rh * 0.64, s, factor);
+        let hkW, hkH, hkX, hkY;
+        let sbW, sbH, sbX, sbY;
+        let capW, capH, capX, capY;
+        let auW, auH, auX, auY;
+        let tmW, tmH, tmX, tmY;
 
-        // Layer 2: Audio Spectrogram (Center-Right)
-        const auX = cx + (120 * s * factor) - (30 * s * reorg);
-        const auY = cy - (20 * s * factor);
-        drawAudioLayer(auX, auY, rw * 0.70, rh * 0.44, s, factor);
+        if (isMob) {
+          // Vertical cascading stack on mobile
+          hkW = Math.min(cw * 0.90, 340 * s);
+          hkH = 50 * s;
+          hkX = cx;
+          hkY = cy - 180 * s * factor;
 
-        // Layer 3: Hook Banner (Peels Top)
-        const hkX = cx - (15 * s * factor);
-        const hkY = cy - rh / 2 - (65 * s * factor) + (40 * s * reorg);
-        drawHookLayer(hkX, hkY, rw * 0.90, 95 * s, s, -0.08 * factor, factor);
+          sbW = Math.min(cw * 0.90, 340 * s);
+          sbH = 95 * s;
+          sbX = cx;
+          sbY = cy - 85 * s * factor;
 
-        // Layer 4: Caption Ribbon (Center Floating)
-        const capX = cx + (25 * s * factor);
-        const capY = cy + (45 * s * factor) - (15 * s * reorg);
-        drawCaptionLayer(capX, capY, rw * 0.78, 56 * s, s, 0.05 * factor, factor);
+          capW = Math.min(cw * 0.90, 340 * s);
+          capH = 44 * s;
+          capX = cx;
+          capY = cy + 5 * s * factor;
 
-        // Layer 5: Edit & Cut Timeline (Peels Bottom)
-        const tmX = cx;
-        const tmY = cy + rh / 2 + (55 * s * factor) - (35 * s * reorg);
-        drawEditLayer(tmX, tmY, rw * 0.88, 100 * s, s, factor);
+          auW = Math.min(cw * 0.90, 340 * s);
+          auH = 95 * s;
+          auX = cx;
+          auY = cy + 95 * s * factor;
 
-        // Signal Connection Traces
-        if (factor > 0.35) {
+          tmW = Math.min(cw * 0.90, 340 * s);
+          tmH = 50 * s;
+          tmX = cx;
+          tmY = cy + 185 * s * factor;
+        } else {
+          // Desktop Cruciform Constellation
+          hkW = 340 * s;
+          hkH = 62 * s;
+          hkX = cx;
+          hkY = cy - (185 * s * factor) + (20 * s * reorg);
+
+          sbW = 220 * s;
+          sbH = 260 * s;
+          sbX = cx - (195 * s * factor) + (20 * s * reorg);
+          sbY = cy + (10 * s * factor);
+
+          capW = 260 * s;
+          capH = 46 * s;
+          capX = cx;
+          capY = cy + (12 * s * factor) - (10 * s * reorg);
+
+          auW = 220 * s;
+          auH = 260 * s;
+          auX = cx + (195 * s * factor) - (20 * s * reorg);
+          auY = cy + (10 * s * factor);
+
+          tmW = 340 * s;
+          tmH = 64 * s;
+          tmX = cx;
+          tmY = cy + (200 * s * factor) - (15 * s * reorg);
+        }
+
+        drawHookLayer(hkX, hkY, hkW, hkH, s, factor);
+        drawVisualLayer(sbX, sbY, sbW, sbH, s, factor);
+        drawCaptionLayer(capX, capY, capW, capH, s, factor);
+        drawAudioLayer(auX, auY, auW, auH, s, factor);
+        drawEditLayer(tmX, tmY, tmW, tmH, s, factor);
+
+        // Laser Connection Traces connecting all 5 layers
+        if (factor > 0.3) {
           ctx.save();
           ctx.setLineDash([4 * s, 4 * s]);
-          ctx.strokeStyle = 'rgba(41, 151, 255, ' + (0.45 * factor) + ')';
+          ctx.strokeStyle = 'rgba(41, 151, 255, ' + (0.55 * factor) + ')';
           ctx.lineWidth = 1.5 * s;
           ctx.beginPath();
-          ctx.moveTo(hkX, hkY + 45 * s);
-          ctx.lineTo(sbX, sbY - rh * 0.22);
-          ctx.lineTo(auX, auY - rh * 0.12);
+          ctx.moveTo(hkX, hkY + hkH / 2);
+          ctx.lineTo(sbX + sbW / 2, sbY);
+          ctx.lineTo(capX, capY);
+          ctx.lineTo(auX - auW / 2, auY);
+          ctx.lineTo(tmX, tmY - tmH / 2);
           ctx.stroke();
           ctx.restore();
         }
       }
-      // STATE 08 & 09: p >= 0.80 -> Content Direction Assembly & Settle
+      // STATE 08 & 09: p >= 0.68 -> Assembled Content Direction Blueprint
       else {
-        const assem = ease(clamp((p - 0.80) / 0.18, 0, 1));
-        drawContentDirection(cx, cy, rw * 1.06, rh * 1.02, s, assem);
+        const assem = ease(clamp((p - 0.68) / 0.16, 0, 1));
+        drawContentDirection(cx, cy + 15 * s, rw * 1.12, rh * 0.86, s, assem);
       }
     }
 
-    // Drawing primitives
     function drawReelSolid(x, y, w, h, s, progress) {
       ctx.save();
       ctx.translate(x, y);
 
-      roundRect(ctx, -w / 2, -h / 2, w, h, 30 * s);
+      roundRect(ctx, -w / 2, -h / 2, w, h, 26 * s);
       ctx.fillStyle = '#09090B';
       ctx.fill();
       ctx.strokeStyle = '#F3F0E9';
-      ctx.lineWidth = 4 * s;
+      ctx.lineWidth = 3.5 * s;
       ctx.stroke();
 
-      const vw = w - 32 * s;
-      const vh = h * 0.62;
-      roundRect(ctx, -vw / 2, -h / 2 + 16 * s, vw, vh, 20 * s);
+      const vw = w - 24 * s;
+      const vh = h * 0.65;
+      roundRect(ctx, -vw / 2, -h / 2 + 12 * s, vw, vh, 18 * s);
       ctx.fillStyle = '#141824';
       ctx.fill();
 
       // Camera recording HUD
       ctx.fillStyle = '#FF3B45';
       ctx.beginPath();
-      ctx.arc(-vw / 2 + 30 * s, -h / 2 + 38 * s, 6 * s, 0, Math.PI * 2);
+      ctx.arc(-vw / 2 + 25 * s, -h / 2 + 30 * s, 5 * s, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (12 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('REC  00:02:18', -vw / 2 + 45 * s, -h / 2 + 42 * s);
+      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('REC 00:02:18 • 60FPS', -vw / 2 + 38 * s, -h / 2 + 34 * s);
 
       // Hook overlay
-      roundRect(ctx, -vw / 2 + 14 * s, -h / 2 + 65 * s, vw - 28 * s, 68 * s, 10 * s);
-      ctx.fillStyle = 'rgba(9, 9, 11, 0.85)';
+      roundRect(ctx, -vw / 2 + 12 * s, -h / 2 + 55 * s, vw - 24 * s, 58 * s, 10 * s);
+      ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
       ctx.fill();
       ctx.strokeStyle = '#FF3B45';
       ctx.lineWidth = 2 * s;
       ctx.stroke();
 
       ctx.fillStyle = '#FF3B45';
-      ctx.font = '700 ' + (13 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('[HOOK: CONTRARIAN OPEN]', -vw / 2 + 28 * s, -h / 2 + 92 * s);
+      ctx.font = '700 ' + (12 * s) + 'px "Bricolage Grotesque", sans-serif';
+      ctx.fillText('[HOOK: CONTRARIAN OPEN]', -vw / 2 + 24 * s, -h / 2 + 78 * s);
       ctx.fillStyle = '#F3F0E9';
-      ctx.font = (13 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Why 99% of hooks fail in 2s', -vw / 2 + 28 * s, -h / 2 + 116 * s);
+      ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
+      ctx.fillText('Why 99% of short-form hooks fail in 2s', -vw / 2 + 24 * s, -h / 2 + 98 * s);
 
       // Waveform
-      for (let i = 0; i < 20; i++) {
-        const bh = (18 + 70 * Math.sin(i * 0.45) ** 2) * s;
-        const bx = -vw / 2 + 35 * s + i * 16 * s;
-        roundRect(ctx, bx, -h / 2 + 235 * s - bh / 2, 7 * s, bh, 3 * s);
+      for (let i = 0; i < 18; i++) {
+        const bh = (16 + 55 * Math.sin(i * 0.48) ** 2) * s;
+        const bx = -vw / 2 + 30 * s + i * 14 * s;
+        roundRect(ctx, bx, -h / 2 + 205 * s - bh / 2, 6 * s, bh, 2.5 * s);
         ctx.fillStyle = '#2997FF';
         ctx.fill();
       }
 
       // Bottom Scrubber
-      const sy = -h / 2 + vh - 20 * s;
+      const sy = -h / 2 + vh - 16 * s;
       ctx.strokeStyle = '#404555';
-      ctx.lineWidth = 4 * s;
+      ctx.lineWidth = 3.5 * s;
       ctx.beginPath();
-      ctx.moveTo(-vw / 2 + 20 * s, sy);
-      ctx.lineTo(vw / 2 - 20 * s, sy);
+      ctx.moveTo(-vw / 2 + 16 * s, sy);
+      ctx.lineTo(vw / 2 - 16 * s, sy);
       ctx.stroke();
 
       ctx.strokeStyle = '#C6FF4A';
       ctx.beginPath();
-      ctx.moveTo(-vw / 2 + 20 * s, sy);
-      ctx.lineTo(-vw / 2 + 180 * s, sy);
+      ctx.moveTo(-vw / 2 + 16 * s, sy);
+      ctx.lineTo(-vw / 2 + 150 * s, sy);
       ctx.stroke();
 
-      // Lower brief card
-      const bw = w - 32 * s;
-      const bh = h - vh - 48 * s;
-      roundRect(ctx, -bw / 2, h / 2 - bh - 16 * s, bw, bh, 20 * s);
+      // Lower brief info
+      const bw = w - 24 * s;
+      const bh = h - vh - 36 * s;
+      roundRect(ctx, -bw / 2, h / 2 - bh - 12 * s, bw, bh, 16 * s);
       ctx.fillStyle = '#F3F0E9';
       ctx.fill();
 
       ctx.fillStyle = '#09090B';
-      ctx.font = '700 ' + (16 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('SIGNAL CORE DECONSTRUCTION', -bw / 2 + 20 * s, h / 2 - bh + 24 * s);
+      ctx.font = '700 ' + (14 * s) + 'px "Bricolage Grotesque", sans-serif';
+      ctx.fillText('SIGNAL CORE ARCHETYPE', -bw / 2 + 16 * s, h / 2 - bh + 22 * s);
 
       ctx.fillStyle = '#555560';
-      ctx.font = (13 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Multimodal analysis: Visual • Hook • Audio • Cuts', -bw / 2 + 20 * s, h / 2 - bh + 50 * s);
+      ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
+      ctx.fillText('Analyzing Visual • Hook • Captions • Cadence', -bw / 2 + 16 * s, h / 2 - bh + 44 * s);
+      ctx.restore();
+    }
+
+    function drawHookLayer(x, y, w, h, s, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(255, 59, 69, 0.35)';
+      ctx.shadowBlur = 14 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 14 * s);
+      ctx.fillStyle = '#09090B';
+      ctx.fill();
+      ctx.strokeStyle = '#FF3B45';
+      ctx.lineWidth = 2.5 * s;
+      ctx.stroke();
+
+      ctx.fillStyle = '#FF3B45';
+      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[01 / HOOK SCRIPT]', -w / 2 + 16 * s, -h / 2 + 24 * s);
+
+      ctx.fillStyle = '#F3F0E9';
+      ctx.font = '600 ' + (13 * s) + 'px "Bricolage Grotesque", sans-serif';
+      ctx.fillText('"Stop writing hooks like it is 2023."', -w / 2 + 16 * s, -h / 2 + 46 * s);
       ctx.restore();
     }
 
     function drawVisualLayer(x, y, w, h, s, f) {
       ctx.save();
       ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-      ctx.shadowBlur = 18 * s * f;
+      ctx.shadowColor = 'rgba(98, 87, 255, 0.3)';
+      ctx.shadowBlur = 16 * s * f;
 
-      roundRect(ctx, -w / 2, -h / 2, w, h, 18 * s);
+      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
       ctx.fillStyle = '#141826';
       ctx.fill();
       ctx.strokeStyle = '#6257FF';
-      ctx.lineWidth = 3 * s;
+      ctx.lineWidth = 2.5 * s;
       ctx.stroke();
 
-      // Tag
-      roundRect(ctx, -w / 2 + 15 * s, -h / 2 + 15 * s, 140 * s, 26 * s, 6 * s);
       ctx.fillStyle = '#6257FF';
-      ctx.fill();
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[VISUAL CUES]', -w / 2 + 24 * s, -h / 2 + 32 * s);
+      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[02 / VISUAL CUES]', -w / 2 + 16 * s, -h / 2 + 24 * s);
 
-      const ph = (h - 75 * s) / 3;
+      const ph = (h - 55 * s) / 3;
       const panels = [
         { t: '00:00 - THE INTERRUPT', c: '#FF3B45' },
         { t: '00:01 - TACTILE PROOF', c: '#2997FF' },
         { t: '00:03 - CONTEXT PIVOT', c: '#C6FF4A' }
       ];
       for (let i = 0; i < 3; i++) {
-        const py = -h / 2 + 50 * s + i * (ph + 6 * s);
-        roundRect(ctx, -w / 2 + 15 * s, py, w - 30 * s, ph, 8 * s);
+        const py = -h / 2 + 38 * s + i * (ph + 5 * s);
+        roundRect(ctx, -w / 2 + 12 * s, py, w - 24 * s, ph, 8 * s);
         ctx.fillStyle = '#0B0E17';
         ctx.fill();
         ctx.strokeStyle = panels[i].c;
-        ctx.lineWidth = 1.5 * s;
+        ctx.lineWidth = 1.2 * s;
         ctx.stroke();
 
         ctx.fillStyle = panels[i].c;
-        ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(panels[i].t, -w / 2 + 25 * s, py + ph / 2 + 4 * s);
+        ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText(panels[i].t, -w / 2 + 18 * s, py + ph / 2 + 4 * s);
       }
       ctx.restore();
     }
 
-    function drawAudioLayer(x, y, w, h, s, f) {
+    function drawCaptionLayer(x, y, w, h, s, f) {
       ctx.save();
       ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-      ctx.shadowBlur = 18 * s * f;
+      ctx.shadowColor = 'rgba(255, 40, 120, 0.35)';
+      ctx.shadowBlur = 14 * s * f;
 
-      roundRect(ctx, -w / 2, -h / 2, w, h, 18 * s);
-      ctx.fillStyle = '#111422';
-      ctx.fill();
-      ctx.strokeStyle = '#2997FF';
-      ctx.lineWidth = 3 * s;
-      ctx.stroke();
-
-      ctx.fillStyle = '#2997FF';
-      ctx.font = '700 ' + (13 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('AUDIO FREQUENCY', -w / 2 + 20 * s, -h / 2 + 32 * s);
-
-      ctx.fillStyle = '#8590A8';
-      ctx.font = '500 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('Cadence: 142 BPM', -w / 2 + 20 * s, -h / 2 + 52 * s);
-
-      const barCount = 18;
-      const bw = 8 * s;
-      const bg = 5 * s;
-      const startX = -w / 2 + 20 * s;
-      for (let i = 0; i < barCount; i++) {
-        const bh = (20 + 80 * Math.sin(i * 0.4 + f) ** 2) * s;
-        roundRect(ctx, startX + i * (bw + bg), h / 2 - 28 * s - bh, bw, bh, 3 * s);
-        ctx.fillStyle = i % 2 === 0 ? '#2997FF' : '#C6FF4A';
-        ctx.fill();
-      }
-      ctx.restore();
-    }
-
-    function drawHookLayer(x, y, w, h, s, rot, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rot);
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
-      ctx.shadowBlur = 20 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
-      ctx.fillStyle = '#09090B';
-      ctx.fill();
-      ctx.strokeStyle = '#FF3B45';
-      ctx.lineWidth = 3.5 * s;
-      ctx.stroke();
-
-      roundRect(ctx, -w / 2 + 18 * s, -h / 2 + 16 * s, 160 * s, 26 * s, 6 * s);
-      ctx.fillStyle = '#FF3B45';
-      ctx.fill();
-      ctx.fillStyle = '#09090B';
-      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[EXTRACTED HOOK]', -w / 2 + 28 * s, -h / 2 + 33 * s);
-
-      ctx.fillStyle = '#F3F0E9';
-      ctx.font = '700 ' + (15 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('"Why 99% of short-form hooks fail"', -w / 2 + 18 * s, -h / 2 + 68 * s);
-      ctx.restore();
-    }
-
-    function drawCaptionLayer(x, y, w, h, s, rot, f) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rot);
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
-      ctx.shadowBlur = 15 * s * f;
-
-      roundRect(ctx, -w / 2, -h / 2, w, h, 14 * s);
-      ctx.fillStyle = 'rgba(9, 9, 11, 0.95)';
+      roundRect(ctx, -w / 2, -h / 2, w, h, 12 * s);
+      ctx.fillStyle = 'rgba(15, 12, 22, 0.95)';
       ctx.fill();
       ctx.strokeStyle = '#FF2878';
       ctx.lineWidth = 2 * s;
       ctx.stroke();
 
       ctx.fillStyle = '#FF2878';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[KINETIC CAPTION]', -w / 2 + 18 * s, -h / 2 + 24 * s);
+      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[03 / KINETIC CAPTIONS]', -w / 2 + 14 * s, -h / 2 + 18 * s);
 
       ctx.fillStyle = '#F3F0E9';
-      ctx.font = '500 ' + (13 * s) + 'px "Instrument Sans", sans-serif';
-      ctx.fillText('Dynamic word-by-word reveal aligned to audio', -w / 2 + 18 * s, -h / 2 + 44 * s);
+      ctx.font = '500 ' + (12 * s) + 'px "Instrument Sans", sans-serif';
+      ctx.fillText('Dynamic word-by-word reveal aligned to speech', -w / 2 + 14 * s, -h / 2 + 36 * s);
+      ctx.restore();
+    }
+
+    function drawAudioLayer(x, y, w, h, s, f) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.shadowColor = 'rgba(41, 151, 255, 0.3)';
+      ctx.shadowBlur = 16 * s * f;
+
+      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
+      ctx.fillStyle = '#111422';
+      ctx.fill();
+      ctx.strokeStyle = '#2997FF';
+      ctx.lineWidth = 2.5 * s;
+      ctx.stroke();
+
+      ctx.fillStyle = '#2997FF';
+      ctx.font = '700 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[04 / AUDIO FREQUENCY]', -w / 2 + 16 * s, -h / 2 + 24 * s);
+
+      ctx.fillStyle = '#8590A8';
+      ctx.font = '500 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('Cadence: 142 BPM Speech Sync', -w / 2 + 16 * s, -h / 2 + 42 * s);
+
+      const barCount = 15;
+      const bw = (w - 36 * s) / (barCount * 1.5);
+      const bg = bw * 0.5;
+      const startX = -w / 2 + 18 * s;
+      for (let i = 0; i < barCount; i++) {
+        const maxBh = h * 0.42;
+        const bh = (8 * s + maxBh * Math.sin(i * 0.45 + f) ** 2);
+        roundRect(ctx, startX + i * (bw + bg), h / 2 - 12 * s - bh, bw, bh, 2 * s);
+        ctx.fillStyle = i % 2 === 0 ? '#2997FF' : '#C6FF4A';
+        ctx.fill();
+      }
       ctx.restore();
     }
 
     function drawEditLayer(x, y, w, h, s, f) {
       ctx.save();
       ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-      ctx.shadowBlur = 18 * s * f;
+      ctx.shadowColor = 'rgba(198, 255, 74, 0.3)';
+      ctx.shadowBlur = 14 * s * f;
 
-      roundRect(ctx, -w / 2, -h / 2, w, h, 16 * s);
+      roundRect(ctx, -w / 2, -h / 2, w, h, 14 * s);
       ctx.fillStyle = '#0C0F1A';
       ctx.fill();
       ctx.strokeStyle = '#C6FF4A';
-      ctx.lineWidth = 3 * s;
+      ctx.lineWidth = 2.5 * s;
       ctx.stroke();
 
       ctx.fillStyle = '#C6FF4A';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[PACING & CUT VELOCITY]', -w / 2 + 20 * s, -h / 2 + 26 * s);
+      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[05 / PACING & CUT VELOCITY]', -w / 2 + 16 * s, -h / 2 + 20 * s);
 
       const cuts = ['[0.0s HOOK]', '[0.8s CUT 1]', '[1.6s CUT 2]', '[2.4s PIVOT]'];
-      const cxStep = (w - 40 * s) / 4;
+      const cxStep = (w - 32 * s) / 4;
       for (let i = 0; i < 4; i++) {
-        const bx = -w / 2 + 20 * s + i * cxStep;
-        roundRect(ctx, bx, -h / 2 + 40 * s, cxStep - 8 * s, 26 * s, 6 * s);
+        const bx = -w / 2 + 16 * s + i * cxStep;
+        roundRect(ctx, bx, -h / 2 + 30 * s, cxStep - 6 * s, 24 * s, 5 * s);
         ctx.fillStyle = '#161C2C';
         ctx.fill();
         ctx.fillStyle = '#F3F0E9';
-        ctx.font = '500 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(cuts[i], bx + 6 * s, -h / 2 + 57 * s);
+        ctx.font = '500 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText(cuts[i], bx + 4 * s, -h / 2 + 45 * s);
       }
       ctx.restore();
     }
@@ -3535,38 +3574,38 @@ function initBoxSequence() {
     function drawContentDirection(x, y, w, h, s, assem) {
       ctx.save();
       ctx.translate(x, y);
-      ctx.shadowColor = 'rgba(98, 87, 255, ' + (0.45 * assem) + ')';
-      ctx.shadowBlur = 30 * s * assem;
+      ctx.shadowColor = 'rgba(98, 87, 255, ' + (0.5 * assem) + ')';
+      ctx.shadowBlur = 25 * s * assem;
 
-      roundRect(ctx, -w / 2, -h / 2, w, h, 28 * s);
+      roundRect(ctx, -w / 2, -h / 2, w, h, 24 * s);
       ctx.fillStyle = '#F3F0E9';
       ctx.fill();
       ctx.strokeStyle = '#09090B';
-      ctx.lineWidth = 5 * s;
+      ctx.lineWidth = 4 * s;
       ctx.stroke();
 
       // Header
-      roundRect(ctx, -w / 2 + 18 * s, -h / 2 + 18 * s, w - 36 * s, 85 * s, 16 * s);
+      roundRect(ctx, -w / 2 + 14 * s, -h / 2 + 14 * s, w - 28 * s, 68 * s, 14 * s);
       ctx.fillStyle = '#09090B';
       ctx.fill();
 
       ctx.fillStyle = '#C6FF4A';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('[VIRALYST CONTENT DIRECTION]', -w / 2 + 36 * s, -h / 2 + 45 * s);
+      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('[VIRALYST CONTENT DIRECTION]', -w / 2 + 28 * s, -h / 2 + 36 * s);
 
       ctx.fillStyle = '#F3F0E9';
-      ctx.font = '700 ' + (22 * s) + 'px "Bricolage Grotesque", sans-serif';
-      ctx.fillText('THE CONTRARIAN OPEN', -w / 2 + 36 * s, -h / 2 + 76 * s);
+      ctx.font = '700 ' + (18 * s) + 'px "Bricolage Grotesque", sans-serif';
+      ctx.fillText('THE CONTRARIAN OPEN', -w / 2 + 28 * s, -h / 2 + 62 * s);
 
-      roundRect(ctx, w / 2 - 160 * s, -h / 2 + 35 * s, 125 * s, 30 * s, 8 * s);
+      roundRect(ctx, w / 2 - 130 * s, -h / 2 + 26 * s, 105 * s, 26 * s, 6 * s);
       ctx.fillStyle = '#6257FF';
       ctx.fill();
       ctx.fillStyle = '#F3F0E9';
-      ctx.font = '600 ' + (11 * s) + 'px "IBM Plex Mono", monospace';
-      ctx.fillText('READY TO SHOOT', w / 2 - 150 * s, -h / 2 + 55 * s);
+      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.fillText('READY TO SHOOT', w / 2 - 120 * s, -h / 2 + 43 * s);
 
       // 4 Operational Direction Modules
-      const secH = (h - 160 * s) / 4;
+      const secH = (h - 130 * s) / 4;
       const specs = [
         { label: '01 / HOOK SCRIPT', desc: 'Why 99% of short-form hooks fail in the first 2 seconds.', badge: 'CONTRARIAN', col: '#FF3B45' },
         { label: '02 / FRAME PACING', desc: '0.8s micro-cuts with tactile visual proof before dialogue.', badge: 'VELOCITY', col: '#6257FF' },
@@ -3575,25 +3614,25 @@ function initBoxSequence() {
       ];
 
       for (let i = 0; i < 4; i++) {
-        const sy = -h / 2 + 120 * s + i * (secH + 8 * s);
-        roundRect(ctx, -w / 2 + 18 * s, sy, w - 36 * s, secH, 12 * s);
+        const sy = -h / 2 + 96 * s + i * (secH + 6 * s);
+        roundRect(ctx, -w / 2 + 14 * s, sy, w - 28 * s, secH, 10 * s);
         ctx.fillStyle = '#E8E4DA';
         ctx.fill();
 
         ctx.fillStyle = specs[i].col;
-        ctx.font = '700 ' + (12 * s) + 'px "Bricolage Grotesque", sans-serif';
-        ctx.fillText(specs[i].label, -w / 2 + 36 * s, sy + 24 * s);
+        ctx.font = '700 ' + (11 * s) + 'px "Bricolage Grotesque", sans-serif';
+        ctx.fillText(specs[i].label, -w / 2 + 26 * s, sy + 20 * s);
 
         ctx.fillStyle = '#09090B';
-        ctx.font = (14 * s) + 'px "Instrument Sans", sans-serif';
-        ctx.fillText(specs[i].desc, -w / 2 + 36 * s, sy + 50 * s);
+        ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
+        ctx.fillText(specs[i].desc, -w / 2 + 26 * s, sy + 42 * s);
 
-        roundRect(ctx, w / 2 - 135 * s, sy + 14 * s, 100 * s, 22 * s, 6 * s);
+        roundRect(ctx, w / 2 - 110 * s, sy + 10 * s, 85 * s, 20 * s, 5 * s);
         ctx.fillStyle = '#09090B';
         ctx.fill();
         ctx.fillStyle = specs[i].col;
-        ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
-        ctx.fillText(specs[i].badge, w / 2 - 125 * s, sy + 29 * s);
+        ctx.font = '600 ' + (9 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillText(specs[i].badge, w / 2 - 102 * s, sy + 23 * s);
       }
       ctx.restore();
     }
@@ -3625,36 +3664,6 @@ function initBoxSequence() {
 
     resizeCanvas();
     window.addEventListener('resize', handleResize);
-
-    const tl = gsap.timeline({ paused: true });
-
-    if (text) {
-      const textSplit = new SplitText(text, {
-        type: 'words, chars',
-        tag: 'span',
-        charsClass: 'split-char',
-        wordsClass: 'split-word'
-      });
-
-      gsap.set(textSplit.words, { display: 'inline-block' });
-      gsap.set(textSplit.chars, {
-        display: 'inline-block',
-        opacity: 0,
-        rotate: 15,
-        x: '-0.2em',
-        y: '0.4em'
-      });
-
-      tl.to(textSplit.chars, {
-        opacity: 1,
-        rotate: 0,
-        x: '0em',
-        y: '0em',
-        ease: 'power3.out',
-        duration: 0.5,
-        stagger: 0.012
-      });
-    }
 
     const finalTimeline = gsap.timeline({ paused: true });
 
@@ -3697,37 +3706,19 @@ function initBoxSequence() {
       );
     }
 
-    let textState = 'before';
     let finalState = 'before';
 
     const st = ScrollTrigger.create({
       trigger: wrap,
       start: startTrigger,
       end: endTrigger,
-      scrub: 0.5, // Smooth scrubbing
+      scrub: 0.3,
       onUpdate: (self) => {
         if (isDestroyed) return;
         currentProgress = self.progress;
         scheduleRender();
 
-        if (self.progress >= 0.65) {
-          if (textState !== 'reversed') {
-            tl.timeScale(3).reverse();
-            textState = 'reversed';
-          }
-        } else if (self.progress >= 0.28) {
-          if (textState !== 'played') {
-            tl.timeScale(1.5).play();
-            textState = 'played';
-          }
-        } else {
-          if (textState !== 'before') {
-            tl.timeScale(3).reverse();
-            textState = 'before';
-          }
-        }
-
-        if (self.progress >= 0.82) {
+        if (self.progress >= 0.68) {
           if (finalState !== 'played') {
             finalTimeline.timeScale(1.25).play();
             finalState = 'played';
@@ -3747,7 +3738,6 @@ function initBoxSequence() {
       isDestroyed = true;
       window.removeEventListener('resize', handleResize);
       st.kill();
-      tl.kill();
       finalTimeline.kill();
     });
   });
@@ -3793,7 +3783,7 @@ function initHeroSequence() {
       const staticSrc = canvas.dataset.staticSrc;
       const filetype = canvas.dataset.filetype || 'webp';
       const startTrigger = wrap.dataset.scrollStart || 'top bottom';
-      const endTrigger = wrap.dataset.scrollEnd || 'bottom top';
+      const endTrigger = 'bottom bottom';
       const fps = parseInt(canvas.dataset.fps, 10) || 24;
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -5730,4 +5720,27 @@ document.fonts.ready.then(function () {
 
 // /INIT FUNCTION & LOAD
 
+
+
+
+// Global smooth scroll for in-page hash anchors
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  if (!href || href === '#' || href === '#login') return;
+  try {
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      if (window.lenis) {
+        window.lenis.scrollTo(target, { offset: -60, duration: 1.2 });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } catch (err) {
+    // Ignore invalid selectors
+  }
+});
 
