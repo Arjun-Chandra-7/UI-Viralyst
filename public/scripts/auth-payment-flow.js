@@ -1,6 +1,7 @@
 /**
  * Viralyst Authentication, Plans, & PhonePe Payment Flow
  * Consistent with Viralyst / Aardvark Design System
+ * Currency: Strictly Indian Rupees (₹ / Rs.)
  */
 
 (function () {
@@ -12,43 +13,47 @@
   let selectedPlan = null;
   let qrInterval = null;
 
-  // Plan catalog (USD and INR)
+  // Plan catalog (Strictly Rupees ₹)
   const PLANS = {
     free: {
       id: 'free',
       name: 'Free Explorer',
-      priceUsd: 0,
-      priceInr: 0,
+      price: 0,
+      priceFormatted: '₹0',
+      period: '/ forever',
       reelsPerMonth: 3,
       badge: 'FREE EXPLORER',
-      features: ['3 Reels analysis / month', 'Spoken hook syntax analysis', 'Standard pattern viewer', 'Community blueprints']
+      features: ['3 Reels analysis / month', 'Spoken hook syntax breakdown', 'Standard format patterns', 'Community blueprints']
     },
     go: {
       id: 'go',
-      name: 'Go Subscription',
-      priceUsd: 1.50,
-      priceInr: 120,
+      name: 'Go',
+      price: 1.50,
+      priceFormatted: '₹1.50',
+      period: '/ month',
       reelsPerMonth: 10,
-      badge: 'GO SUBSCRIPTION',
-      features: ['10 reels a month', 'Professional dashboard', 'Spoken & audio cadence matching', 'Exportable script blueprints']
+      badge: 'GO TIER',
+      features: ['10 reels a month', 'Professional dashboard', 'Spoken & audio cadence sync', 'Exportable shoot briefs']
     },
     plus: {
       id: 'plus',
-      name: 'Plus Subscription',
-      priceUsd: 5.00,
-      priceInr: 400,
+      name: 'Plus',
+      price: 5.00,
+      priceFormatted: '₹5.00',
+      period: '/ month',
       reelsPerMonth: 40,
       badge: '★ MOST POPULAR',
-      features: ['40 reels a month', 'Professional dashboard', 'Multi-track V-Lens signal decomposition', 'Acoustic cadence & micro-cut analysis', 'Custom brand profile learning']
+      features: ['40 reels a month', 'Professional dashboard', 'Multi-track V-Lens decomposition', 'Acoustic cadence & micro-cut timing', 'Custom brand profile learning']
     },
     pro: {
       id: 'pro',
-      name: 'Pro Subscription',
-      priceUsd: 20.00,
-      priceInr: 1600,
+      name: 'Pro',
+      price: 20.00,
+      priceFormatted: '₹20.00',
+      period: '/ month',
       reelsPerMonth: 60,
       badge: 'PRO MULTI-ACCOUNT',
-      features: ['Manage up to 3 accounts', '60 reels a month', 'Professional dashboard for each brand', 'Priority autonomous Manager direction', 'Dedicated format engineering']
+      features: ['Manage up to 3 accounts', '60 reels a month', 'Professional dashboard per account', 'Dedicated autonomous Manager', 'Priority format engineering']
     }
   };
 
@@ -110,7 +115,7 @@
         </div>
       </div>
 
-      <!-- 2. Plans & Pricing Modal -->
+      <!-- 2. Plans & Pricing Modal (Rs / ₹) -->
       <div id="v-plan-modal" class="v-modal-overlay">
         <div class="v-modal-container v-modal-container--wide">
           <button type="button" class="v-modal-close" data-close-modal="" aria-label="Close modal">
@@ -132,7 +137,7 @@
               <div>
                 <span class="v-plan-badge" style="background: rgba(197, 188, 255, 0.3); color: #32225F;">[FREE PLAN]</span>
                 <h3 class="v-plan-title">Free Explorer</h3>
-                <div class="v-plan-price">$0 <span>/ forever</span></div>
+                <div class="v-plan-price">₹0 <span>/ forever</span></div>
                 <ul class="v-plan-features">
                   <li><span class="v-plan-check">&check;</span> 3 Reels analysis / month</li>
                   <li><span class="v-plan-check">&check;</span> Spoken hook syntax breakdown</li>
@@ -150,7 +155,7 @@
               <div>
                 <span class="v-plan-badge" style="background: rgba(255, 81, 70, 0.15); color: #FF5146;">[GO TIER]</span>
                 <h3 class="v-plan-title">Go</h3>
-                <div class="v-plan-price">$1.50 <span>/ month (₹120)</span></div>
+                <div class="v-plan-price">₹1.50 <span>/ month</span></div>
                 <ul class="v-plan-features">
                   <li><span class="v-plan-check">&check;</span> <strong>10 reels a month</strong></li>
                   <li><span class="v-plan-check">&check;</span> <strong>Professional dashboard</strong></li>
@@ -159,7 +164,7 @@
                 </ul>
               </div>
               <button type="button" class="v-plan-action-btn v-plan-action-btn--go" data-choose-plan="go">
-                Select Go &rarr;
+                Select Go (₹1.50) &rarr;
               </button>
             </div>
 
@@ -168,7 +173,7 @@
               <div>
                 <span class="v-plan-badge v-plan-badge--popular">★ MOST POPULAR</span>
                 <h3 class="v-plan-title">Plus</h3>
-                <div class="v-plan-price">$5.00 <span>/ month (₹400)</span></div>
+                <div class="v-plan-price">₹5.00 <span>/ month</span></div>
                 <ul class="v-plan-features">
                   <li><span class="v-plan-check">&check;</span> <strong>40 reels a month</strong></li>
                   <li><span class="v-plan-check">&check;</span> <strong>Professional dashboard</strong></li>
@@ -178,7 +183,7 @@
                 </ul>
               </div>
               <button type="button" class="v-plan-action-btn v-plan-action-btn--plus" data-choose-plan="plus">
-                Select Plus &rarr;
+                Select Plus (₹5.00) &rarr;
               </button>
             </div>
 
@@ -187,7 +192,7 @@
               <div>
                 <span class="v-plan-badge" style="background: rgba(49, 92, 255, 0.25); color: #C5BCFF;">[MULTI-ACCOUNT]</span>
                 <h3 class="v-plan-title" style="color: #FFFFFF;">Pro</h3>
-                <div class="v-plan-price" style="color: #FFFFFF;">$20.00 <span>/ month (₹1,600)</span></div>
+                <div class="v-plan-price" style="color: #FFFFFF;">₹20.00 <span>/ month</span></div>
                 <ul class="v-plan-features" style="color: rgba(255,255,255,0.85);">
                   <li><span class="v-plan-check">&check;</span> <strong>Manage up to 3 accounts</strong></li>
                   <li><span class="v-plan-check">&check;</span> <strong>60 reels a month</strong></li>
@@ -197,14 +202,14 @@
                 </ul>
               </div>
               <button type="button" class="v-plan-action-btn v-plan-action-btn--pro" data-choose-plan="pro">
-                Select Pro &rarr;
+                Select Pro (₹20.00) &rarr;
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 3. PhonePe Payment Gateway Modal -->
+      <!-- 3. PhonePe Payment Gateway Modal (Rs / ₹) -->
       <div id="v-phonepe-modal" class="v-modal-overlay">
         <div class="v-modal-container phonepe-modal">
           <button type="button" class="v-modal-close" style="color: #FFF;" data-close-modal="" aria-label="Close modal">
@@ -233,7 +238,7 @@
               </div>
               <div class="phonepe-order-amount">
                 <span>Total Due</span>
-                <span id="phonepe-amount-display">₹400 ($5.00)</span>
+                <span id="phonepe-amount-display">₹5.00</span>
               </div>
             </div>
 
@@ -247,7 +252,6 @@
             <div id="phonepe-view-qr" class="phonepe-qr-wrap">
               <div class="phonepe-qr-box">
                 <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Clean realistic SVG QR pattern -->
                   <rect width="120" height="120" fill="white"/>
                   <path fill="#5F259F" d="M10 10h30v30H10V10zm6 6v18h18V16H16zm4 4h10v10H20V20zM80 10h30v30H80V10zm6 6v18h18V16H86zm4 4h10v10H90V20zM10 80h30v30H10V80zm6 6v18h18V86H16zm4 4h10v10H20V90z"/>
                   <path fill="#5F259F" d="M50 10h10v10H50zm10 10h10v10H60zm-10 10h10v10H50zm30 10h10v10H80zm-20 0h10v10H60zm20 10h10v10H80zm10-10h10v10H90zm10 10h10v10h-10zm-60 10h10v10H40zm10 10h10v10H50zm10-10h10v10H60zm10 10h10v10H70zm10-10h10v10H80zm20 0h10v10h-10zm-50 20h10v10H50zm10 10h10v10H60zm20-10h10v10H80zm20 10h10v10h-10z"/>
@@ -279,7 +283,7 @@
             </div>
 
             <button type="button" id="phonepe-submit-btn" class="phonepe-pay-btn">
-              <span>Pay & Activate Subscription</span>
+              <span id="phonepe-pay-btn-label">Pay ₹5.00 with PhonePe</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
 
@@ -290,7 +294,7 @@
         </div>
       </div>
 
-      <!-- 4. Setup View Modal / Screen (Minimal & Blank Canvas as requested) -->
+      <!-- 4. Setup View Modal / Screen (Minimal & Blank Canvas) -->
       <div id="v-setup-modal" class="v-modal-overlay">
         <div class="v-modal-container v-modal-container--wide" style="min-height: 85vh; display: flex; flex-direction: column; justify-content: space-between;">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(11, 11, 15, 0.08); padding-bottom: 1.2em;">
@@ -312,7 +316,7 @@
             </div>
           </div>
 
-          <!-- Blank Setup Canvas as requested by user -->
+          <!-- Blank Setup Canvas -->
           <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3em 1em; text-align: center;">
             <div style="margin-bottom: 1.5em;">
               <span style="font-family: var(--font-mono); font-size: 11px; color: var(--coral-red); font-weight: 700; letter-spacing: 0.08em;">[STEP 01: WORKSPACE SETUP]</span>
@@ -368,14 +372,11 @@
   function handleLoginClick(e) {
     if (e) e.preventDefault();
 
-    // If user is already verified and has subscription, go straight to setup
     if (currentUser && currentSubscription) {
       showSetupScreen();
     } else if (currentUser) {
-      // User is verified, show plans
       showPlanModal();
     } else {
-      // Show Google verification
       openModal('v-auth-modal');
     }
   }
@@ -417,19 +418,18 @@
     selectedPlan = plan;
 
     if (plan.id === 'free') {
-      // Free plan directly activates
       currentSubscription = {
         planId: 'free',
         planName: plan.name,
         reelsPerMonth: plan.reelsPerMonth,
         amountPaid: 0,
+        currency: 'INR',
         status: 'active',
         activatedAt: new Date().toISOString()
       };
       localStorage.setItem('viralyst_subscription', JSON.stringify(currentSubscription));
       showSetupScreen();
     } else {
-      // Open PhonePe Modal
       openPhonePe(plan);
     }
   }
@@ -437,10 +437,12 @@
   function openPhonePe(plan) {
     const planNameEl = document.getElementById('phonepe-plan-name');
     const amountEl = document.getElementById('phonepe-amount-display');
-    if (planNameEl) planNameEl.textContent = plan.name + ' (' + plan.reelsPerMonth + ' Reels/mo)';
-    if (amountEl) amountEl.textContent = '₹' + plan.priceInr + ' ($' + plan.priceUsd.toFixed(2) + ')';
+    const btnLabelEl = document.getElementById('phonepe-pay-btn-label');
 
-    // Start 5 minute timer
+    if (planNameEl) planNameEl.textContent = plan.name + ' (' + plan.reelsPerMonth + ' Reels/mo)';
+    if (amountEl) amountEl.textContent = plan.priceFormatted;
+    if (btnLabelEl) btnLabelEl.textContent = 'Pay ' + plan.priceFormatted + ' with PhonePe';
+
     startPhonePeTimer();
     openModal('v-phonepe-modal');
   }
@@ -471,7 +473,7 @@
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Authorizing with PhonePe...</span>';
+      submitBtn.innerHTML = '<span>Authorizing ₹' + (selectedPlan ? selectedPlan.price.toFixed(2) : '5.00') + ' with PhonePe...</span>';
     }
     if (statusEl) {
       statusEl.style.display = 'block';
@@ -488,9 +490,9 @@
 
       currentSubscription = {
         planId: selectedPlan ? selectedPlan.id : 'plus',
-        planName: selectedPlan ? selectedPlan.name : 'Plus Subscription',
+        planName: selectedPlan ? selectedPlan.name : 'Plus',
         reelsPerMonth: selectedPlan ? selectedPlan.reelsPerMonth : 40,
-        amountPaid: selectedPlan ? selectedPlan.priceInr : 400,
+        amountPaid: selectedPlan ? selectedPlan.price : 5.00,
         currency: 'INR',
         gateway: 'PhonePe',
         transactionId: txnId,
@@ -511,7 +513,7 @@
     const avatarEl = document.getElementById('v-setup-avatar');
 
     if (currentSubscription && badgeEl) {
-      badgeEl.textContent = (currentSubscription.planName || 'PLUS PLAN').toUpperCase() + ' ACTIVE • ' + currentSubscription.reelsPerMonth + ' REELS/MO';
+      badgeEl.textContent = (currentSubscription.planName || 'PLUS').toUpperCase() + ' PLAN ACTIVE • ' + currentSubscription.reelsPerMonth + ' REELS/MO';
     }
     if (currentUser && emailEl) {
       emailEl.textContent = currentUser.email || 'user@gmail.com';
@@ -524,25 +526,21 @@
   }
 
   function bindEvents() {
-    // Intercept all "href='#login'" buttons
     document.querySelectorAll('a[href="#login"]').forEach(btn => {
       btn.removeAttribute('target');
       btn.addEventListener('click', handleLoginClick);
     });
 
-    // Close buttons
     document.querySelectorAll('[data-close-modal]').forEach(btn => {
       btn.addEventListener('click', closeAllModals);
     });
 
-    // Close when clicking overlay backdrop
     document.querySelectorAll('.v-modal-overlay').forEach(overlay => {
       overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeAllModals();
       });
     });
 
-    // Google Signin Button
     const googleBtn = document.getElementById('v-google-signin-btn');
     const accountPicker = document.getElementById('v-account-picker');
     if (googleBtn && accountPicker) {
@@ -551,7 +549,6 @@
       });
     }
 
-    // Default account option
     const arjunOption = document.querySelector('[data-select-account="arjun"]');
     if (arjunOption) {
       arjunOption.addEventListener('click', () => {
@@ -559,7 +556,6 @@
       });
     }
 
-    // Custom Google form
     const customForm = document.getElementById('v-custom-account-form');
     if (customForm) {
       customForm.addEventListener('submit', (e) => {
@@ -573,7 +569,6 @@
       });
     }
 
-    // Plan selections
     document.querySelectorAll('[data-choose-plan]').forEach(btn => {
       btn.addEventListener('click', () => {
         const planId = btn.getAttribute('data-choose-plan');
@@ -581,7 +576,6 @@
       });
     });
 
-    // PhonePe Tabs
     document.querySelectorAll('.phonepe-tab-btn').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.phonepe-tab-btn').forEach(t => t.classList.remove('is--active'));
@@ -594,13 +588,11 @@
       });
     });
 
-    // PhonePe submit
     const phonepeBtn = document.getElementById('phonepe-submit-btn');
     if (phonepeBtn) {
       phonepeBtn.addEventListener('click', simulatePhonePePayment);
     }
 
-    // Setup logout button
     const logoutBtn = document.getElementById('v-setup-logout-btn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
@@ -612,7 +604,6 @@
       });
     }
 
-    // Check hash on load
     if (window.location.hash === '#login' || window.location.hash === '#auth') {
       handleLoginClick();
     } else if (window.location.hash === '#plans' || window.location.hash === '#pricing') {
@@ -624,20 +615,18 @@
     } else if (window.location.hash === '#setup') {
       if (!currentUser) completeGoogleAuth('Arjun Chandra', 'arjun.chandra@gmail.com');
       if (!currentSubscription) {
-        currentSubscription = { planName: 'Plus Plan', reelsPerMonth: 40 };
+        currentSubscription = { planName: 'Plus', reelsPerMonth: 40, amountPaid: 5.00, currency: 'INR' };
       }
       showSetupScreen();
     }
   }
 
-  // Auto-init on DOMContentLoaded or immediate
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectModals);
   } else {
     injectModals();
   }
 
-  // Global hooks for external customization / real credentials injection
   window.ViralystAuth = {
     open: handleLoginClick,
     showPlans: showPlanModal,
