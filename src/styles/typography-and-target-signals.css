@@ -38,18 +38,31 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 800 !important;
 }
 
-/* Hero H1 Geometry: Two Clean, Confident Lines */
-.hero__title {
+/* Hero H1 Geometry: Bold, Commanding, Wide Display */
+.hero__title,
+.hero__title.u-heading-xxl {
   font-family: var(--font-display) !important;
-  font-size: clamp(2.9rem, 4.8vw, 4.85rem) !important;
-  letter-spacing: -0.038em !important;
-  font-weight: 800 !important;
-  line-height: 1.02 !important;
+  font-size: clamp(3.6rem, 5.8vw, 5.8rem) !important;
+  letter-spacing: -0.04em !important;
+  font-weight: 850 !important;
+  line-height: 0.96 !important;
   white-space: normal !important;
-  word-break: keep-all !important;
-  max-width: 14ch !important;
-  margin-bottom: 0.3em !important;
-  color: #191919 !important;
+  word-break: normal !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin-bottom: 0.35em !important;
+  color: #111113 !important;
+}
+
+.hero__paragraph,
+.hero__paragraph.u-paragraph-regular {
+  font-family: var(--font-body) !important;
+  font-size: clamp(1.18rem, 1.45vw, 1.38rem) !important;
+  line-height: 1.5 !important;
+  color: rgba(25, 25, 25, 0.82) !important;
+  max-width: 48ch !important;
+  margin-top: 0.8em !important;
+  margin-bottom: 1.8em !important;
 }
 
 /* Navigation & Interactive Buttons */
@@ -64,7 +77,7 @@ h1, h2, h3, h4, h5, h6,
   letter-spacing: -0.01em !important;
 }
 
-/* Body copy & paragraphs */
+/* Body copy & paragraphs: Broad, balanced text area coverage */
 p,
 .u-paragraph-large,
 .u-paragraph-medium,
@@ -72,10 +85,23 @@ p,
 .u-paragraph-small,
 .hero__paragraph,
 .books__paragraph,
-.flow__paragraph {
+.flow__paragraph,
+.manager-section__desc {
   font-family: var(--font-body) !important;
   letter-spacing: -0.01em !important;
   font-weight: 450 !important;
+}
+
+.books__paragraph {
+  max-width: 52ch !important;
+  font-size: clamp(1.15rem, 1.3vw, 1.32rem) !important;
+  line-height: 1.5 !important;
+}
+
+.manager-section__desc {
+  max-width: 52ch !important;
+  font-size: clamp(1.15rem, 1.3vw, 1.32rem) !important;
+  line-height: 1.5 !important;
 }
 
 /* Handwritten script elements */
