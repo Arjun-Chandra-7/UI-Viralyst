@@ -547,3 +547,187 @@
 .exclusive-midnight .exclusive-slider__title {
   color: #FFFFFF !important;
 }
+
+/* --------------------------------------------------------------------------
+   5. HERO MIDDLE BRIDGE & TELEMETRY HUD (Eliminate Negative Space)
+   -------------------------------------------------------------------------- */
+.hero__middle-bridge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 15;
+  pointer-events: auto;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* Handwritten Note with Curved Arrow */
+.hero__handwritten-note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-3deg);
+  user-select: none;
+}
+
+.hero__note-text {
+  font-family: var(--font-handwritten, "Permanent Marker", cursive, sans-serif);
+  font-size: 1.35em;
+  line-height: 1.15;
+  color: var(--violet, #3B308F);
+  text-align: center;
+  white-space: normal;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.hero__note-arrow {
+  width: 64px;
+  height: 32px;
+  margin-top: 4px;
+  margin-left: 28px;
+  filter: drop-shadow(0 2px 4px rgba(59, 48, 143, 0.15));
+}
+
+/* Live Telemetry Radar Card */
+.hero__telemetry-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(11, 11, 15, 0.12);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.12),
+    0 6px 15px -4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero__telemetry-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.18);
+}
+
+.telemetry__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(11, 11, 15, 0.12);
+}
+
+.telemetry__pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF5146;
+  box-shadow: 0 0 8px #FF5146;
+  animation: pulse-telemetry 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-telemetry {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.7); opacity: 0.4; }
+}
+
+.telemetry__status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #0B0B0F;
+  flex: 1;
+}
+
+.telemetry__fps {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  border-radius: 6px;
+}
+
+.telemetry__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.telemetry__metric-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6B7280;
+}
+
+.telemetry__metric-val {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  color: #0B0B0F;
+}
+
+.telemetry__bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(11, 11, 15, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.telemetry__bar-fill {
+  width: 78%;
+  height: 100%;
+  background: linear-gradient(90deg, #FF5146 0%, #3B82F6 100%);
+  border-radius: 4px;
+  animation: telemetry-bar-sweep 2.5s infinite ease-in-out alternate;
+}
+
+@keyframes telemetry-bar-sweep {
+  0% { width: 35%; }
+  100% { width: 92%; }
+}
+
+/* Adjust Desktop Hero Inner to a balanced 3-column flow */
+@media screen and (min-width: 992px) {
+  .hero__inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 32px !important;
+    width: 100% !important;
+  }
+
+  .hero__content {
+    flex: 0 1 44% !important;
+    max-width: 540px !important;
+  }
+
+  .hero__middle-bridge {
+    flex: 0 0 220px !important;
+    display: flex !important;
+  }
+
+  .hero__visual {
+    flex: 0 1 38% !important;
+    max-width: 380px !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .hero__middle-bridge {
+    margin: 2em auto;
+  }
+}
