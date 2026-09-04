@@ -1,0 +1,549 @@
+/* ==========================================================================
+   VIRALYST 3D PHONE HERO, VIBRANT CARDS & SATURATED SECTION PALETTE
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO 3D PHONE MOCKUP (Blender Cycles Style)
+   -------------------------------------------------------------------------- */
+.phone-3d-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  perspective: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-3d__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(11, 11, 15, 0.9);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.5em;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.phone-3d__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.phone-3d {
+  position: relative;
+  width: 320px;
+  height: 640px;
+  transform: rotateY(-8deg) rotateX(6deg) rotateZ(-2deg);
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+}
+
+.phone-3d:hover {
+  transform: rotateY(-2deg) rotateX(2deg) rotateZ(0deg) scale(1.02);
+}
+
+/* Outer Titanium Chamfer Chassis */
+.phone-3d__chassis {
+  position: absolute;
+  inset: 0;
+  background: #1C1B1F;
+  border-radius: 52px;
+  padding: 10px;
+  box-shadow: 
+    0 40px 90px -15px rgba(0, 0, 0, 0.5),
+    0 20px 40px -10px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 2px #4A4852,
+    inset 0 0 0 4px #1C1B1F,
+    inset 0 0 0 5px rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Side Hardware Buttons */
+.phone-3d__btn {
+  position: absolute;
+  background: #38363F;
+  border-radius: 4px;
+}
+
+.phone-3d__btn--action {
+  left: -13px;
+  top: 110px;
+  width: 4px;
+  height: 28px;
+}
+
+.phone-3d__btn--vol-up {
+  left: -13px;
+  top: 155px;
+  width: 4px;
+  height: 48px;
+}
+
+.phone-3d__btn--vol-down {
+  left: -13px;
+  top: 215px;
+  width: 4px;
+  height: 48px;
+}
+
+.phone-3d__btn--power {
+  right: -13px;
+  top: 175px;
+  width: 4px;
+  height: 72px;
+}
+
+/* Phone Screen */
+.phone-3d__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  border-radius: 42px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+/* Dynamic Island */
+.phone-3d__notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 26px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.phone-3d__camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #090918;
+  border: 1px solid #1F1F35;
+  box-shadow: inset 0 0 3px #3B82F6;
+}
+
+/* Glass Glare Overlay */
+.phone-3d__glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 30%, transparent 50%);
+  pointer-events: none;
+  z-index: 40;
+  border-radius: 42px;
+}
+
+/* --------------------------------------------------------------------------
+   2. REELS CONTINUOUS SCROLL STREAM INSIDE PHONE
+   -------------------------------------------------------------------------- */
+.phone-reels-stream {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  animation: scroll-reels 24s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.phone-3d:hover .phone-reels-stream {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-reels {
+  0% { transform: translateY(0); }
+  22% { transform: translateY(0); }
+  25% { transform: translateY(-100%); }
+  47% { transform: translateY(-100%); }
+  50% { transform: translateY(-200%); }
+  72% { transform: translateY(-200%); }
+  75% { transform: translateY(-300%); }
+  97% { transform: translateY(-300%); }
+  100% { transform: translateY(0); }
+}
+
+.phone-reel {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 50px 16px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #FFFFFF;
+  user-select: none;
+}
+
+/* Reel Background Gradients */
+.phone-reel--sunset {
+  background: linear-gradient(180deg, #FF5146 0%, #D81B60 45%, #180B28 100%);
+}
+
+.phone-reel--cyber {
+  background: linear-gradient(180deg, #2563EB 0%, #7C3AED 50%, #0B0E1E 100%);
+}
+
+.phone-reel--amethyst {
+  background: linear-gradient(180deg, #9333EA 0%, #C026D3 45%, #190A2E 100%);
+}
+
+.phone-reel--amber {
+  background: linear-gradient(180deg, #EA580C 0%, #F59E0B 45%, #1A0D00 100%);
+}
+
+/* Progress bar */
+.phone-reel__progress {
+  position: absolute;
+  top: 44px;
+  left: 16px;
+  right: 16px;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phone-reel__progress-fill {
+  display: block;
+  height: 100%;
+  width: 65%;
+  background: #FFFFFF;
+  border-radius: 4px;
+  animation: progress-pulse 3s infinite linear;
+}
+
+@keyframes progress-pulse {
+  0% { width: 10%; }
+  100% { width: 95%; }
+}
+
+.phone-reel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phone-reel__tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+}
+
+.phone-reel__time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+/* Audio Wave Visualizer inside Reel */
+.phone-reel__visualizer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 8px;
+}
+
+.phone-reel__wave-bar {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 4px;
+  animation: wave-bar-pulse 1.2s infinite ease-in-out alternate;
+}
+
+.phone-reel__wave-bar:nth-child(1) { height: 12px; animation-delay: 0.1s; }
+.phone-reel__wave-bar:nth-child(2) { height: 26px; animation-delay: 0.3s; }
+.phone-reel__wave-bar:nth-child(3) { height: 18px; animation-delay: 0.15s; }
+.phone-reel__wave-bar:nth-child(4) { height: 32px; animation-delay: 0.4s; }
+.phone-reel__wave-bar:nth-child(5) { height: 14px; animation-delay: 0.25s; }
+
+@keyframes wave-bar-pulse {
+  0% { transform: scaleY(0.4); opacity: 0.6; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+.phone-reel__radar-line {
+  width: 100%;
+  height: 2px;
+  background: #60A5FA;
+  box-shadow: 0 0 10px #60A5FA;
+}
+
+/* Body Captions */
+.phone-reel__body {
+  margin-bottom: 12px;
+  max-width: 200px;
+}
+
+.phone-reel__caption-pill {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #FF5146;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.phone-reel__text-line {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.phone-reel__text-line--long { width: 160px; }
+.phone-reel__text-line--short { width: 110px; opacity: 0.5; }
+
+/* Right Action Column */
+.phone-reel__sidebar {
+  position: absolute;
+  right: 14px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.phone-reel__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.phone-reel__action svg {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+}
+
+.phone-reel__action span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.phone-reel__disc {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #333 30%, #000 70%);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  animation: spin-disc 4s linear infinite;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes spin-disc {
+  100% { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   3. CURRENT SIGNALS CAROUSEL CARDS (Vibrant Editorial Artworks)
+   -------------------------------------------------------------------------- */
+.signal-poster {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 1.75em;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.4em;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+.signal-poster:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 35px 70px -10px rgba(0, 0, 0, 0.45);
+}
+
+/* 6 Bespoke Saturated Card Color Gradients */
+.signal-poster--1 {
+  background: linear-gradient(160deg, #1E3A8A 0%, #2563EB 50%, #3B82F6 100%);
+  border-color: #60A5FA;
+}
+
+.signal-poster--2 {
+  background: linear-gradient(160deg, #9D174D 0%, #DB2777 50%, #F472B6 100%);
+  border-color: #F472B6;
+}
+
+.signal-poster--3 {
+  background: linear-gradient(160deg, #4C1D95 0%, #7C3AED 50%, #A78BFA 100%);
+  border-color: #A78BFA;
+}
+
+.signal-poster--4 {
+  background: linear-gradient(160deg, #B45309 0%, #D97706 50%, #F59E0B 100%);
+  border-color: #FCD34D;
+}
+
+.signal-poster--5 {
+  background: linear-gradient(160deg, #064E3B 0%, #059669 50%, #10B981 100%);
+  border-color: #6EE7B7;
+}
+
+.signal-poster--6 {
+  background: linear-gradient(160deg, #9A3412 0%, #EA580C 50%, #FB923C 100%);
+  border-color: #FDBA74;
+}
+
+.signal-poster__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+}
+
+.signal-poster__body {
+  margin: 1.5em 0;
+}
+
+.signal-poster__title {
+  font-family: var(--font-display);
+  font-size: 1.5em;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.signal-poster__badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #0B0B0F;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.signal-poster__wave {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+}
+
+.signal-poster__wave span {
+  width: 3px;
+  background: #FFFFFF;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   4. SATURATED VIBRANT SECTION BACKGROUNDS
+   -------------------------------------------------------------------------- */
+/* Benefits Section: Royal Ultramarine Cobalt */
+.benefits-vibrant {
+  background: #2546E8 !important;
+  color: #FFFFFF !important;
+  padding: 6em 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefits-vibrant .benefits__inner {
+  background: #2546E8 !important;
+}
+
+.benefits-vibrant .benefits__label-inner {
+  background: #FFFFFF !important;
+  color: #0B0B0F !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
+}
+
+.benefits-vibrant .benefits__label-inner:hover {
+  background: #FF5146 !important;
+  color: #FFFFFF !important;
+}
+
+/* FAQ Section: Soft Lavender Lilac */
+.faq-lavender {
+  background-color: #EDE8FC !important;
+  padding: 5em 0 !important;
+}
+
+.faq-lavender .accordion__details {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  border: 1.5px solid rgba(11, 11, 15, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04) !important;
+  margin-bottom: 0.8em !important;
+}
+
+/* Manager / Join Us Now Section: Warm Tangerine Melon */
+.manager-melon {
+  background-color: #FFEADB !important;
+  color: #0B0B0F !important;
+  padding: 2em 0 5em 0 !important;
+}
+
+/* Exclusive Section: Deep Midnight Royal Cobalt */
+.exclusive-midnight {
+  background-color: #14122B !important;
+  color: #FFFFFF !important;
+  padding: 5em 0 !important;
+}
+
+.exclusive-midnight .exclusive__title,
+.exclusive-midnight .exclusive-slider__title {
+  color: #FFFFFF !important;
+}
