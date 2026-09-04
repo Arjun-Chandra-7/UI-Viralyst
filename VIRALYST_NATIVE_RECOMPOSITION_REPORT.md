@@ -20,7 +20,7 @@ The page no longer reads, feels, or thinks like a book club, publishing house, o
 3. **Mascot Logic Eradicated**: 45 instances of cartoon aardvark animal ear SVGs removed from all popups and card crowns.
 4. **All Book Genres Replaced**: Literary genres (*Horror, Sci-Fi, Romance, Gothic Fiction, Fantasy*) converted into **11 Content Territories** (*Founder Stories, Tech & SaaS, Breakout Teardowns, Educational Deep-Dives, Tactile Demos, Culture & Trends, Opinion & Debate, Documentary Sprints, B2B Playbooks, Personal Brand, Fast Tutorials*).
 5. **Color Rhythm Recomposed**: Broke the inherited Aardvark pastel progression with the bold, high-contrast Viralyst Native Palette (`Milk → Ink → Electric Violet → Ink → Hot Pink → Acid Lime → Milk → Electric Violet → Signal Red → Ink`).
-6. **Master Codex Blueprint**: Section 11 transformed into the Short-Form Architecture Codex v4.2 with technical retention trajectory and hook taxonomy modules.
+6. **Master Architecture Blueprint**: Section 11 transformed into the Short-Form Architecture Blueprint v4.2 with technical retention trajectory and hook taxonomy modules.
 7. **Responsive & Build Integrity**: **11/11 viewports passed with 0px overflow and 0 console errors**; production build completes in 250ms.
 
 ---
@@ -35,7 +35,7 @@ The page no longer reads, feels, or thinks like a book club, publishing house, o
 | **Popup Ears** | 45 cartoon aardvark ear SVGs perched on speech bubbles | Clean geometric HUD frames and signal reticles | **ERADICATED** |
 | **Section 10 Mascot** | `choice-heart-illustration.svg` (cartoon heart with eyes) | **Signal Frequency Matrix** technical HUD emblem | **REPLACED** |
 | **Section 5 Categories** | 11 book genres (*Horror, Romance, Gothic Fiction...*) | **11 Content Territories** (*Founder Stories, SaaS, Teardowns...*) | **REPLACED** |
-| **Section 11 Product** | Physical horror anthology book with author roster | **The Short-Form Architecture Codex v4.2** | **REPLACED** |
+| **Section 11 Product** | Physical horror anthology book with author roster | **The Short-Form Architecture Blueprint v4.2** | **REPLACED** |
 | **Section 7 Copy** | USD/CAD membership pricing per book ($17.99/mo) | Tiered intelligence platform access & pattern library | **ERADICATED** |
 | **App Store URLs** | Deep links to `com.aardvark.app` | Neutral `#app` anchors | **CLEANED** |
 | **Image Alt Tags** | 44 instances of `... book cover` | `... format reel` / `... creative storyboard` | **CLEANED** |
@@ -132,7 +132,7 @@ FAQ:              MILK (#F5F2EA) clean typography
 WHOLE REEL:       ELECTRIC VIOLET (#7057FF) analytical matrix
 TICKER:           SIGNAL RED (#FF4D3D) brand manifesto
 PATTERNS:         DEEP INK (#09090B) blueprint gallery
-CODEX:            MILK (#F5F2EA) master architecture sheet
+BLUEPRINT:        MILK (#F5F2EA) master architecture sheet
 FOOTER:           DEEP INK (#09090B) authoritative platform base
 ```
 

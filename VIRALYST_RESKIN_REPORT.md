@@ -126,12 +126,12 @@ Colors were updated strictly via CSS variables in `:root`, preserving all Webflo
   2. `PT 02: FAST DEMO`
   3. `PT 03: STORY → PAYOFF`
   4. `PT 04: MYTH → PROOF`
-- **Archetype Badges**: Circular badges (`FORMAT`, `PACING`, `CODEX`) replacing fake author portraits.
+- **Archetype Badges**: Circular badges (`FORMAT`, `PACING`, `BLUEPRINT`) replacing fake author portraits.
 
 ### Section 11: Viralyst Architecture (`exclusive is--bg-white`)
-- **Title**: `The Short-Form Codex`.
+- **Title**: `The Short-Form Blueprint`.
 - **Sub-banner**: `The Master Content Blueprint`.
-- **Badge**: `Architecture • Codex`.
+- **Badge**: `Architecture • Blueprint`.
 - **Signals Decoded**: `Hook Taxonomies, Visual Retention Resets, Pacing Curves, Audio Synchronization, Transcript Cadence, Script Frameworks`.
 - **Breakdown Notes**: Technical teardowns of opening contradiction and frame-to-script pacing.
 

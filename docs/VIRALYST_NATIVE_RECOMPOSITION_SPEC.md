@@ -122,7 +122,7 @@ ACID LIME:      #CBFF4A  (High-visibility performance accent)
 | **Section 8: Whole Reel** | `#09090B` (Ink) | `#F5F2EA` (Milk) | `#FF4D3D` (Signal Red) | Technical analytical matrix |
 | **Section 9: Ticker** | `#FF4D3D` (Signal Red) | `#09090B` (Ink) | `#F5F2EA` (Milk) | Bold creator manifesto |
 | **Section 10: Patterns** | `#7057FF` (Electric Violet) | `#F5F2EA` (Milk) | `#20D5E5` / `#CBFF4A` | Blueprint format gallery |
-| **Section 11: Codex** | `#F5F2EA` (Milk) | `#09090B` (Ink) | `#FF2D8D` (Hot Pink) | Master intelligence document |
+| **Section 11: Blueprint** | `#F5F2EA` (Milk) | `#09090B` (Ink) | `#FF2D8D` (Hot Pink) | Master intelligence document |
 | **Footer** | `#09090B` (Ink) | `#F5F2EA` (Milk) | `#CBFF4A` (Acid Lime) | Authoritative platform base |
 
 ---

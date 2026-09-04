@@ -31,7 +31,7 @@ SIGNAL LIME:    #C6FF4A  (Micro-accent only, <5% visual presence)
 8. **Manager (Section 8)**: `OBSIDIAN (#09090B)` structured prompt & response studio.
 9. **Brand Ticker (Section 9)**: `VIRAL RED (#FF3B45)` high-voltage brand manifesto.
 10. **Pattern Library (Section 10)**: `OBSIDIAN (#09090B)` format blueprint gallery.
-11. **Codex (Section 11)**: `BONE (#F3F0E9)` master content architecture.
+11. **Blueprint (Section 11)**: `BONE (#F3F0E9)` master content architecture.
 12. **Footer**: `OBSIDIAN (#09090B)` authoritative platform base.
 
 ---

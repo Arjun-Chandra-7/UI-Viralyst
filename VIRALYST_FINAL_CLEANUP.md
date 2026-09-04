@@ -16,7 +16,7 @@ This surgical cleanup pass eliminated 100% of remaining reference/book-club resi
    - Section 6 (**"Benefits"**) floating labels cleaned of fake scoring terms (`Hook syntax`, `Content structures`, `Creative briefs`).
    - Section 7 (**"FAQ"**) completely rewritten from scratch with 7 authentic, grounded Viralyst questions and answers. All mentions of physical delivery, USA/Canada shipping, and mobile app downloads were removed.
    - Section 8 (**"Join Us Now"**) updated with a grounded illustrative Manager directive card showing exact user-agent interaction (`What should we make next?` -> `Try a demonstration-first format.`).
-   - Section 10 (**"Exclusive"**) cleaned of fake `100M views` claims and renamed to **"The Content Architecture Codex"**.
+   - Section 10 (**"Exclusive"**) cleaned of fake `100M views` claims and renamed to **"The Content Architecture Blueprint"**.
 
 2. **`public/scripts/slater.js`**:
    - Replaced `142 BPM Speech Sync` on the Canvas V-Lens scan animation with `Speech & Rhythm Cadence`.

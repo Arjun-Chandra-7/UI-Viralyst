@@ -26,7 +26,7 @@ Every item listed below is marked for surgical removal or replacement in the **V
   - Hero visual (`package-visual.webp`): Retains layered 3D depth mimicking an open book carton.
   - Section 2 (Carousel): 6 cards using 643x925 aspect ratio originally modeled after novel book covers.
   - Section 10 (Pattern Library): Cards originally modeled after annual book award winners with author portraits.
-  - Section 11 (Codex): Hardbound anthology book presentation.
+  - Section 11 (Blueprint): Master architecture sheet presentation.
 - **Book-Club Connotation**: Suggests physical book covers, spines, and printed editions.
 - **Verdict**: **REPLACE WITH NATIVE SHORT-FORM REEL ARTIFACTS**:
   - Pure 9:16 vertical media frames with kinetic video anatomy.
@@ -56,7 +56,7 @@ Every item listed below is marked for surgical removal or replacement in the **V
   - FAQ: `MILK (#F5F2EA)` clean typographic clarity.
   - Reads The Whole Reel: `INK (#09090B)` technical analysis matrix.
   - Pattern Library: `ELECTRIC VIOLET (#7057FF)` / `MEDIA CYAN (#20D5E5)` blueprint gallery.
-  - Codex & Footer: `INK (#09090B)` authoritative platform closure.
+  - Blueprint & Footer: `INK (#09090B)` authoritative platform closure.
 
 ### Metaphor 5: "Consider us your book curator" / Doorstep Delivery Remnants
 - **Current Role**: Copy describing curating reads, checking doorsteps, or claiming books.

@@ -219,14 +219,14 @@
 ## 12. Section 11: The Creative Dossier (`exclusive is--bg-white`)
 - **CURRENT VISUAL ROLE**: Featured flagship product highlight.
 - **CURRENT BOOK-LIKE RESIDUE**: "Aardvark Exclusive", horror anthology book, fake customer review quotes.
-- **REAL VIRALYST CONCEPT**: "Viralyst Intelligence Codex: The Complete Short-Form Architecture".
+- **REAL VIRALYST CONCEPT**: "Viralyst Intelligence Blueprint: The Complete Short-Form Architecture".
 - **OBJECT REPLACEMENT**:
-  - High-impact vertical format codex / intelligence playbook cover.
+  - High-impact vertical format blueprint / intelligence playbook cover.
   - Review quotes transformed into format breakdown notes (Hook mechanics, retention triggers, shot composition).
 - **COPY REPLACEMENT**:
   - Heading: `Viralyst Architecture`
   - Sub-banner: `The Master Content Blueprint`
-  - Item Title: `The Short-Form Intelligence Codex`
+  - Item Title: `The Short-Form Intelligence Blueprint`
   - Blurb: `A comprehensive breakdown of every high-performing video structure, hook taxonomy, and kinetic editing pattern.`
   - CTA Button: `Explore Blueprint`
 - **COLOR CHANGE**: Clean `#F6F2EA` canvas with `#FF2D9A` and `#6C4BFF` badges.
