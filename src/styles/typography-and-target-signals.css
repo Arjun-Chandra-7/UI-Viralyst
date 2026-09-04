@@ -1,0 +1,476 @@
+/* ==========================================================================
+   VIRALYST REFINED TYPOGRAPHY & TARGET SIGNALS JACKET SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL TYPOGRAPHY OVERHAUL (10000% UPGRADE)
+   -------------------------------------------------------------------------- */
+:root {
+  --font-display: "Champ", "Syne", "Plus Jakarta Sans", -apple-system, sans-serif;
+  --font-heading: "Champ", "Syne", "Plus Jakarta Sans", -apple-system, sans-serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-handwritten: "OrganicHand", "Caveat", cursive;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+}
+
+body, html {
+  font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* All Headings & Titles */
+h1, h2, h3, h4, h5, h6,
+.u-heading-xxl,
+.u-heading-l,
+.u-heading-m,
+.u-heading-s,
+.u-heading-xs,
+.hero__title,
+.books__title,
+.exclusive__title,
+.faq__title,
+.manager-section h2,
+.tagline-curve__title {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.028em !important;
+  font-weight: 800 !important;
+}
+
+/* Body copy & paragraphs */
+p,
+.u-paragraph-large,
+.u-paragraph-medium,
+.u-paragraph-regular,
+.u-paragraph-small,
+.hero__paragraph,
+.books__paragraph,
+.flow__paragraph {
+  font-family: var(--font-body) !important;
+  letter-spacing: -0.01em !important;
+  font-weight: 450 !important;
+}
+
+/* Handwritten script elements */
+.u-handwritten-regular,
+.u-handwritten-big,
+.book__text,
+.hero__text,
+.hero__note-text {
+  font-family: var(--font-handwritten) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Metadata, timecodes, telemetry */
+.tag-small,
+.phone-reel__tag,
+.phone-3d__badge,
+.telemetry__status,
+.telemetry__fps,
+.telemetry__metric-label {
+  font-family: var(--font-mono) !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. CURRENT SIGNALS: AUTHENTIC SPECIMEN COVERS (Target Match)
+   -------------------------------------------------------------------------- */
+/* The Cover Canvas */
+.signal-jacket-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.48;
+  border-radius: 1.25em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.4em;
+  box-shadow: 0 15px 35px -8px rgba(0, 0, 0, 0.45);
+  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.signal-jacket-cover:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.55);
+}
+
+/* Tactile Publisher / Pattern Stamp in Top Corner */
+.jacket-stamp {
+  position: absolute;
+  top: 1.2em;
+  right: 1.2em;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  z-index: 5;
+}
+
+.jacket-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Cover Central Illustration Graphic */
+.jacket-art {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cover Header & Footer Typography */
+.jacket-top {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.jacket-bottom {
+  position: relative;
+  z-index: 5;
+}
+
+.jacket-creator {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.jacket-title {
+  font-family: var(--font-display) !important;
+  font-size: 2.2em;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.jacket-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* 6 Bespoke Specimen Designs matching Aardvark Book Jackets */
+/* Cover 1: The Loophole Hook (Mystical Indigo & Glowing Portal) */
+.jacket-cover--1 {
+  background: radial-gradient(circle at 50% 40%, #2E2572 0%, #15103E 70%, #0D0A26 100%);
+  color: #FFFFFF;
+}
+.jacket-cover--1 .jacket-stamp { color: #FFD043; border-color: #FFD043; background: rgba(255, 208, 67, 0.15); }
+.jacket-cover--1 .jacket-badge-pill { background: #FF5146; color: #FFFFFF; }
+.jacket-cover--1 .jacket-title { color: #FFFFFF; }
+
+/* Cover 2: Speed Blueprint (Raven Forest Emerald & Camera Aperture) */
+.jacket-cover--2 {
+  background: radial-gradient(circle at 50% 35%, #15803D 0%, #052E16 65%, #02170B 100%);
+  color: #FFFFFF;
+}
+.jacket-cover--2 .jacket-stamp { color: #4ADE80; border-color: #4ADE80; background: rgba(74, 222, 128, 0.15); }
+.jacket-cover--2 .jacket-badge-pill { background: #22C55E; color: #052E16; }
+.jacket-cover--2 .jacket-title { color: #F0FDF4; }
+
+/* Cover 3: The Silent Anchor (Stark Raven Ink & Crimson Drop) */
+.jacket-cover--3 {
+  background: radial-gradient(circle at 50% 45%, #27272A 0%, #121215 65%, #050508 100%);
+  color: #FFFFFF;
+  border-color: rgba(255, 81, 70, 0.4);
+}
+.jacket-cover--3 .jacket-stamp { color: #FF5146; border-color: #FF5146; background: rgba(255, 81, 70, 0.15); }
+.jacket-cover--3 .jacket-badge-pill { background: #FFFFFF; color: #000000; }
+.jacket-cover--3 .jacket-title { color: #FFFFFF; }
+
+/* Cover 4: Micro-Docu Sprint (Terracotta Crimson & Cinematic 35mm) */
+.jacket-cover--4 {
+  background: radial-gradient(circle at 50% 35%, #9A3412 0%, #431407 70%, #1C0702 100%);
+  color: #FFFFFF;
+}
+.jacket-cover--4 .jacket-stamp { color: #FDBA74; border-color: #FDBA74; background: rgba(253, 186, 116, 0.15); }
+.jacket-cover--4 .jacket-badge-pill { background: #F97316; color: #FFFFFF; }
+.jacket-cover--4 .jacket-title { color: #FFF7ED; }
+
+/* Cover 5: The Infinite Loop (Deep Oceanic Cyan & Infinite Ribbon) */
+.jacket-cover--5 {
+  background: radial-gradient(circle at 50% 40%, #0E7490 0%, #083344 70%, #021720 100%);
+  color: #FFFFFF;
+}
+.jacket-cover--5 .jacket-stamp { color: #67E8F9; border-color: #67E8F9; background: rgba(103, 232, 249, 0.15); }
+.jacket-cover--5 .jacket-badge-pill { background: #06B6D4; color: #083344; }
+.jacket-cover--5 .jacket-title { color: #ECFEFF; }
+
+/* Cover 6: Acoustic Micro-Cut (Warm Golden Honey & Sound Frequency) */
+.jacket-cover--6 {
+  background: radial-gradient(circle at 50% 40%, #B45309 0%, #451A03 70%, #1E0B02 100%);
+  color: #FFFFFF;
+}
+.jacket-cover--6 .jacket-stamp { color: #FCD34D; border-color: #FCD34D; background: rgba(252, 211, 77, 0.15); }
+.jacket-cover--6 .jacket-badge-pill { background: #F59E0B; color: #000000; }
+.jacket-cover--6 .jacket-title { color: #FEF3C7; }
+
+/* --------------------------------------------------------------------------
+   3. SECTION 4: "SEE WHAT'S INSIDE THE REEL" (Desloped & Cohesive)
+   -------------------------------------------------------------------------- */
+.scan-section-cohesive {
+  background-color: #FBF6EB !important;
+  color: #0B0B0F !important;
+  padding: 10em 0 8em 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-section-cohesive .scan-section__title {
+  color: #0B0B0F !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.5em, 5vw, 4.5em) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  text-align: center;
+}
+
+.scan-section-cohesive .scan-section__subtitle {
+  color: #4B5563 !important;
+  font-family: var(--font-body) !important;
+  font-size: 1.25em !important;
+  max-width: 48ch !important;
+  margin: 0.8em auto 2.5em auto !important;
+  text-align: center;
+}
+
+/* High-Craft Multi-Track Deconstruction Engine */
+.deconstruct-engine {
+  max-width: 1040px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 2px solid #0B0B0F;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px -15px rgba(11, 11, 15, 0.15);
+  overflow: hidden;
+}
+
+.deconstruct-engine__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FAF7F0;
+  border-bottom: 2px solid #0B0B0F;
+  padding: 12px 24px;
+}
+
+.deconstruct-engine__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.deconstruct-engine__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF5146;
+  box-shadow: 0 0 8px #FF5146;
+  animation: pulse-telemetry 1.5s infinite;
+}
+
+.deconstruct-engine__badges {
+  display: flex;
+  gap: 8px;
+}
+
+.deconstruct-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 11, 15, 0.15);
+  color: #0B0B0F;
+}
+
+/* Center Split: Video Specimen on Left, 4 Tracks on Right */
+.deconstruct-engine__body {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 480px;
+}
+
+@media screen and (max-width: 900px) {
+  .deconstruct-engine__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left: Active Reel Frame */
+.deconstruct-video-frame {
+  background: #0B0B0F;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 2px solid #0B0B0F;
+  position: relative;
+  color: #FFFFFF;
+}
+
+.deconstruct-video-frame__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 81, 70, 0.25);
+  color: #FF8A80;
+  border: 1px solid #FF5146;
+}
+
+.deconstruct-video-frame__center {
+  text-align: center;
+  padding: 2em 0;
+}
+
+.deconstruct-video-frame__hook {
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.deconstruct-video-frame__pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background: #FF5146;
+  color: #FFFFFF;
+}
+
+.deconstruct-video-frame__meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #9CA3AF;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Right: 4 Telemetry Tracks */
+.deconstruct-tracks {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFFFF;
+}
+
+.deconstruct-track {
+  background: #FAF8F5;
+  border: 1.5px solid rgba(11, 11, 15, 0.1);
+  border-radius: 14px;
+  padding: 14px 18px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.deconstruct-track:hover {
+  transform: translateX(4px);
+  border-color: #FF5146;
+}
+
+.track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.track-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  color: #0B0B0F;
+}
+
+.track-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #6B7280;
+}
+
+/* Track Visualizer Bars */
+.track-bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 24px;
+}
+
+.track-bars span {
+  flex: 1;
+  background: #3B82F6;
+  border-radius: 2px;
+}
+
+.track-segments {
+  display: flex;
+  gap: 6px;
+  height: 22px;
+}
+
+.track-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 6px;
+  color: #FFFFFF;
+}
+
+.track-spline {
+  width: 100%;
+  height: 26px;
+}
