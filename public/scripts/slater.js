@@ -3218,23 +3218,23 @@ function initBoxSequence() {
       const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
       const ease = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-      // 1. Reel Media Background (Monolithic)
+      // 1. Reel Media Background (Monolithic Deep Slate, No AI Slop Purple)
       ctx.save();
       roundRect(ctx, 4 * s, 4 * s, rw, rh, 22 * s);
-      ctx.fillStyle = '#17122C';
+      ctx.fillStyle = '#0F172A';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 81, 70, 0.4)';
-      ctx.shadowColor = 'rgba(255, 81, 70, 0.3)';
+      ctx.strokeStyle = 'rgba(255, 81, 70, 0.5)';
+      ctx.shadowColor = 'rgba(255, 81, 70, 0.2)';
       ctx.shadowBlur = 16 * s;
       ctx.lineWidth = 2 * s;
       ctx.stroke();
       ctx.clip();
 
-      // Atmospheric radial fill
+      // Atmospheric radial fill (Rich Slate & Charcoal)
       const grad = ctx.createRadialGradient(cx, cy * 0.7, 20 * s, cx, cy, 260 * s);
-      grad.addColorStop(0, '#2E2254');
-      grad.addColorStop(0.6, '#1B1438');
-      grad.addColorStop(1, '#100D24');
+      grad.addColorStop(0, '#1E293B');
+      grad.addColorStop(0.6, '#0F172A');
+      grad.addColorStop(1, '#0B0F19');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, cw, ch);
 
@@ -3245,7 +3245,7 @@ function initBoxSequence() {
       ctx.fill();
 
       ctx.fillStyle = '#F4F0E8';
-      ctx.font = '600 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+      ctx.font = '600 ' + (10 * s) + 'px "Geist Mono", monospace';
       ctx.fillText('REC 00:02:18 • 60FPS', 36 * s, 30 * s);
 
       ctx.fillStyle = 'rgba(244, 240, 232, 0.6)';
@@ -3274,89 +3274,89 @@ function initBoxSequence() {
 
       // Render revealed signals inside the Reel behind the V-Lens
       if (scanFactor > 0.1) {
-        // Signal 01: Hook Syntax (Top)
+        // Signal 01: Hook Syntax (Top) - High Contrast Tactile Card
         const hookAlpha = clamp((scanFactor - 0.1) / 0.2, 0, 1);
         ctx.save();
-        ctx.fillStyle = 'rgba(255, 81, 70, ' + (0.15 * hookAlpha) + ')';
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + (0.92 * hookAlpha) + ')';
         roundRect(ctx, 16 * s, 50 * s, rw - 32 * s, 54 * s, 10 * s);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(255, 81, 70, ' + (0.6 * hookAlpha) + ')';
+        ctx.strokeStyle = 'rgba(255, 81, 70, ' + (0.85 * hookAlpha) + ')';
         ctx.lineWidth = 1.5 * s;
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(255, 81, 70, ' + hookAlpha + ')';
-        ctx.font = '700 ' + (10 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillStyle = '#E11D48';
+        ctx.font = '700 ' + (10 * s) + 'px "Geist Mono", monospace';
         ctx.fillText('[01 / HOOK: CONTRARIAN OPEN]', 26 * s, 70 * s);
 
-        ctx.fillStyle = 'rgba(244, 240, 232, ' + hookAlpha + ')';
-        ctx.font = '600 ' + (12.5 * s) + 'px "Bricolage Grotesque", sans-serif';
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '700 ' + (12.5 * s) + 'px "Bricolage Grotesque", sans-serif';
         ctx.fillText('"Stop writing hooks like it is 2023."', 26 * s, 90 * s);
         ctx.restore();
       }
 
       if (scanFactor > 0.35) {
-        // Signal 02: Kinetic Caption Timing (Mid-top)
+        // Signal 02: Kinetic Caption Timing (Mid-top) - High Contrast Card
         const capAlpha = clamp((scanFactor - 0.35) / 0.25, 0, 1);
         ctx.save();
-        ctx.fillStyle = 'rgba(245, 63, 131, ' + (0.15 * capAlpha) + ')';
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + (0.92 * capAlpha) + ')';
         roundRect(ctx, 16 * s, 115 * s, rw - 32 * s, 42 * s, 8 * s);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(245, 63, 131, ' + (0.6 * capAlpha) + ')';
+        ctx.strokeStyle = 'rgba(37, 99, 235, ' + (0.85 * capAlpha) + ')';
         ctx.lineWidth = 1.5 * s;
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(245, 63, 131, ' + capAlpha + ')';
-        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillStyle = '#2563EB';
+        ctx.font = '700 ' + (9.5 * s) + 'px "Geist Mono", monospace';
         ctx.fillText('[02 / CAPTION] 00:01.2 • Dynamic Reveal', 26 * s, 132 * s);
 
-        ctx.fillStyle = 'rgba(244, 240, 232, ' + capAlpha + ')';
-        ctx.font = (11 * s) + 'px "Instrument Sans", sans-serif';
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '600 ' + (11 * s) + 'px "Instrument Sans", sans-serif';
         ctx.fillText('Aligned to natural vocal inflection', 26 * s, 148 * s);
         ctx.restore();
       }
 
       if (scanFactor > 0.6) {
-        // Signal 03: Audio Spectrum Waveform (Mid)
+        // Signal 03: Audio Spectrum Waveform (Mid) - High Contrast Card
         const auAlpha = clamp((scanFactor - 0.6) / 0.25, 0, 1);
         ctx.save();
-        ctx.fillStyle = 'rgba(49, 92, 255, ' + (0.15 * auAlpha) + ')';
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + (0.92 * auAlpha) + ')';
         roundRect(ctx, 16 * s, 170 * s, rw - 32 * s, 54 * s, 10 * s);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(49, 92, 255, ' + (0.6 * auAlpha) + ')';
+        ctx.strokeStyle = 'rgba(2, 132, 199, ' + (0.85 * auAlpha) + ')';
         ctx.lineWidth = 1.5 * s;
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(49, 92, 255, ' + auAlpha + ')';
-        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillStyle = '#0284C7';
+        ctx.font = '700 ' + (9.5 * s) + 'px "Geist Mono", monospace';
         ctx.fillText('[03 / AUDIO] Speech & Rhythm Cadence', 26 * s, 188 * s);
 
         for (let i = 0; i < 22; i++) {
           const bh = (8 + 24 * Math.sin(i * 0.45 + p * 8) ** 2) * s;
           const bx = 26 * s + i * 13 * s;
           roundRect(ctx, bx, 214 * s - bh, 4 * s, bh, 2 * s);
-          ctx.fillStyle = 'rgba(49, 92, 255, ' + auAlpha + ')';
+          ctx.fillStyle = '#2563EB';
           ctx.fill();
         }
         ctx.restore();
       }
 
       if (scanFactor > 0.8) {
-        // Signal 04: Cut Velocity Timeline (Bottom)
+        // Signal 04: Cut Velocity Timeline (Bottom) - High Contrast Card
         const cutAlpha = clamp((scanFactor - 0.8) / 0.2, 0, 1);
         ctx.save();
-        ctx.fillStyle = 'rgba(245, 212, 90, ' + (0.15 * cutAlpha) + ')';
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + (0.92 * cutAlpha) + ')';
         roundRect(ctx, 16 * s, 235 * s, rw - 32 * s, 44 * s, 8 * s);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(245, 212, 90, ' + (0.6 * cutAlpha) + ')';
+        ctx.strokeStyle = 'rgba(217, 119, 6, ' + (0.85 * cutAlpha) + ')';
         ctx.lineWidth = 1.5 * s;
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';
-        ctx.font = '600 ' + (9.5 * s) + 'px "IBM Plex Mono", monospace';
+        ctx.fillStyle = '#D97706';
+        ctx.font = '700 ' + (9.5 * s) + 'px "Geist Mono", monospace';
         ctx.fillText('[04 / PACING] Micro-Cut • Visual Pivot • Loop', 26 * s, 254 * s);
 
         // Timeline tick marks
-        ctx.strokeStyle = 'rgba(245, 212, 90, ' + cutAlpha + ')';
+        ctx.strokeStyle = '#D97706';
         ctx.lineWidth = 2 * s;
         ctx.beginPath();
         ctx.moveTo(26 * s, 268 * s);
@@ -3367,12 +3367,12 @@ function initBoxSequence() {
 
       // Default raw Reel content at bottom before scan
       if (scanFactor < 0.7) {
-        ctx.fillStyle = '#F4F0E8';
-        ctx.font = '700 ' + (15 * s) + 'px "Bricolage Grotesque", sans-serif';
+        ctx.fillStyle = '#F8FAFC';
+        ctx.font = '800 ' + (15 * s) + 'px "Bricolage Grotesque", sans-serif';
         ctx.fillText('THE CONTRARIAN OPEN', 24 * s, rh - 50 * s);
 
-        ctx.fillStyle = 'rgba(244, 240, 232, 0.65)';
-        ctx.font = (12 * s) + 'px "Instrument Sans", sans-serif';
+        ctx.fillStyle = 'rgba(248, 250, 252, 0.75)';
+        ctx.font = '500 ' + (12 * s) + 'px "Instrument Sans", sans-serif';
         ctx.fillText('Original Raw Reel Specimen', 24 * s, rh - 30 * s);
       }
 

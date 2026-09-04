@@ -549,185 +549,166 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. HERO MIDDLE BRIDGE & TELEMETRY HUD (Eliminate Negative Space)
+   5. HERO 3-PHONE 3D DEPTH CLUSTER (Front Focus + 2 Recessed Angles)
    -------------------------------------------------------------------------- */
-.hero__middle-bridge {
+.hero-phones-trio {
   position: relative;
+  width: 100%;
+  max-width: 540px;
+  height: 640px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 24px;
-  z-index: 15;
-  pointer-events: auto;
-  max-width: 240px;
+  align-items: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
   margin: 0 auto;
 }
 
-/* Handwritten Note with Curved Arrow */
-.hero__handwritten-note {
-  position: relative;
+.hero-phones-trio .phone-3d-wrapper {
+  position: absolute;
+  width: 290px;
+  height: 580px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Background Left Phone: Angled, Dulled, Audio Focus */
+.hero-phones-trio .phone-3d-wrapper--left {
+  z-index: 2;
+  transform: perspective(1200px) translateZ(-50px) rotateY(-18deg) rotateX(4deg) rotateZ(-3deg) translateX(-180px) translateY(14px) scale(0.85);
+  opacity: 0.7;
+  filter: brightness(0.88) contrast(0.94);
+}
+
+.hero-phones-trio .phone-3d-wrapper--left .phone-3d {
+  transform: none !important;
+}
+
+/* Background Right Phone: Angled, Dulled, Pacing Focus */
+.hero-phones-trio .phone-3d-wrapper--right {
+  z-index: 2;
+  transform: perspective(1200px) translateZ(-50px) rotateY(18deg) rotateX(4deg) rotateZ(3deg) translateX(180px) translateY(14px) scale(0.85);
+  opacity: 0.7;
+  filter: brightness(0.88) contrast(0.94);
+}
+
+.hero-phones-trio .phone-3d-wrapper--right .phone-3d {
+  transform: none !important;
+}
+
+/* Foreground Center Phone: In Sharp Focus, Elevated Along Z-axis */
+.hero-phones-trio .phone-3d-wrapper--center {
+  z-index: 10;
+  transform: perspective(1200px) translateZ(80px) rotateY(-2deg) rotateX(2deg) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-phones-trio .phone-3d-wrapper--center .phone-3d {
+  transform: none !important;
+}
+
+/* Depth Separation on Hover */
+.hero-phones-trio:hover .phone-3d-wrapper--left {
+  transform: perspective(1200px) translateZ(-70px) rotateY(-22deg) rotateX(5deg) rotateZ(-4deg) translateX(-215px) translateY(16px) scale(0.85);
+  opacity: 0.82;
+}
+
+.hero-phones-trio:hover .phone-3d-wrapper--right {
+  transform: perspective(1200px) translateZ(-70px) rotateY(22deg) rotateX(5deg) rotateZ(4deg) translateX(215px) translateY(16px) scale(0.82);
+  opacity: 0.82;
+}
+
+.hero-phones-trio:hover .phone-3d-wrapper--center {
+  transform: perspective(1200px) translateZ(100px) rotateY(-1deg) rotateX(1deg) scale(1.02);
+}
+
+/* Static Reel Layouts for Side Phones */
+.phone-static-reel {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transform: rotate(-3deg);
-  user-select: none;
-}
-
-.hero__note-text {
-  font-family: var(--font-handwritten, "Permanent Marker", cursive, sans-serif);
-  font-size: 1.35em;
-  line-height: 1.15;
-  color: var(--violet, #3B308F);
-  text-align: center;
-  white-space: normal;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.hero__note-arrow {
-  width: 64px;
-  height: 32px;
-  margin-top: 4px;
-  margin-left: 28px;
-  filter: drop-shadow(0 2px 4px rgba(59, 48, 143, 0.15));
-}
-
-/* Live Telemetry Radar Card */
-.hero__telemetry-card {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(11, 11, 15, 0.12);
-  border-radius: 20px;
-  padding: 16px;
-  box-shadow: 
-    0 20px 40px -10px rgba(0, 0, 0, 0.12),
-    0 6px 15px -4px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero__telemetry-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.18);
-}
-
-.telemetry__header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(11, 11, 15, 0.12);
-}
-
-.telemetry__pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #FF5146;
-  box-shadow: 0 0 8px #FF5146;
-  animation: pulse-telemetry 1.5s infinite ease-in-out;
-}
-
-@keyframes pulse-telemetry {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.7); opacity: 0.4; }
-}
-
-.telemetry__status {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #0B0B0F;
-  flex: 1;
-}
-
-.telemetry__fps {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 6px;
-  background: rgba(16, 185, 129, 0.15);
-  color: #059669;
-  border-radius: 6px;
-}
-
-.telemetry__metric {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-bottom: 8px;
-}
-
-.telemetry__metric-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #6B7280;
-}
-
-.telemetry__metric-val {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 800;
-  color: #0B0B0F;
-}
-
-.telemetry__bar {
-  width: 100%;
-  height: 4px;
-  background: rgba(11, 11, 15, 0.08);
-  border-radius: 4px;
+  justify-content: space-between;
+  padding: 3.5em 1.25em 1.5em;
+  background: #09090D;
   overflow: hidden;
-  margin-top: 6px;
 }
 
-.telemetry__bar-fill {
-  width: 78%;
-  height: 100%;
-  background: linear-gradient(90deg, #FF5146 0%, #3B82F6 100%);
-  border-radius: 4px;
-  animation: telemetry-bar-sweep 2.5s infinite ease-in-out alternate;
+.phone-static-reel--audio {
+  background: linear-gradient(170deg, #131224 0%, #0A0914 100%);
 }
 
-@keyframes telemetry-bar-sweep {
-  0% { width: 35%; }
-  100% { width: 92%; }
+.phone-static-reel--pacing {
+  background: linear-gradient(170deg, #1C150C 0%, #0B0A08 100%);
 }
 
-/* Adjust Desktop Hero Inner to a balanced 3-column flow */
+/* Clean Desktop Hero 2-Column Balanced Geometry */
 @media screen and (min-width: 992px) {
   .hero__inner {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 32px !important;
+    gap: 40px !important;
     width: 100% !important;
+    min-height: 86vh !important;
+    padding-top: 1.5em !important;
+    padding-bottom: 2em !important;
   }
 
   .hero__content {
-    flex: 0 1 44% !important;
-    max-width: 540px !important;
-  }
-
-  .hero__middle-bridge {
-    flex: 0 0 220px !important;
-    display: flex !important;
+    flex: 1 1 50% !important;
+    max-width: 580px !important;
+    z-index: 10 !important;
   }
 
   .hero__visual {
-    flex: 0 1 38% !important;
-    max-width: 380px !important;
+    flex: 1 1 50% !important;
+    max-width: 560px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 }
 
 @media screen and (max-width: 991px) {
-  .hero__middle-bridge {
-    margin: 2em auto;
+  .hero-phones-trio {
+    max-width: 360px;
+    height: 560px;
   }
+  .hero-phones-trio .phone-3d-wrapper--left,
+  .hero-phones-trio .phone-3d-wrapper--right {
+    display: none;
+  }
+  .hero-phones-trio .phone-3d-wrapper--center {
+    width: 100%;
+    transform: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. SECTION 4 ("SEE WHAT'S INSIDE THE REEL") WARM, COHESIVE SYSTEM
+   -------------------------------------------------------------------------- */
+.box.is--bg-paper {
+  background-color: var(--color-paper, #FBF6EB) !important;
+  position: relative !important;
+}
+
+.box__intro {
+  text-align: center;
+  padding-top: 4.5em;
+  padding-bottom: 2em;
+}
+
+.box__element {
+  background-color: #F4ECE1 !important; /* Warm sand / biscuit matching site */
+  border: 2px solid rgba(25, 25, 25, 0.08) !important;
+  border-radius: 40px !important;
+  clip-path: inset(var(--grid-margin) round 2.5em) !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.box__canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
 }
